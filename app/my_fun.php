@@ -38,3 +38,24 @@ if (! function_exists('del_folder')) {
         }
     }
 }
+
+//檢查可登入的
+function check_login($n){
+    if($n==="教學組長") return true;
+    if($n==="教師兼教學組長") return true;
+    if($n==="教學註冊組長") return true;
+    if($n==="研發組長") return true;
+    if($n==="課程研發組長") return true;
+    if($n==="教學研發組長") return true;
+    if($n==="資訊組長") return true;
+    if($n==="教務組長") return true;
+    if($n==="教務主任") return true;
+    if($n==="教導主任") return true;
+    if($n==="輔導主任") return true;
+    if($n==="輔導室主任") return true;
+    if($n==="特教組長") return true;
+    if($n==="資料組長") return true;
+    if($n==="校長") return true;
+
+    return false;
+}

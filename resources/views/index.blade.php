@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master',['bg_color'=>'bg-dark'])
 
 @section('content')
     <div class="row justify-content-center">

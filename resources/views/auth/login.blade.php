@@ -1,14 +1,17 @@
-@extends('layouts.master',['bg'=>'bg-dark'])
+@extends('layouts.master',['bg_color'=>'bg-dark'])
 
 @section('title','登入 | ')
-
-@endsection
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h4>系統及管理登入頁面</h4></div>
+                <div class="card-header">
+                    <h4>
+                        <img src="{{ asset('images/admin.svg') }}" height="36">
+                        評審及管理登入
+                    </h4>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -45,7 +48,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    登入
+                                    <i class="fas fa-sign-in-alt"></i> 登入
                                 </button>
                             </div>
                         </div>

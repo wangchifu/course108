@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark {{ $bg_color }} fixed-top">
     <div class="container">
         <img src="{{ asset('images/icon.svg') }}" height="36">　
         <a class="navbar-brand" href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a>
@@ -42,7 +42,7 @@
                     @endif
                     @if(auth()->user()->group_id==9)
                         <li class="nav-item">
-                            <a class="nav-link" href="">[ 後台管理 ]</a>
+                            <a class="nav-link" href="{{ route('users.index') }}">[ 後台管理 ]</a>
                         </li>
                     @endif
                 @endauth
@@ -53,7 +53,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="">
+                            <a class="dropdown-item" href="{{ route('glogin') }}">
                                 國中小學
                             </a>
                             <a class="dropdown-item" href="{{ route('login') }}">
@@ -68,7 +68,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @if(auth()->user()->group_id !="1" and auth()->user()->group_id !="2")
-                            <a class="dropdown-item" href="">更改密碼</a>
+                            <a class="dropdown-item" href="{{ route('reset_pwd') }}">更改密碼</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();

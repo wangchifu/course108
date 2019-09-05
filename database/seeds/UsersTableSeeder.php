@@ -94,7 +94,7 @@ class UsersTableSeeder extends Seeder
             'updated_at'=>now(),
         ]);
         \App\User::create([
-            'username' => 'second1',
+            'username' => 'second2',
             'name' => '複審委員2',
             'group_id' => '5',
             'password' => bcrypt('demo1234'),
