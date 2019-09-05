@@ -66,5 +66,11 @@ Route::group(['middleware'=>'admin'],function(){
     Route::patch('users/{user}/disable' , 'UserController@disable')->name('users.disable');
     Route::patch('users/{user}/able' , 'UserController@able')->name('users.able');
     Route::get('users/{user}/reset' , 'UserController@reset')->name('users.reset');
+
+
+    //教科書版本管理
+    Route::get('books/index' , 'BookController@index')->name('books.index');
+    Route::post('books/store' , 'BookController@store')->name('books.store');
+    Route::delete('books/destroy' , 'BookController@destroy')->name('books.destroy');
 });
 

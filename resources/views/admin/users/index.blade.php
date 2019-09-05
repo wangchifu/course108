@@ -3,9 +3,15 @@
 @section('title','使用者 | ')
 
 @section('content')
+    <?php
+        for($i=1;$i<7;$i++){
+            $active[$i] = null;
+        }
+        $active[1] = "active";
+    ?>
     <div class="row justify-content-center">
         <div class="col-md-3">
-            @include('admin.users.side')
+            @include('admin.side',['active'=>$active])
         </div>
         <div class="col-md-9">
             <div class="card">
