@@ -3,19 +3,19 @@
         <i class="fas fa-users"></i> 使用者管理
     </a>
     <a href="" class="list-group-item list-group-item-action {{ $active[2] }}">
-        年度管理
+        <i class="far fa-calendar-alt"></i> 年度管理
     </a>
     <a href="{{ route('books.index') }}" class="list-group-item list-group-item-action {{ $active[3] }}">
-        教科書版本管理
+        <i class="fas fa-book"></i> 教科書版本管理
     </a>
     <a href="" class="list-group-item list-group-item-action {{ $active[4] }}">
-        普教審查管理
+        <i class="fas fa-user"></i> 普教審查管理
     </a>
     <a href="" class="list-group-item list-group-item-action {{ $active[5] }}">
-        特教審查管理
+        <i class="fas fa-user-tag"></i> 特教審查管理
     </a>
     <a href="" class="list-group-item list-group-item-action {{ $active[6] }}">
-        匯出表單
+        <i class="fas fa-file-export"></i> 匯出表單
     </a>
 </div>
 
