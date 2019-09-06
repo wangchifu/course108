@@ -4,10 +4,10 @@
 
 @section('content')
     <?php
-        for($i=1;$i<7;$i++){
+        for($i=1;$i<8;$i++){
             $active[$i] = null;
         }
-        $active[3] = "active";
+        $active[4] = "active";
     ?>
     <div class="row justify-content-center">
         <div class="col-md-3">

@@ -67,6 +67,14 @@ Route::group(['middleware'=>'admin'],function(){
     Route::patch('users/{user}/able' , 'UserController@able')->name('users.able');
     Route::get('users/{user}/reset' , 'UserController@reset')->name('users.reset');
 
+    //年度管理
+    Route::get('years/index' , 'YearController@index')->name('years.index');
+    Route::get('years/{year}/show' , 'YearController@show')->name('years.show');
+    Route::get('years/create' , 'YearController@create')->name('years.create');
+    Route::post('years/store' , 'YearController@store')->name('years.store');
+    Route::get('years/{year}/edit' , 'YearController@edit')->name('years.edit');
+    Route::patch('years/{year}/update' , 'YearController@update')->name('years.update');
+    Route::get('years/{year}/destroy' , 'YearController@destroy')->name('years.destroy');
 
     //教科書版本管理
     Route::get('books/index' , 'BookController@index')->name('books.index');
