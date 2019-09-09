@@ -11,16 +11,21 @@
                     </h5>
                 </div>
                 <div class="card-body">
+                    @auth
+                        @if(auth()->user()->admin==1)
+                            <a href="{{ route('posts.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> 新增公告</a>
+                        @endif
+                    @endauth
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th width="100">
+                            <th width="120">
                                 發佈日期
                             </th>
                             <th>
                                 標題
                             </th>
-                            <th width="100">
+                            <th width="120">
                                 發佈單位
                             </th>
                             <th width="80">
@@ -29,10 +34,25 @@
                         </tr>
                         </thead>
                         <tbody>
-
+                        @foreach($posts as $post)
+                            <tr>
+                                <td>
+                                    {{ substr($post->created_at,0,10) }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('posts.show',$post->id) }}">{{ \Illuminate\Support\Str::limit($post->title,70) }}</a>
+                                </td>
+                                <td>
+                                    {{ $post->user->name }}
+                                </td>
+                                <td>
+                                    {{ $post->views }}
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
-
+                        {{ $posts->links() }}
                 </div>
             </div>
             <hr>

@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+//首頁
+Route::get('/' , 'PostController@index')->name('index');
+//公告內容
+Route::get('/posts/show/{post}' , 'PostController@show')->name('posts.show');
+//下載storage裡public的檔案
+Route::get('file/{file}', 'FileController@getFile');
 
 //Auth::routes();
 //上列包含了下列十條路由
@@ -57,6 +60,15 @@ Route::group(['middleware'=>'auth'],function(){
 
 //管理者可連
 Route::group(['middleware'=>'admin'],function(){
+    //公告系統
+    Route::get('posts/create' , 'PostController@create')->name('posts.create');
+    Route::post('posts' , 'PostController@store')->name('posts.store');
+    Route::get('posts/{post}/edit' , 'PostController@edit')->name('posts.edit');
+    Route::patch('posts/{post}' , 'PostController@update')->name('posts.update');
+    Route::delete('posts/{post}', 'PostController@destroy')->name('posts.destroy');
+    //刪檔案
+    Route::get('posts/{file}/fileDel' , 'PostController@fileDel')->name('posts.fileDel');
+
     //使用者管理
     Route::match(['get','post'],'users/index' , 'UserController@index')->name('users.index');
     Route::get('users/{group_id}/create' , 'UserController@create')->name('users.create');
