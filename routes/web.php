@@ -96,6 +96,12 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('questions/delete_part/{part}' , 'QuestionController@delete_part')->name('questions.delete_part');
     Route::get('questions/delete_topic/{topic}' , 'QuestionController@delete_topic')->name('questions.delete_topic');
     Route::get('questions/delete_question/{question}' , 'QuestionController@delete_question')->name('questions.delete_question');
+    Route::get('questions/edit_part/{select_year}/{part}' , 'QuestionController@edit_part')->name('questions.edit_part');
+    Route::get('questions/edit_topic/{select_year}/{topic}' , 'QuestionController@edit_topic')->name('questions.edit_topic');
+    Route::get('questions/edit_question/{select_year}/{question}' , 'QuestionController@edit_question')->name('questions.edit_question');
+    Route::post('questions/{part}/update_part' , 'QuestionController@update_part')->name('questions.update_part');
+    Route::post('questions/{topic}/update_topic' , 'QuestionController@update_topic')->name('questions.update_topic');
+    Route::post('questions/{question}/update_question' , 'QuestionController@update_question')->name('questions.update_question');
 
     //教科書版本管理
     Route::get('books/index' , 'BookController@index')->name('books.index');

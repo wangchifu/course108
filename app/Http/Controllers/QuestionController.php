@@ -106,4 +106,81 @@ class QuestionController extends Controller
         $question->delete();
         return redirect()->route('questions.index');
     }
+
+    public function edit_part($select_year,Part $part)
+    {
+        $part_order_by = [
+            '1'=>'壹','2'=>'貳','3'=>'參','4'=>'肆','5'=>'伍','6'=>'陸','7'=>'柒','8'=>'捌','9'=>'玖','10'=>'拾'
+        ];
+        $data = [
+            'part'=>$part,
+            'part_order_by'=>$part_order_by,
+            'select_year'=>$select_year,
+        ];
+
+        return view('admin.questions.edit_part',$data);
+    }
+
+    public function update_part(Request $request,Part $part)
+    {
+        $att['order_by'] = $request->input('order_by');
+        $att['title'] = $request->input('title');
+        $att['year'] = $request->input('year');
+        $part->update($att);
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function edit_topic($select_year,Topic $topic)
+    {
+        $part_order_by = [
+            '1'=>'壹','2'=>'貳','3'=>'參','4'=>'肆','5'=>'伍','6'=>'陸','7'=>'柒','8'=>'捌','9'=>'玖','10'=>'拾'
+        ];
+        $parts = Part::where('year',$select_year)->orderBy('order_by')->get();
+        foreach($parts as $part){
+            $part_items[$part->id] = $part_order_by[$part->order_by].'.'.$part->title;
+        }
+        $data = [
+            'topic'=>$topic,
+            'part_items'=>$part_items,
+            'select_year'=>$select_year,
+        ];
+
+        return view('admin.questions.edit_topic',$data);
+    }
+
+    public function update_topic(Request $request,Topic $topic)
+    {
+        $att['order_by'] = $request->input('order_by');
+        $att['title'] = $request->input('title');
+        $att['part_id'] = $request->input('part_id');
+        $att['year'] = $request->input('year');
+        $topic->update($att);
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function edit_question($select_year,Question $question)
+    {
+        $topics = Topic::where('year',$select_year)->orderBy('order_by')->get();
+        foreach($topics as $topic){
+            $topic_items[$topic->id] = $topic->order_by.'.'.$topic->title;
+        }
+        $data = [
+            'question'=>$question,
+            'select_year'=>$select_year,
+            'topic_items'=>$topic_items,
+        ];
+        return view('admin.questions.edit_question',$data);
+    }
+
+    public function update_question(Request $request,Question $question)
+    {
+        $att['order_by'] = $request->input('order_by');
+        $att['title'] = $request->input('title');
+        $att['topic_id'] = $request->input('topic_id');
+        $att['type'] = $request->input('type');
+        $att['g_s'] = $request->input('g_s');
+        $att['year'] = $request->input('year');
+        $question->update($att);
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
 }

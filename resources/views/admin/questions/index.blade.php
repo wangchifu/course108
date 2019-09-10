@@ -156,7 +156,7 @@
                         <div class="row title-div">
                             <div class="col-12">
                                 <h3>
-                                    {{ $part_order_by[$part->order_by] }}、{{ $part->title }} <a href=""><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_part',$part->id) }}" onclick="return confirm('確定刪除？底下所屬一併刪除喔！！')"><i class="text-danger fas fa-trash"></i></a>
+                                    {{ $part_order_by[$part->order_by] }}、{{ $part->title }} <a href="javascript:open_upload('{{ route('questions.edit_part',['part'=>$part->id,'select_year'=>$select_year]) }}','新視窗')"><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_part',$part->id) }}" onclick="return confirm('確定刪除？底下所屬一併刪除喔！！')"><i class="text-danger fas fa-trash"></i></a>
                                 </h3>
                             </div>
                         </div>
@@ -164,13 +164,13 @@
                             @foreach($part->topics as $topic)
                             <div class="col-2">
                                 <div class="section-div">
-                                    {{ $topic->order_by }}.{{ $topic->title }} <a href=""><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_topic',$topic->id) }}" onclick="return confirm('確定刪除？底下所屬一併刪除喔！！')"><i class="text-danger fas fa-trash"></i></a>
+                                    {{ $topic->order_by }}.{{ $topic->title }} <a href="javascript:open_upload('{{ route('questions.edit_topic',['topic'=>$topic->id,'select_year'=>$select_year]) }}','新視窗')"><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_topic',$topic->id) }}" onclick="return confirm('確定刪除？底下所屬一併刪除喔！！')"><i class="text-danger fas fa-trash"></i></a>
                                 </div>
                             </div>
                             <div class="col-10">
                             @foreach($topic->questions as $question)
                                 <div class="centent-div">
-                                    {{ $question->order_by }} {{ $question->title }} <a href=""><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_question',$question->id) }}" onclick="return confirm('確定刪除？')"><i class="text-danger fas fa-trash"></i></a><br>
+                                    {{ $question->order_by }} {{ $question->title }} <a href="javascript:open_upload('{{ route('questions.edit_question',['question'=>$question->id,'select_year'=>$select_year]) }}','新視窗')"><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_question',$question->id) }}" onclick="return confirm('確定刪除？')"><i class="text-danger fas fa-trash"></i></a><br>
                                     ({{ $type_items[$question->type] }}
                                     @if($question->g_s=="1")
                                         <span class="text-primary">{{ $g_s_items[$question->g_s] }})</span>
@@ -187,4 +187,10 @@
             </div>
         </div>
     </div>
+    <script>
+        function open_upload(url,name)
+        {
+            window.open(url,name,'statusbar=no,scrollbars=yes,status=yes,resizable=yes,width=800,height=400');
+        }
+    </script>
 @endsection
