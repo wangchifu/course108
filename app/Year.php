@@ -30,4 +30,8 @@ class Year extends Model
         'step4_date1',
         'step4_date2',
     ];
+    public function parts()
+    {
+        return $this->hasMany(Part::class);
+    }
 }

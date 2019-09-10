@@ -13,6 +13,11 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
+                @if(auth()->user()->group_id==9)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('posts.create') }}">新增公告</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="">課程計畫分享</a>
                 </li>

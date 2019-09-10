@@ -5,7 +5,7 @@
     <a href="{{ route('years.index') }}" class="list-group-item list-group-item-action {{ $active[2] }}">
         <i class="far fa-calendar-alt"></i> 年度管理
     </a>
-    <a href="" class="list-group-item list-group-item-action {{ $active[3] }}">
+    <a href="{{ route('questions.index') }}" class="list-group-item list-group-item-action {{ $active[3] }}">
         <i class="far fa-question-circle"></i> 題目管理
     </a>
     <a href="{{ route('books.index') }}" class="list-group-item list-group-item-action {{ $active[4] }}">

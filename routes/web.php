@@ -88,6 +88,15 @@ Route::group(['middleware'=>'admin'],function(){
     Route::patch('years/{year}/update' , 'YearController@update')->name('years.update');
     Route::get('years/{year}/destroy' , 'YearController@destroy')->name('years.destroy');
 
+    //題目管理
+    Route::match(['get','post'],'questions' , 'QuestionController@index')->name('questions.index');
+    Route::post('questions/store_part' , 'QuestionController@store_part')->name('questions.store_part');
+    Route::post('questions/store_topic' , 'QuestionController@store_topic')->name('questions.store_topic');
+    Route::post('questions/store_question' , 'QuestionController@store_question')->name('questions.store_question');
+    Route::get('questions/delete_part/{part}' , 'QuestionController@delete_part')->name('questions.delete_part');
+    Route::get('questions/delete_topic/{topic}' , 'QuestionController@delete_topic')->name('questions.delete_topic');
+    Route::get('questions/delete_question/{question}' , 'QuestionController@delete_question')->name('questions.delete_question');
+
     //教科書版本管理
     Route::get('books/index' , 'BookController@index')->name('books.index');
     Route::post('books/store' , 'BookController@store')->name('books.store');
