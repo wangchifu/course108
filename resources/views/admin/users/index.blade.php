@@ -74,6 +74,7 @@
                                     {{ $user->name }}
                                 </td>
                                 <td>
+                                    {{ $user->school }}
                                     {{ $user->title }}
                                 </td>
                                 <td>

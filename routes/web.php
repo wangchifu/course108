@@ -18,6 +18,8 @@ Route::get('/posts/show/{post}' , 'PostController@show')->name('posts.show');
 //下載storage裡public的檔案
 Route::get('file/{file}', 'FileController@getFile');
 
+//打開課程計畫的檔案
+Route::get('schools/{file_path}/open' , 'FileController@open')->name('schools.open');
 //Auth::routes();
 //上列包含了下列十條路由
 #登入
@@ -116,3 +118,11 @@ Route::group(['middleware'=>'admin'],function(){
     Route::delete('books/destroy' , 'BookController@destroy')->name('books.destroy');
 });
 
+//學校可用
+Route::group(['middleware' => 'school'],function(){
+    Route::match(['get','post'],'schools' , 'SchoolController@index')->name('schools.index');
+    Route::get('schools/edit/{select_year}' , 'SchoolController@edit')->name('schools.edit');
+    Route::get('schools/{select_year}/upload1/{question}' , 'SchoolController@upload1')->name('schools.upload1');
+    Route::post('schools/save1' , 'SchoolController@save1')->name('schools.save1');
+    Route::get('schools/{file_path}/delete1' , 'SchoolController@delete1')->name('schools.delete1');
+});

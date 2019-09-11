@@ -47,7 +47,7 @@
             {{ Form::select('g_s',$g_s_items,null,['required'=>'required']) }}
         </td>
         <td>
-            <button class="btn btn-success btn-sm" onclick="return confirm('確定嗎？')">新增「子題」</button>
+            <button class="btn btn-success btn-sm" onclick="return confirm('確定嗎？')"><i class="fas fa-save"></i> 儲存「子題」</button>
         </td>
     </tr>
     <input type="hidden" name="year" value="{{ $select_year }}">

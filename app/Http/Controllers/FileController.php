@@ -16,6 +16,14 @@ class FileController extends Controller
         return response()->download($file);
     }
 
+    //不要強制下載，要線上打開
+    public function open($file_path)
+    {
+        $file_path = str_replace('&&','/',$file_path);
+        $file = storage_path('app/public/upload/'.$file_path);
+
+        return response()->file($file);
+    }
 
 /**
     //不要強制下載，要線上打開

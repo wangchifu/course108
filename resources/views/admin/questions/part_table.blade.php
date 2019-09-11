@@ -16,7 +16,7 @@
             {{ Form::text('title',null,['id'=>'title','class' => 'form-control', 'placeholder' => '請輸入名稱','required'=>'required']) }}
         </td>
         <td>
-            <button class="btn btn-success btn-sm" onclick="return confirm('確定嗎？')">新增「部分」</button>
+            <button class="btn btn-success btn-sm" onclick="return confirm('確定嗎？')"><i class="fas fa-save"></i> 儲存「部分」</button>
         </td>
     </tr>
     <input type="hidden" name="year" value="{{ $select_year }}">

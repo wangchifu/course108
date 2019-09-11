@@ -26,14 +26,18 @@ table.POST tfoot td {
 }
 
 .custom-div{
-    border:1px solid #96c2f1;background-color:#eff7ff;padding: 10px;
+    border:1px solid;background-color:#eff7ff;padding: 10px;
  }
 .title-div{
-    border:1px solid #000000;background-color:#66b3ff;padding: 10px;
+    border:1px solid;background-color:#66b3ff;padding: 10px;
 }
 .section-div{
     border:1px solid;background-color:#d2e9ff;padding: 10px;
 }
 .centent-div{
     border:1px solid;background-color:#ffdf7e;padding: 10px;
+}
+
+.check-div{
+    border:1px solid;background-color:lightpink;padding: 10px;
 }
