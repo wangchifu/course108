@@ -80,7 +80,7 @@
                                     {{ $user->email }}
                                 </td>
                                 <td>
-                                    <a href="" class="">
+                                    <a href="{{ route('sims.impersonate',$user->id) }}" onclick="return confirm('確定模擬登入？')">
                                         <span class="badge badge-warning">模擬</span>
                                     </a>
                                     @if($user->disable)

@@ -55,6 +55,9 @@ Route::group(['middleware'=>'auth'],function(){
     //更改個人密碼
     Route::get('resetPwd' , 'HomeController@reset_pwd')->name('reset_pwd');
     Route::patch('updatePWD' , 'HomeController@update_pwd')->name('update_pwd');
+
+    //結束模擬
+    Route::get('sims/impersonate_leave', 'SimulationController@impersonate_leave')->name('sims.impersonate_leave');
 });
 
 
@@ -78,6 +81,9 @@ Route::group(['middleware'=>'admin'],function(){
     Route::patch('users/{user}/disable' , 'UserController@disable')->name('users.disable');
     Route::patch('users/{user}/able' , 'UserController@able')->name('users.able');
     Route::get('users/{user}/reset' , 'UserController@reset')->name('users.reset');
+
+    //模擬登入
+    Route::get('sims/{user}/impersonate', 'SimulationController@impersonate')->name('sims.impersonate');
 
     //年度管理
     Route::get('years/index' , 'YearController@index')->name('years.index');
