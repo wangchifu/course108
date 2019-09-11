@@ -102,6 +102,7 @@ Route::group(['middleware'=>'admin'],function(){
     Route::post('questions/{part}/update_part' , 'QuestionController@update_part')->name('questions.update_part');
     Route::post('questions/{topic}/update_topic' , 'QuestionController@update_topic')->name('questions.update_topic');
     Route::post('questions/{question}/update_question' , 'QuestionController@update_question')->name('questions.update_question');
+    Route::post('questions/copy' , 'QuestionController@copy')->name('questions.copy');
 
     //教科書版本管理
     Route::get('books/index' , 'BookController@index')->name('books.index');

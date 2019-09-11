@@ -18,8 +18,9 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->unsignedInteger('topic_id');
             $table->unsignedInteger('year');
-            $table->string('order_by');
+            $table->float('order_by');
             $table->unsignedInteger('type');//題目類型
+            $table->tinyInteger('need')->nullable();//必填1，非必填null
             $table->unsignedInteger('g_s');//1普教；2特教
             $table->timestamps();
         });

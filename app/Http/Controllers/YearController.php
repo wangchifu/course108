@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\C31Table;
 use App\C81Table;
 use App\Course;
+use App\Part;
+use App\Question;
+use App\Topic;
 use App\Year;
 use Illuminate\Http\Request;
 
@@ -104,7 +107,11 @@ class YearController extends Controller
 
     public function destroy(Year $year)
     {
+        Part::where('year',$year->year)->delete();
+        Topic::where('year',$year->year)->delete();
+        Question::where('year',$year->year)->delete();
         $year->delete();
+
         return redirect()->route('years.index');
     }
 }

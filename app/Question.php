@@ -12,6 +12,7 @@ class Question extends Model
         'year',
         'order_by',
         'type',
+        'need',
         'g_s',
     ];
     public function topic()

@@ -29,121 +29,34 @@
                                 {{ Form::select('year',$year_items,$select_year,['onchange'=>'submit()']) }}
                                 {{ Form::close() }}
                             </td>
-                        </tr>
+                            <td>----------
+                            </td>
+                            <td>
+                                {{ Form::open(['route'=>'questions.copy','method'=>'post']) }}
+                                或是從
+                                {{ Form::select('b_year',$year_items,$select_year) }}
+                                複製到
+                                {{ Form::select('l_year',$year_items,$select_year) }}
+                                <button class="btn btn-success btn-sm" onclick="return confirm('會刪掉後者，把前者複製到後者喔！')"><i class="fas fa-copy"></i> 複製</button>
+                                {{ Form::close() }}
+                            </td>
+
+                        </td>
                     </table>
                 </div>
                 <div class="card-body">
                     <h5>1.新增部分</h5>
-                    <table class="table">
-                        {{ Form::open(['route'=>'questions.store_part','method'=>'post']) }}
-                        <tr>
-                            <td width="120">
-                                <label>序號</label>
-                            </td>
-                            <td colspan="2">
-                                {{ Form::select('order_by',$part_order_by,null,['required'=>'required']) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>名稱</label>
-                            </td>
-                            <td>
-                                {{ Form::text('title',null,['id'=>'title','class' => 'form-control', 'placeholder' => '請輸入名稱','required'=>'required']) }}
-                            </td>
-                            <td>
-                                <button class="btn btn-success btn-sm" onclick="return confirm('確定嗎？')">新增「部分」</button>
-                            </td>
-                        </tr>
-                            <input type="hidden" name="year" value="{{ $select_year }}">
-                        {{ Form::close() }}
-                    </table>
+                    {{ Form::open(['route'=>'questions.store_part','method'=>'post']) }}
+                    @include('admin.questions.part_table')
+                    {{ Form::close() }}
                     <h5>2.新增大題</h5>
-                    <table class="table">
-                        {{ Form::open(['route'=>'questions.store_topic','method'=>'post']) }}
-                        <tr>
-                            <td width="120">
-                                <label>所屬「部分」</label>
-                            </td>
-                            <td colspan="2">
-                                {{ Form::select('part_id',$part_items,null,['required'=>'required']) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                大題號
-                            </td>
-                            <td colspan="2">
-                                {{ Form::text('order_by',null,['id'=>'order_by', 'placeholder' => '請輸入整數','required'=>'required','maxlength'=>'2']) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>名稱</label>
-                            </td>
-                            <td>
-                                {{ Form::text('title',null,['id'=>'title','class' => 'form-control', 'placeholder' => '請輸入名稱','required'=>'required']) }}
-                            </td>
-                            <td>
-                                <button class="btn btn-success btn-sm" onclick="return confirm('確定嗎？')">新增「大題」</button>
-                            </td>
-                        </tr>
-                        <input type="hidden" name="year" value="{{ $select_year }}">
-                        {{ Form::close() }}
-                    </table>
+                    {{ Form::open(['route'=>'questions.store_topic','method'=>'post']) }}
+                    @include('admin.questions.topic_table')
+                    {{ Form::close() }}
                     <h5>3.新增子題</h5>
-                    <table class="table">
-                        {{ Form::open(['route'=>'questions.store_question','method'=>'post']) }}
-                        <?php
-                            $type_items = ['1'=>'單檔','2'=>'多檔','3'=>'年級科目節數','4'=>'年級科目單檔','5'=>'年級科目版本','6'=>'年級單檔','7'=>'年級多檔','0'=>'不用傳'];
-                            $g_s_items = ['1'=>'普教題目','2'=>'特教題目'];
-                        ?>
-                        <tr>
-                            <td width="120">
-                                <label>所屬「大題」</label>
-                            </td>
-                            <td colspan="2">
-                                {{ Form::select('topic_id',$topic_items,null,['required'=>'required']) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                子題號
-                            </td>
-                            <td colspan="2">
-                                {{ Form::text('order_by',null,['id'=>'order_by', 'placeholder' => '如 1.1','required'=>'required','maxlength'=>'4']) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>名稱</label>
-                            </td>
-                            <td colspan="2">
-                                {{ Form::text('title',null,['id'=>'title','class' => 'form-control', 'placeholder' => '請輸入名稱','required'=>'required']) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>題型</label>
-                            </td>
-                            <td colspan="2">
-                                {{ Form::select('type',$type_items,null,['required'=>'required']) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>類別</label>
-                            </td>
-                            <td>
-                                {{ Form::select('g_s',$g_s_items,null,['required'=>'required']) }}
-                            </td>
-                            <td>
-                                <button class="btn btn-success btn-sm" onclick="return confirm('確定嗎？')">新增「子題」</button>
-                            </td>
-                        </tr>
-                        <input type="hidden" name="year" value="{{ $select_year }}">
-                        {{ Form::close() }}
-                    </table>
+                    {{ Form::open(['route'=>'questions.store_question','method'=>'post']) }}
+                    @include('admin.questions.question_table')
+                    {{ Form::close() }}
                 </div>
             </div>
             <hr>
@@ -168,20 +81,30 @@
                                 </div>
                             </div>
                             <div class="col-10">
-                            @foreach($topic->questions as $question)
-                                <div class="centent-div">
-                                    {{ $question->order_by }} {{ $question->title }} <a href="javascript:open_upload('{{ route('questions.edit_question',['question'=>$question->id,'select_year'=>$select_year]) }}','新視窗')"><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_question',$question->id) }}" onclick="return confirm('確定刪除？')"><i class="text-danger fas fa-trash"></i></a><br>
-                                    ({{ $type_items[$question->type] }}
-                                    @if($question->g_s=="1")
-                                        <span class="text-primary">{{ $g_s_items[$question->g_s] }})</span>
-                                    @elseif($question->g_s=="2")
-                                        <span class="text-danger">{{ $g_s_items[$question->g_s] }})</span>
-                                    @endif
-                                </div>
-                            @endforeach
+                                @foreach($topic->questions as $question)
+                                    <div class="centent-div">
+                                        {{ $question->order_by }} {{ $question->title }} <a href="javascript:open_upload('{{ route('questions.edit_question',['question'=>$question->id,'select_year'=>$select_year]) }}','新視窗')"><i class="text-primary fas fa-edit"></i></a> <a href="{{ route('questions.delete_question',$question->id) }}" onclick="return confirm('確定刪除？')"><i class="text-danger fas fa-trash"></i></a><br>
+                                        (
+                                        @if($question->need=="1")
+                                            <span class="text-danger">必填</span>
+                                        @else
+                                            <span class="text-info">非必填</span>
+                                        @endif
+                                        {{ $type_items[$question->type] }}
+                                        @if($question->g_s=="1")
+                                            <span class="text-primary">{{ $g_s_items[$question->g_s] }}</span>
+                                        @elseif($question->g_s=="2")
+                                            <span class="text-danger">{{ $g_s_items[$question->g_s] }}</span>
+                                        @endif
+                                        )
+                                    </div>
+                                    <br>
+                                @endforeach
                             </div>
+                            <br>
                             @endforeach
                         </div>
+                        <br>
                     @endforeach
                 </div>
             </div>

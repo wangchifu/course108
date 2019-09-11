@@ -17,7 +17,7 @@ class CreatePartsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->unsignedInteger('year');
-            $table->string('order_by');
+            $table->unsignedInteger('order_by');
             $table->timestamps();
         });
     }

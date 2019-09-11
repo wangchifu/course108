@@ -18,7 +18,7 @@ class CreateTopicsTable extends Migration
             $table->string('title');
             $table->unsignedInteger('part_id');
             $table->unsignedInteger('year');
-            $table->string('order_by');
+            $table->unsignedInteger('order_by');
             $table->timestamps();
         });
     }
