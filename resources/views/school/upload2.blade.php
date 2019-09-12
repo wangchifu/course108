@@ -2,7 +2,7 @@
 @section('title','上傳檔案 | ')
 @section('content')
 @include('layouts.form_errors')
-{{ Form::open(['route'=>'schools.save1','method'=>'post','files'=>true]) }}
+{{ Form::open(['route'=>'schools.save2','method'=>'post','files'=>true]) }}
 <table class="table">
     <thead>
     <tr>
@@ -10,7 +10,7 @@
             題目序號
         </th>
         <th>
-            選擇檔案
+            選擇檔案(用 Ctrl 可多選)
         </th>
         <th width="200">
             動作<br>
@@ -25,10 +25,10 @@
             {{$question->order_by}} {{ \Illuminate\Support\Str::limit($question->title,30) }}
         </td>
         <td>
-            <input type="file" name="files[]" required>
+            <input type="file" name="files[]" required multiple>
         </td>
         <td>
-            <button type="submit" onclick="return confirm('確定？')">上傳單檔</button>
+            <button type="submit" onclick="return confirm('確定？')">上傳多檔</button>
         </td>
     </tr>
     </tbody>

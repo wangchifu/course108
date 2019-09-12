@@ -17,23 +17,11 @@
                 @foreach($topic->questions as $question)
                     <div class="centent-div">
                         {{ $question->order_by }} {{ $question->title }}<br>
-                        (
-                        @if($question->need=="1")
-                            <span class="text-danger">必填</span>
-                        @else
-                            <span class="text-info">非必填</span>
-                        @endif
-                        {{ $type_items[$question->type] }}
-                        @if($question->g_s=="1")
-                            <span class="text-primary">{{ $g_s_items[$question->g_s] }}</span>
-                        @elseif($question->g_s=="2")
-                            <span class="text-danger">{{ $g_s_items[$question->g_s] }}</span>
-                        @endif
-                        )
                     </div>
                     @yield('upload'.$question->id)
-                    <br>
-                    <br>
+                    @if($question->type!="0")
+                        <br>
+                    @endif
                 @endforeach
             </div>
             <br>

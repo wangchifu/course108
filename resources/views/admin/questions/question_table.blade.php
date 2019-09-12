@@ -12,7 +12,7 @@
             子題號
         </td>
         <td colspan="2">
-            {{ Form::text('order_by',null,['id'=>'order_by', 'placeholder' => '如 1.1','required'=>'required','maxlength'=>'4']) }}
+            {{ Form::text('order_by',null,['id'=>'order_by', 'placeholder' => '如 1.1','required'=>'required','maxlength'=>'5']) }}
         </td>
     </tr>
     <tr>

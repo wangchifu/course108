@@ -98,7 +98,9 @@
                                         @endif
                                         )
                                     </div>
-                                    <br>
+                                    @if($question->type!="0")
+                                        <br>
+                                    @endif
                                 @endforeach
                             </div>
                             <br>

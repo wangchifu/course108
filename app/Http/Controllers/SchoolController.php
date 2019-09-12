@@ -114,9 +114,9 @@ class SchoolController extends Controller
                 $att['code'] = auth()->user()->code;
                 $att['question_id'] = $question_id;
                 $att['year'] = $select_year;
-                $att['file'] .= $new_filename.',';
+                $att['file'] .= ','.$new_filename;
             }
-            $att['file'] = substr($att['file'],0,-1);
+            $att['file'] = substr($att['file'],1);
             $upload = Upload::create($att);
 
                 write_log('上傳 '.$upload->question->order_by.' 題檔案',$select_year);
@@ -142,4 +142,98 @@ class SchoolController extends Controller
 
         return redirect()->route('schools.edit',$f[0]);
     }
+
+    public function upload2($select_year,Question $question)
+    {
+        $data = [
+            'select_year'=>$select_year,
+            'question'=>$question,
+        ];
+        return view('school.upload2',$data);
+    }
+
+    public function save2(UploadRequest $request)
+    {
+        $select_year = $request->input('select_year');
+        $question_id = $request->input('question_id');
+        //處理檔案上傳
+        if ($request->hasFile('files')) {
+            //先查詢有無上傳過
+            $upload = Upload::where('question_id',$question_id)
+                ->where('code',auth()->user()->code)
+                ->first();
+            if($upload){
+                $att['file'] = $upload->file;
+            }else{
+                $att['file'] = "";
+            }
+
+            $files = $request->file('files');
+
+            foreach($files as $file){
+                $info = [
+                    //'mime-type' => $file->getMimeType(),
+                    'original_filename' => $file->getClientOriginalName(),
+                    'extension' => $file->getClientOriginalExtension(),
+                    'size' => $file->getClientSize(),
+                ];
+                $new_filename = date('YmdHis').'-'.$info['original_filename'];
+                $file->storeAs('public/upload/'.$select_year.'/'.auth()->user()->code.'/'.$question_id,$new_filename);
+
+                $att['code'] = auth()->user()->code;
+                $att['question_id'] = $question_id;
+                $att['year'] = $select_year;
+                $att['file'] .= ','.$new_filename;
+            }
+
+            if(substr($att['file'],0,1)==","){
+                $att['file'] = substr($att['file'],1);
+            }
+
+            if($upload){
+                $upload->update($att);
+            }else{
+                $upload = Upload::create($att);
+            }
+
+
+            write_log('上傳 '.$upload->question->order_by.' 題檔案',$select_year);
+        }
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function delete2($file_path)
+    {
+        $file_path = str_replace('&&','/',$file_path);
+        $f = explode('/',$file_path);
+
+        $file = storage_path('app/public/upload/'.$file_path);
+
+        $upload = Upload::where('question_id',$f[2])
+            ->where('code',auth()->user()->code)
+            ->first();
+        $ff = explode(',',$upload->file);
+
+        //移除所選檔案
+        $new_file = "";
+        foreach($ff as $k=>$v){
+            if($v != $f[3]){
+                $new_file .= $v.",";
+            }
+        }
+        $att['file'] = substr($new_file,0,-1);
+        if($att['file'] == ""){
+            $upload->delete();
+        }else{
+            $upload->update($att);
+        }
+
+        unlink($file);
+
+        write_log('刪除已上傳的 '.$upload->question->order_by.' 題檔案'.' '.substr($f[3],15),$upload->year);
+
+        return redirect()->route('schools.edit',$f[0]);
+    }
+
 }

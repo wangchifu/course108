@@ -107,12 +107,29 @@
                                         </td>
                                         <td>
                                             @if($upload)
+                                                @if($question->type=="1")
                                                 <?php
                                                 $file_path = $select_year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$upload->file;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> 檢視上傳
+                                                    <i class="fas fa-eye"></i> 檢視檔案
                                                 </a>
+                                                @endif
+                                                @if($question->type=="2")
+                                                    <?php
+                                                        $files = explode(',',$upload->file);
+                                                        $i=1;
+                                                    ?>
+                                                    @foreach($files as $file)
+                                                        <?php
+                                                            $file_path = $select_year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$file;
+                                                        ?>
+                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                            <i class="fas fa-eye"></i> 檢視檔案 {{ $i }}
+                                                        </a><br>
+                                                        <?php $i++; ?>
+                                                    @endforeach
+                                                @endif
                                             @else
                                                 @if($question->need)
                                                     <span class="text-danger">未上傳</span>
