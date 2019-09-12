@@ -236,4 +236,39 @@ class SchoolController extends Controller
         return redirect()->route('schools.edit',$f[0]);
     }
 
+    public function upload8($select_year,Question $question)
+    {
+        $data = [
+            'select_year'=>$select_year,
+            'question'=>$question,
+        ];
+        return view('school.upload8',$data);
+    }
+
+    public function save8(UploadRequest $request)
+    {
+        $question_id = $request->input('question_id');
+        $select_year = $request->input('select_year');
+
+        $att['file'] = $request->input('want_date');
+        $att['code'] = auth()->user()->code;
+        $att['question_id'] = $question_id;
+        $att['year'] = $select_year;
+
+        $upload = Upload::create($att);
+
+        write_log('已填寫 '.$upload->question->order_by.' 題日期',$select_year);
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function delete8(Upload $upload)
+    {
+        $select_year = $upload->year;
+        write_log('刪除 '.$upload->question->order_by.' 題日期',$select_year);
+        $upload->delete();
+
+        return redirect()->route('schools.edit',$select_year);
+    }
+
 }

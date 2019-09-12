@@ -45,9 +45,9 @@
                     <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                         <i class="fas fa-eye"></i> 檢視檔案 {{ $i }}
                     </a>
-                    <a href="{{ route('schools.delete2',$file_path) }}" onclick="return confirm('確定刪除？')">
+                    <a href="{{ route('schools.delete2',$file_path) }}" onclick="return confirm('確定刪除 檔案{{ $i }} ？')">
                         <i class="far fa-trash-alt text-info"></i>
-                    </a>
+                    </a>　
                     <?php $i++; ?>
                 @endforeach
             @else
@@ -55,6 +55,22 @@
                     <a href="javascript:open_upload('{{ route('schools.upload2',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳多檔</a>
                 @else
                     <a href="javascript:open_upload('{{ route('schools.upload2',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning check_red"><i class="fas fa-times-circle"></i> 未上傳多檔</a>
+                @endif
+            @endif
+            <br>
+        @endif
+
+        @if($question->type=="8")
+            @if($upload)
+                <span class="text-primary"><i class="fas fa-calendar"></i> {{ $upload->file }}</span>
+                <a href="{{ route('schools.delete8',$upload->id) }}" onclick="return confirm('確定重設 ？')">
+                    <i class="far fa-trash-alt text-info"></i>
+                </a>　
+            @else
+                @if($question->need=="1")
+                    <a href="javascript:open_upload('{{ route('schools.upload8',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未填寫日期</a>
+                @else
+                    <a href="javascript:open_upload('{{ route('schools.upload8',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning check_red"><i class="fas fa-times-circle"></i> 未填寫日期</a>
                 @endif
             @endif
             <br>
