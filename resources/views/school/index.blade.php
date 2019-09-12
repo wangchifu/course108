@@ -24,7 +24,7 @@
                     </table>
                 </div>
                 <div class="card-body">
-                    <a href="" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> 檢視上傳歷程</a>
+                    <a href="{{ route('schools.show_log',$select_year) }}" class="btn btn-info btn-sm" target="_blank"><i class="fas fa-eye"></i> 檢視上傳歷程</a>
                     <a href="{{ route('schools.edit',$select_year) }}" class="btn btn-success btn-sm"><i class="fas fa-upload"></i> 上傳檔案</a>
                     <br><br>
                     <table class="table table-striped">
@@ -74,7 +74,58 @@
                         </tr>
                     </table>
                     <h1>{{ auth()->user()->school }} {{ $select_year }}學年度課程計畫</h1>
-                    @include('school.questions')
+                    <table border="1">
+                        @foreach($parts as $part)
+                            <tr bgcolor="#cccccc">
+                                <td>
+                                    {{ $part_order_by[$part->order_by] }}
+                                </td>
+                                <td>
+                                    {{ $part->title }}
+                                </td>
+                                <td width="90">
+                                    狀況
+                                </td>
+                            </tr>
+                            @foreach($part->topics as $topic)
+                                <tr>
+                                    <td colspan="3">
+                                        {{ $topic->order_by }}.{{ $topic->title }}
+                                    </td>
+                                </tr>
+
+                                @foreach($topic->questions as $question)
+                                    <?php
+                                    $upload = \App\Upload::where('question_id',$question->id)
+                                        ->where('code',auth()->user()->code)
+                                        ->first();
+                                    ?>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            {{ $question->order_by }} {{ $question->title }}
+                                        </td>
+                                        <td>
+                                            @if($upload)
+                                                <?php
+                                                $file_path = $select_year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$upload->file;
+                                                ?>
+                                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                    <i class="fas fa-eye"></i> 檢視上傳
+                                                </a>
+                                            @else
+                                                @if($question->need)
+                                                    <span class="text-danger">未上傳</span>
+                                                @else
+                                                    <span class="text-warning">非必填</span>
+                                                @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>

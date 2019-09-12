@@ -12,4 +12,8 @@ class Upload extends Model
         'code',
         'file',
     ];
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

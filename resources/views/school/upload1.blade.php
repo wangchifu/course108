@@ -25,7 +25,7 @@
             {{$question->order_by}} {{ \Illuminate\Support\Str::limit($question->title,30) }}
         </td>
         <td>
-            <input type="file" name="file" required>
+            <input type="file" name="files[]" required>
         </td>
         <td>
             <button type="submit" onclick="return confirm('確定？')">上傳</button>

@@ -120,6 +120,9 @@ Route::group(['middleware'=>'admin'],function(){
 
 //學校可用
 Route::group(['middleware' => 'school'],function(){
+    //顯示動作log
+    Route::get('schools/{year}/logs','SchoolController@show_log')->name('schools.show_log');
+
     Route::match(['get','post'],'schools' , 'SchoolController@index')->name('schools.index');
     Route::get('schools/edit/{select_year}' , 'SchoolController@edit')->name('schools.edit');
     Route::get('schools/{select_year}/upload1/{question}' , 'SchoolController@upload1')->name('schools.upload1');

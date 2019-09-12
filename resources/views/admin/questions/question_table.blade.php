@@ -36,7 +36,7 @@
             <label>必填？</label>
         </td>
         <td colspan="2">
-            {{ Form::checkbox('need','1',true,['id'=>'need']) }} <label for="need" class="text-danger">必填</label>
+            {{ Form::checkbox('need','1',null,['id'=>'need']) }} <label for="need" class="text-danger">必填</label>
         </td>
     </tr>
     <tr>

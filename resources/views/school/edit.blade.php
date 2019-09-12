@@ -34,7 +34,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="#" class="btn btn-secondary btn-sm" onclick="history.back();"><i class="fas fa-backward"></i> 返回</a>
+                    <a href="{{ route('schools.index') }}" class="btn btn-secondary btn-sm"><i class="fas fa-backward"></i> 返回</a>
                 </div>
                 <div class="card-body">
                     <h1>{{ auth()->user()->school }} {{ $year->year }}學年度課程計畫</h1>

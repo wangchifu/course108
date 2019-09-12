@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadRequest;
+use App\Log;
 use App\Part;
 use App\Question;
 use App\Upload;
@@ -59,6 +60,18 @@ class SchoolController extends Controller
         return view('school.edit',$data);
     }
 
+    public function show_log($year)
+    {
+        $logs = Log::where('year',$year)
+            ->where('school_code',auth()->user()->code)
+            ->orderBy('id','DESC')
+            ->get();
+        $data = [
+            'logs'=>$logs,
+        ];
+        return view('school.log',$data);
+    }
+
     public function upload1($select_year,Question $question)
     {
         $data = [
@@ -73,7 +86,7 @@ class SchoolController extends Controller
         $select_year = $request->input('select_year');
         $question_id = $request->input('question_id');
         //處理檔案上傳
-        if ($request->hasFile('file')) {
+        if ($request->hasFile('files')) {
             //先刪除已經有的
             $upload = Upload::where('question_id',$question_id)
                 ->where('code',auth()->user()->code)
@@ -84,7 +97,11 @@ class SchoolController extends Controller
                 $upload->delete();
             }
 
-            $file = $request->file('file');
+            $files = $request->file('files');
+
+            $att['file'] = "";
+
+            foreach($files as $file){
                 $info = [
                     //'mime-type' => $file->getMimeType(),
                     'original_filename' => $file->getClientOriginalName(),
@@ -97,8 +114,12 @@ class SchoolController extends Controller
                 $att['code'] = auth()->user()->code;
                 $att['question_id'] = $question_id;
                 $att['year'] = $select_year;
-                $att['file'] = $new_filename;
-                Upload::create($att);
+                $att['file'] .= $new_filename.',';
+            }
+            $att['file'] = substr($att['file'],0,-1);
+            $upload = Upload::create($att);
+
+                write_log('上傳 '.$upload->question->order_by.' 題檔案',$select_year);
         }
 
         echo "<body onload='opener.location.reload();window.close();'>";
@@ -116,6 +137,9 @@ class SchoolController extends Controller
             ->first();
         $upload->delete();
         unlink($file);
+
+        write_log('刪除已上傳的 '.$upload->question->order_by.' 題檔案',$upload->year);
+
         return redirect()->route('schools.edit',$f[0]);
     }
 }
