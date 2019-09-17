@@ -236,6 +236,191 @@ class SchoolController extends Controller
         return redirect()->route('schools.edit',$f[0]);
     }
 
+    public function upload6($select_year,Question $question,$stu_year)
+    {
+        $data = [
+            'select_year'=>$select_year,
+            'question'=>$question,
+            'stu_year'=>$stu_year
+        ];
+        return view('school.upload6',$data);
+    }
+
+    public function save6(UploadRequest $request)
+    {
+        $select_year = $request->input('select_year');
+        $question_id = $request->input('question_id');
+        $stu_year = $request->input('stu_year');
+        //處理檔案上傳
+        if ($request->hasFile('files')) {
+            //先查詢有無上傳過
+            $upload = Upload::where('question_id',$question_id)
+                ->where('code',auth()->user()->code)
+                ->first();
+            if($upload){
+                $file_array = unserialize($upload->file);
+                //刪除已上傳的檔案
+                if(isset($file_array[$stu_year])){
+                    $old_file = storage_path('app/public/upload/'.$select_year.'/'.auth()->user()->code.'/'.$question_id.'/'.$file_array[$stu_year]);
+                    unlink($old_file);
+                }
+            }else{
+                $file_array = [];
+            }
+
+            $files = $request->file('files');
+
+            foreach($files as $file){
+                $info = [
+                    //'mime-type' => $file->getMimeType(),
+                    'original_filename' => $file->getClientOriginalName(),
+                    'extension' => $file->getClientOriginalExtension(),
+                    'size' => $file->getClientSize(),
+                ];
+                $new_filename = date('YmdHis').'-'.$info['original_filename'];
+                $file->storeAs('public/upload/'.$select_year.'/'.auth()->user()->code.'/'.$question_id,$new_filename);
+
+                $att['code'] = auth()->user()->code;
+                $att['question_id'] = $question_id;
+                $att['year'] = $select_year;
+                $file_array[$stu_year] = $new_filename;
+            }
+
+            $att['file'] = serialize($file_array);
+
+            if($upload){
+                $upload->update($att);
+            }else{
+                $upload = Upload::create($att);
+            }
+            $cht_stu_year = ['1'=>'一年級','2'=>'二年級','3'=>'三年級','4'=>'四年級','5'=>'五年級','6'=>'六年級','7'=>'七年級','8'=>'八年級','9'=>'九年級'];
+            write_log('上傳 '.$upload->question->order_by.' 題 '.$cht_stu_year[$stu_year].' 檔案',$select_year);
+        }
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function delete6($file_path,$stu_year)
+    {
+        $file_path = str_replace('&&','/',$file_path);
+        $f = explode('/',$file_path);
+
+        $file = storage_path('app/public/upload/'.$file_path);
+
+        $upload = Upload::where('question_id',$f[2])
+            ->where('code',auth()->user()->code)
+            ->first();
+
+        $file_array = unserialize($upload->file);
+        unset($file_array[$stu_year]);
+
+        if(array_filter($file_array)){
+            $att['file'] = serialize($file_array);
+            $upload->update($att);
+        }else{
+            $upload->delete();
+        }
+        unlink($file);
+        $cht_stu_year = ['1'=>'一年級','2'=>'二年級','3'=>'三年級','4'=>'四年級','5'=>'五年級','6'=>'六年級','7'=>'七年級','8'=>'八年級','9'=>'九年級'];
+        write_log('刪除已上傳的 '.$upload->question->order_by.' 題 '.$cht_stu_year[$stu_year].' 檔案',$upload->year);
+
+        return redirect()->route('schools.edit',$f[0]);
+    }
+
+    public function upload7($select_year,Question $question,$stu_year)
+    {
+        $data = [
+            'select_year'=>$select_year,
+            'question'=>$question,
+            'stu_year'=>$stu_year
+        ];
+        return view('school.upload7',$data);
+    }
+
+    public function save7(UploadRequest $request)
+    {
+        $select_year = $request->input('select_year');
+        $question_id = $request->input('question_id');
+        $stu_year = $request->input('stu_year');
+        //處理檔案上傳
+        if ($request->hasFile('files')) {
+            //先查詢有無上傳過
+            $upload = Upload::where('question_id',$question_id)
+                ->where('code',auth()->user()->code)
+                ->first();
+            if($upload){
+                $file_array = unserialize($upload->file);
+            }else{
+                $file_array = [];
+            }
+
+            $files = $request->file('files');
+
+            foreach($files as $file){
+                $info = [
+                    //'mime-type' => $file->getMimeType(),
+                    'original_filename' => $file->getClientOriginalName(),
+                    'extension' => $file->getClientOriginalExtension(),
+                    'size' => $file->getClientSize(),
+                ];
+                $new_filename = date('YmdHis').'-'.$info['original_filename'];
+                $file->storeAs('public/upload/'.$select_year.'/'.auth()->user()->code.'/'.$question_id,$new_filename);
+
+                $att['code'] = auth()->user()->code;
+                $att['question_id'] = $question_id;
+                $att['year'] = $select_year;
+                if(!isset($file_array[$stu_year])){
+                    $file_array[$stu_year] = array();
+                }
+                array_push($file_array[$stu_year],$new_filename);
+            }
+
+            $att['file'] = serialize($file_array);
+
+            if($upload){
+                $upload->update($att);
+            }else{
+                $upload = Upload::create($att);
+            }
+            $cht_stu_year = ['1'=>'一年級','2'=>'二年級','3'=>'三年級','4'=>'四年級','5'=>'五年級','6'=>'六年級','7'=>'七年級','8'=>'八年級','9'=>'九年級'];
+            write_log('上傳 '.$upload->question->order_by.' 題 '.$cht_stu_year[$stu_year].' 檔案',$select_year);
+        }
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function delete7($file_path,$stu_year)
+    {
+        $file_path = str_replace('&&','/',$file_path);
+        $f = explode('/',$file_path);
+
+        $file = storage_path('app/public/upload/'.$file_path);
+
+        $upload = Upload::where('question_id',$f[2])
+            ->where('code',auth()->user()->code)
+            ->first();
+
+        $file_array = unserialize($upload->file);
+        foreach($file_array[$stu_year] as $k=>$v){
+            if($v==$f[3]){
+                unset($file_array[$stu_year][$k]);
+            }
+        }
+
+        if(array_filter($file_array)){
+            $att['file'] = serialize($file_array);
+            $upload->update($att);
+        }else{
+            $upload->delete();
+        }
+        unlink($file);
+        $cht_stu_year = ['1'=>'一年級','2'=>'二年級','3'=>'三年級','4'=>'四年級','5'=>'五年級','6'=>'六年級','7'=>'七年級','8'=>'八年級','9'=>'九年級'];
+        write_log('刪除已上傳的 '.$upload->question->order_by.' 題 '.$cht_stu_year[$stu_year].' 檔案',$upload->year);
+
+        return redirect()->route('schools.edit',$f[0]);
+    }
+
+
     public function upload8($select_year,Question $question)
     {
         $data = [

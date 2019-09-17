@@ -25,7 +25,7 @@
                 @if($question->need=="1")
                     <a href="javascript:open_upload('{{ route('schools.upload1',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
                 @else
-                    <a href="javascript:open_upload('{{ route('schools.upload1',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                    <a href="javascript:open_upload('{{ route('schools.upload1',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
                 @endif
             @endif
             <br>
@@ -33,7 +33,7 @@
 
         @if($question->type=="2")
             @if($upload)
-                <a href="javascript:open_upload('{{ route('schools.upload2',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-success check_red"><i class="fas fa-times-circle"></i> 再上傳</a>
+                <a href="javascript:open_upload('{{ route('schools.upload2',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
                 <?php
                 $files = explode(',',$upload->file);
                 $i=1;
@@ -54,10 +54,375 @@
                 @if($question->need=="1")
                     <a href="javascript:open_upload('{{ route('schools.upload2',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳多檔</a>
                 @else
-                    <a href="javascript:open_upload('{{ route('schools.upload2',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning check_red"><i class="fas fa-times-circle"></i> 未上傳多檔</a>
+                    <a href="javascript:open_upload('{{ route('schools.upload2',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳多檔</a>
                 @endif
             @endif
             <br>
+        @endif
+
+        @if($question->type=="6")
+            <br>
+            <?php
+                 $f = ['1'=>'','2'=>'','3'=>'','4'=>'','5'=>'','6'=>'','7'=>'','8'=>'','9'=>''];
+                 if($upload and $upload->file != null){
+                     $check_f = unserialize($upload->file);
+                     //填入
+                     foreach($f as $k=>$v){
+                         if(isset($check_f[$k])) $f[$k] = $check_f[$k];
+                     }
+                 }
+            ?>
+            @if(auth()->user()->group_id=="1")
+                <table border="1">
+                    <tr>
+                        <td>
+                             年級
+                        </td>
+                        <td>
+                            一年級
+                        </td>
+                        <td>
+                            二年級
+                        </td>
+                        <td>
+                            三年級
+                        </td>
+                        <td>
+                            四年級
+                        </td>
+                        <td>
+                            五年級
+                        </td>
+                        <td>
+                            六年級
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            單檔
+                        </td>
+                        <td>
+                            @if($f[1])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'1']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[1];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'1']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'1']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'1']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($f[2])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'2']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[2];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'2']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'2']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'2']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($f[3])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'3']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[3];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'3']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'3']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'3']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($f[4])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'4']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[4];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'4']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'4']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'4']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($f[5])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'5']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[5];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'5']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'5']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'5']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($f[6])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'6']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[6];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'6']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'6']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'6']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            @endif
+            @if(auth()->user()->group_id=="2")
+                <table border="1">
+                    <tr>
+                        <td>
+                            年級
+                        </td>
+                        <td>
+                            七年級
+                        </td>
+                        <td>
+                            八年級
+                        </td>
+                        <td>
+                            九年級
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            單檔
+                        </td>
+                        <td>
+                            @if($f[7])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'7']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[7];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'7']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'7']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'7']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($f[8])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'8']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[8];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'8']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'8']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'8']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+                            @if($f[9])
+                                <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'9']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <?php
+                                $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$f[9];
+                                ?>
+                                <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                    <i class="fas fa-eye"></i> 檢視檔案
+                                </a>
+                                <a href="{{ route('schools.delete6',['file_path'=>$file_path,'stu_year'=>'9']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                    <i class="far fa-trash-alt text-info"></i>
+                                </a>
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'9']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload6',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'9']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            @endif
+        @endif
+
+        @if($question->type=="7")
+            <br>
+            <?php
+            $f = ['1'=>'','2'=>'','3'=>'','4'=>'','5'=>'','6'=>'','7'=>'','8'=>'','9'=>''];
+            if($upload and $upload->file != null){
+                $check_f = unserialize($upload->file);
+            }
+            ?>
+            @if(auth()->user()->group_id=="1")
+                <table border="1">
+                    <tr>
+                        <td>
+                            年級
+                        </td>
+                        <td>
+                            一年級
+                        </td>
+                        <td>
+                            二年級
+                        </td>
+                        <td>
+                            三年級
+                        </td>
+                        <td>
+                            四年級
+                        </td>
+                        <td>
+                            五年級
+                        </td>
+                        <td>
+                            六年級
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            多檔
+                        </td>
+                        <td>
+                            @if(isset($check_f[1]))
+                                <a href="javascript:open_upload('{{ route('schools.upload7',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'1']) }}','新視窗')" class="badge badge-success"><i class="fas fa-times-circle"></i> 再上傳</a>
+                                <br>
+                                <?php $i=1; ?>
+                                @foreach($check_f[1] as $k=>$v)
+                                    <?php
+                                    $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                    ?>
+                                    <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                        <i class="fas fa-eye"></i> 檢視檔案{{ $i }}
+                                    </a>
+                                    <a href="{{ route('schools.delete7',['file_path'=>$file_path,'stu_year'=>'1']) }}" onclick="return confirm('確定刪除 檔案？')">
+                                        <i class="far fa-trash-alt text-info"></i>
+                                    </a>
+                                    <br>
+                                    <?php $i++; ?>
+                                @endforeach
+                            @else
+                                @if($question->need=="1")
+                                    <a href="javascript:open_upload('{{ route('schools.upload7',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'1']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @else
+                                    <a href="javascript:open_upload('{{ route('schools.upload7',['select_year'=>$year->year,'question'=>$question->id,'stu_year'=>'1']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳單檔</a>
+                                @endif
+                            @endif
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            @endif
+            @if(auth()->user()->group_id=="2")
+                <table border="1">
+                    <tr>
+                        <td>
+                            年級
+                        </td>
+                        <td>
+                            七年級
+                        </td>
+                        <td>
+                            八年級
+                        </td>
+                        <td>
+                            九年級
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            多檔
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            @endif
+
         @endif
 
         @if($question->type=="8")
@@ -70,7 +435,7 @@
                 @if($question->need=="1")
                     <a href="javascript:open_upload('{{ route('schools.upload8',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未填寫日期</a>
                 @else
-                    <a href="javascript:open_upload('{{ route('schools.upload8',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning check_red"><i class="fas fa-times-circle"></i> 未填寫日期</a>
+                    <a href="javascript:open_upload('{{ route('schools.upload8',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未填寫日期</a>
                 @endif
             @endif
             <br>
