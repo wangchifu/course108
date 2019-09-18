@@ -82,8 +82,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('sims.impersonate',$user->id) }}" onclick="return confirm('確定模擬登入？')">
-                                        <span class="badge badge-warning">模擬</span>
-                                    </a>
+                                        <span class="badge badge-warning">模擬</span></a>
                                     @if($user->disable)
                                         <a href="#" onclick="if(confirm('確定啟用帳號 {{ $user->username }} 嗎?')) getElementById('able{{ $user->id }}').submit();else return false">
                                             <span class="badge badge-success">啟用</span>
