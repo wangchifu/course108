@@ -62,6 +62,60 @@
             <br>
         @endif
 
+        @if($question->type=="5")
+            @if($upload)
+                <?php
+                    $book = unserialize($upload->file);
+                ?>
+                <table>
+                    <tr valign="top">
+                        @if(auth()->user()->group_id=="1")
+                            <td valign="top">
+                                @if(!empty($year12))
+                                    <strong>國小十二年國教課程</strong>
+                                    @include('school.book_e12_ok')
+                                @endif
+                            </td>
+                            <td>
+                                　
+                            </td>
+                            <td>
+                                @if(!empty($year9))
+                                    <strong>國小九年一貫課程</strong>
+                                    @include('school.book_e9_ok')
+                                @endif
+                            </td>
+                        @elseif(auth()->user()->group_id=="2")
+                            <td valign="top">
+                                @if(!empty($year12))
+                                    <strong>國中十二年國教課程</strong>
+                                    @include('school.book_j12_ok')
+                                @endif
+                            </td>
+                            <td>
+                                　
+                            </td>
+                            <td>
+                                @if(!empty($year9))
+                                    <strong>國中九年一貫課程</strong>
+                                    @include('school.book_j9_ok')
+                                @endif
+                            </td>
+                        @endif
+                    </tr>
+                </table>
+                <br>
+                <a href="{{ route('schools.delete5',$upload->id) }}" class="btn btn-info btn-sm" onclick="return confirm('確定重設？')"><i class="fas fa-trash-alt"></i> 清除重設</a>
+            @else
+                @if($question->need=="1")
+                    <a href="javascript:open_upload('{{ route('schools.upload5',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未填寫</a>
+                @else
+                    <a href="javascript:open_upload('{{ route('schools.upload5',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未填寫</a>
+                @endif
+            @endif
+            <br>
+        @endif
+
         @if($question->type=="6")
             <br>
             <?php
@@ -632,7 +686,7 @@
     <script>
         function open_upload(url,name)
         {
-            window.open(url,name,'statusbar=no,scrollbars=yes,status=yes,resizable=yes,width=900,height=200');
+            window.open(url,name,'statusbar=no,scrollbars=yes,status=yes,resizable=yes,width=900,height=450');
         }
     </script>
 @endsection

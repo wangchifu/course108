@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\Http\Requests\UploadRequest;
 use App\Log;
 use App\Part;
@@ -49,6 +50,58 @@ class SchoolController extends Controller
         $questions = Question::where('year',$select_year)->orderBy('order_by')->get();
 
         $parts = Part::where('year',$select_year)->orderBy('order_by')->get();
+
+        //九年一貫的年級有哪一些
+        if(auth()->user()->group_id==1){
+            if($year->e1 == '9year'){
+                $year9[] = "一";
+            }else{
+                $year12[] = "一";
+            }
+            if($year->e2 == '9year'){
+                $year9[] = "二";
+            }else{
+                $year12[] = "二";
+            }
+            if($year->e3 == '9year'){
+                $year9[] = "三";
+            }else{
+                $year12[] = "三";
+            }
+            if($year->e4 == '9year'){
+                $year9[] = "四";
+            }else{
+                $year12[] = "四";
+            }
+            if($year->e5 == '9year'){
+                $year9[] = "五";
+            }else{
+                $year12[] = "五";
+            }
+            if($year->e6 == '9year'){
+                $year9[] = "六";
+            }else{
+                $year12[] = "六";
+            }
+
+        }elseif(auth()->user()->group_id==2){
+            if($year->j1 == '9year'){
+                $year9[] = "七";
+            }else{
+                $year12[] = "七";
+            }
+            if($year->j2 == '9year'){
+                $year9[] = "八";
+            }else{
+                $year12[] = "八";
+            }
+            if($year->j3 == '9year'){
+                $year9[] = "九";
+            }else{
+                $year12[] = "九";
+            }
+        }
+
         $data = [
             'part_order_by'=>$part_order_by,
             'type_items'=>$type_items,
@@ -56,6 +109,8 @@ class SchoolController extends Controller
             'parts'=>$parts,
             'year'=>$year,
             'questions'=>$questions,
+            'year9'=>$year9,
+            'year12'=>$year12,
         ];
         return view('school.edit',$data);
     }
@@ -234,6 +289,155 @@ class SchoolController extends Controller
         write_log('刪除已上傳的 '.$upload->question->order_by.' 題檔案'.' '.substr($f[3],15),$upload->year);
 
         return redirect()->route('schools.edit',$f[0]);
+    }
+
+    public function upload5($select_year,Question $question)
+    {
+        $year = Year::where('year',$select_year)->first();
+
+        $year9 = [];
+        $year12= [];
+        //九年一貫的年級有哪一些
+        if(auth()->user()->group_id==1){
+            if($year->e1 == '9year'){
+                $year9[] = "一";
+            }else{
+                $year12[] = "一";
+            }
+            if($year->e2 == '9year'){
+                $year9[] = "二";
+            }else{
+                $year12[] = "二";
+            }
+            if($year->e3 == '9year'){
+                $year9[] = "三";
+            }else{
+                $year12[] = "三";
+            }
+            if($year->e4 == '9year'){
+                $year9[] = "四";
+            }else{
+                $year12[] = "四";
+            }
+            if($year->e5 == '9year'){
+                $year9[] = "五";
+            }else{
+                $year12[] = "五";
+            }
+            if($year->e6 == '9year'){
+                $year9[] = "六";
+            }else{
+                $year12[] = "六";
+            }
+
+        }elseif(auth()->user()->group_id==2){
+            if($year->j1 == '9year'){
+                $year9[] = "七";
+            }else{
+                $year12[] = "七";
+            }
+            if($year->j2 == '9year'){
+                $year9[] = "八";
+            }else{
+                $year12[] = "八";
+            }
+            if($year->j3 == '9year'){
+                $year9[] = "九";
+            }else{
+                $year12[] = "九";
+            }
+        }
+
+        //管理者已建之版本
+        $mandarin_books = Book::where('subject','mandarin')
+            ->where('disable',null)
+            ->get();
+        $dialects_books = Book::where('subject','dialects')
+            ->where('disable',null)
+            ->get();
+        $english_books = Book::where('subject','english')
+            ->where('disable',null)
+            ->get();
+        $mathematics_books = Book::where('subject','mathematics')
+            ->where('disable',null)
+            ->get();
+        $life_curriculum_books = Book::where('subject','life_curriculum')
+            ->where('disable',null)
+            ->get();
+        $social_studies_books = Book::where('subject','social_studies')
+            ->where('disable',null)
+            ->get();
+        $science_technology_books = Book::where('subject','science_technology')
+            ->where('disable',null)
+            ->get();
+        $science_books = Book::where('subject','science')
+            ->where('disable',null)
+            ->get();
+        $arts_humanities_books = Book::where('subject','arts_humanities')
+            ->where('disable',null)
+            ->get();
+        $integrative_activities_books = Book::where('subject','integrative_activities')
+            ->where('disable',null)
+            ->get();
+        $technology_books = Book::where('subject','technology')
+            ->where('disable',null)
+            ->get();
+        $health_physical_books = Book::where('subject','health_physical')
+            ->where('disable',null)
+            ->get();
+
+        $data = [
+            'select_year'=>$select_year,
+            'question'=>$question,
+            'year9'=>$year9,
+            'year12'=>$year12,
+            'mandarin_books'=>$mandarin_books,
+            'dialects_books'=>$dialects_books,
+            'english_books'=>$english_books,
+            'mathematics_books'=>$mathematics_books,
+            'life_curriculum_books'=>$life_curriculum_books,
+            'social_studies_books'=>$social_studies_books,
+            'science_technology_books'=>$science_technology_books,
+            'science_books'=>$science_books,
+            'arts_humanities_books'=>$arts_humanities_books,
+            'integrative_activities_books'=>$integrative_activities_books,
+            'technology_books'=>$technology_books,
+            'health_physical_books'=>$health_physical_books,
+        ];
+        return view('school.upload5',$data);
+    }
+
+    public function save5(Request $request)
+    {
+        $select_year = $request->input('select_year');
+        $question_id = $request->input('question_id');
+
+        $book['mandarin'] = $request->input('mandarin_book');
+        $book['dialects'] = $request->input('dialects_book');
+        $book['english'] = $request->input('english_book');
+        $book['mathematics'] = $request->input('mathematics_book');
+        $book['life_curriculum'] = $request->input('life_curriculum_book');
+        $book['social_studies'] = $request->input('social_studies_book');
+        $book['science_technology'] = $request->input('science_technology_book');
+        $book['science'] = $request->input('science_book');
+        $book['arts_humanities'] = $request->input('arts_humanities_book');
+        $book['integrative_activities'] = $request->input('integrative_activities_book');
+        $book['technology'] = $request->input('technology_book');
+        $book['health_physical'] = $request->input('health_physical_book');
+
+        $att['code'] = auth()->user()->code;
+        $att['question_id'] = $question_id;
+        $att['year'] = $select_year;
+        $att['file'] = serialize($book);
+        Upload::create($att);
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function delete5(Upload $upload)
+    {
+        $upload->delete();
+        return redirect()->route('schools.edit',$upload->year);
     }
 
     public function upload6($select_year,Question $question,$stu_year)
