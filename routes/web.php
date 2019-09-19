@@ -131,6 +131,10 @@ Route::group(['middleware' => 'school'],function(){
     Route::get('schools/{select_year}/upload2/{question}' , 'SchoolController@upload2')->name('schools.upload2');
     Route::post('schools/save2' , 'SchoolController@save2')->name('schools.save2');
     Route::get('schools/{file_path}/delete2' , 'SchoolController@delete2')->name('schools.delete2');
+
+    Route::get('schools/{select_year}/upload4/{question}/{grade}/{subject}' , 'SchoolController@upload4')->name('schools.upload4');
+    Route::post('schools/save4' , 'SchoolController@save4')->name('schools.save4');
+    Route::get('schools/{file_path}/delete4/{grade}/{subject}' , 'SchoolController@delete4')->name('schools.delete4');
     Route::get('schools/{select_year}/upload5/{question}' , 'SchoolController@upload5')->name('schools.upload5');
     Route::post('schools/save5' , 'SchoolController@save5')->name('schools.save5');
     Route::get('schools/{upload}/delete5' , 'SchoolController@delete5')->name('schools.delete5');

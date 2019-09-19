@@ -29,6 +29,57 @@ class SchoolController extends Controller
             $year = Year::where('year',$select_year)->first();
         }
 
+        //九年一貫的年級有哪一些
+        if(auth()->user()->group_id==1){
+            if($year->e1 == '9year'){
+                $year9[] = "一";
+            }else{
+                $year12[] = "一";
+            }
+            if($year->e2 == '9year'){
+                $year9[] = "二";
+            }else{
+                $year12[] = "二";
+            }
+            if($year->e3 == '9year'){
+                $year9[] = "三";
+            }else{
+                $year12[] = "三";
+            }
+            if($year->e4 == '9year'){
+                $year9[] = "四";
+            }else{
+                $year12[] = "四";
+            }
+            if($year->e5 == '9year'){
+                $year9[] = "五";
+            }else{
+                $year12[] = "五";
+            }
+            if($year->e6 == '9year'){
+                $year9[] = "六";
+            }else{
+                $year12[] = "六";
+            }
+
+        }elseif(auth()->user()->group_id==2){
+            if($year->j1 == '9year'){
+                $year9[] = "七";
+            }else{
+                $year12[] = "七";
+            }
+            if($year->j2 == '9year'){
+                $year9[] = "八";
+            }else{
+                $year12[] = "八";
+            }
+            if($year->j3 == '9year'){
+                $year9[] = "九";
+            }else{
+                $year12[] = "九";
+            }
+        }
+
         $data = [
             'year_items'=>$year_items,
             'select_year'=>$select_year,
@@ -37,6 +88,8 @@ class SchoolController extends Controller
             'g_s_items'=>$g_s_items,
             'parts'=>$parts,
             'year'=>$year,
+            'year9'=>$year9,
+            'year12'=>$year12,
         ];
         return view('school.index',$data);
     }
@@ -287,6 +340,110 @@ class SchoolController extends Controller
         unlink($file);
 
         write_log('刪除已上傳的 '.$upload->question->order_by.' 題檔案'.' '.substr($f[3],15),$upload->year);
+
+        return redirect()->route('schools.edit',$f[0]);
+    }
+
+    public function upload4($select_year,Question $question,$grade,$subject)
+    {
+        $subjects = config('course.subjects');
+        $data = [
+            'select_year'=>$select_year,
+            'question'=>$question,
+            'subject'=>$subject,
+            'subjects'=>$subjects,
+            'grade'=>$grade,
+        ];
+        return view('school.upload4',$data);
+    }
+
+    public function save4(UploadRequest $request)
+    {
+        $select_year = $request->input('select_year');
+        $question_id = $request->input('question_id');
+        $grade = $request->input('grade');
+        $subject = $request->input('subject');
+
+
+        //處理檔案上傳
+        if ($request->hasFile('files')) {
+            //先查詢有無上傳過
+            $upload = Upload::where('question_id',$question_id)
+                ->where('code',auth()->user()->code)
+                ->first();
+
+            if($upload){
+                $area_file = unserialize($upload->file);
+            }else{
+                $area_file = [];
+            }
+
+            $files = $request->file('files');
+
+            foreach($files as $file){
+                $info = [
+                    //'mime-type' => $file->getMimeType(),
+                    'original_filename' => $file->getClientOriginalName(),
+                    'extension' => $file->getClientOriginalExtension(),
+                    'size' => $file->getClientSize(),
+                ];
+                $new_filename = date('YmdHis').'-'.$info['original_filename'];
+                $file->storeAs('public/upload/'.$select_year.'/'.auth()->user()->code.'/'.$question_id,$new_filename);
+
+                $att['code'] = auth()->user()->code;
+                $att['question_id'] = $question_id;
+                $att['year'] = $select_year;
+
+                //檢查是否為覆蓋
+                if(isset($area_file[$subject][$grade])){
+                    $old_file = storage_path('app/public/upload/'.$select_year.'/'.auth()->user()->code.'/'.$question_id.'/'.$area_file[$subject][$grade]);
+                    if(file_exists($old_file)){
+                        unlink($old_file);
+                    }
+                }
+
+                $area_file[$subject][$grade] = $new_filename;
+            }
+
+            $att['file'] = serialize($area_file);
+            if($upload){
+                $upload->update($att);
+            }else{
+                $upload = Upload::create($att);
+            }
+
+
+            write_log('上傳 '.$upload->question->order_by.' 題'.$grade.'年級'.$subject.'檔案',$select_year);
+        }
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+
+    public function delete4($file_path,$grade,$subject)
+    {
+        $file_path = str_replace('&&','/',$file_path);
+        $f = explode('/',$file_path);
+
+        $file = storage_path('app/public/upload/'.$file_path);
+
+        $upload = Upload::where('question_id',$f[2])
+            ->where('code',auth()->user()->code)
+            ->first();
+        $area_file = unserialize($upload->file);
+
+        unset($area_file[$subject][$grade]);
+
+        unlink($file);
+
+        if(array_filter($area_file)){
+            $att['file'] = serialize($area_file);
+            $upload->update($att);
+        }else{
+            $upload->delete();
+        }
+
+        write_log('刪除已上傳的 '.$upload->question->order_by.' 題'.$grade.'年級'.$subject.'檔案',$upload->year);
 
         return redirect()->route('schools.edit',$f[0]);
     }

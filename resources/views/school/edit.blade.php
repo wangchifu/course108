@@ -62,6 +62,54 @@
             <br>
         @endif
 
+        @if($question->type=="4")
+            <?php
+                if($upload){
+                    $area_file = unserialize($upload->file);
+                }else{
+                    $area_file = [];
+                }
+            ?>
+            <table>
+                <tr valign="top">
+                    @if(auth()->user()->group_id==1)
+                        <td valign="top">
+                            @if(!empty($year12))
+                                <strong>國小十二年國教課程</strong>
+                                @include('school.upload4_e12')
+                            @endif
+                        </td>
+                        <td>
+                            　
+                        </td>
+                        <td>
+                            @if(!empty($year9))
+                                <strong>國小九年一貫課程</strong>
+                                @include('school.upload4_e9')
+                            @endif
+                        </td>
+                    @else(auth()->user()->group_id==2)
+                        <td valign="top">
+                            @if(!empty($year12))
+                                <strong>國中十二年國教課程</strong>
+                                @include('school.upload4_j12')
+                            @endif
+                        </td>
+                        <td>
+                            　
+                        </td>
+                        <td>
+                            @if(!empty($year9))
+                                <strong>國中九年一貫課程</strong>
+                                @include('school.upload4_j9')
+                            @endif
+                        </td>
+                    @endif
+                </tr>
+            </table>
+            <br>
+        @endif
+
         @if($question->type=="5")
             @if($upload)
                 <?php

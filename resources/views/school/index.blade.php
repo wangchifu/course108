@@ -102,7 +102,7 @@
                                     ?>
                                     <tr>
                                         <td></td>
-                                        <td>
+                                        <td valign="top">
                                             {{ $question->order_by }} {{ $question->title }}
                                         </td>
                                         <td>
@@ -130,6 +130,106 @@
                                                         <?php $i++; ?>
                                                     @endforeach
                                                 @endif
+                                                @if($question->type=="4")
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td></td>
+                                                    <td colspan="2">
+                                                        <?php
+                                                        if($upload){
+                                                            $area_file = unserialize($upload->file);
+                                                        }else{
+                                                            $area_file = [];
+                                                        }
+                                                        ?>
+                                                        <table>
+                                                            <tr valign="top">
+                                                                @if(auth()->user()->group_id==1)
+                                                                    <td valign="top">
+                                                                        @if(!empty($year12))
+                                                                            <strong>國小十二年國教課程</strong>
+                                                                            @include('school.upload4_e12_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        　
+                                                                    </td>
+                                                                    <td>
+                                                                        @if(!empty($year9))
+                                                                            <strong>國小九年一貫課程</strong>
+                                                                            @include('school.upload4_e9_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                @else(auth()->user()->group_id==2)
+                                                                    <td valign="top">
+                                                                        @if(!empty($year12))
+                                                                            <strong>國中十二年國教課程</strong>
+                                                                            @include('school.upload4_j12_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        　
+                                                                    </td>
+                                                                    <td>
+                                                                        @if(!empty($year9))
+                                                                            <strong>國中九年一貫課程</strong>
+                                                                            @include('school.upload4_j9_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                @endif
+                                                            </tr>
+                                                        </table>
+                                                        <br>
+                                                @endif
+                                                @if($question->type=="5")
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td colspan="2">
+                                                            <?php
+                                                            $book = unserialize($upload->file);
+                                                            ?>
+                                                            <table>
+                                                                <tr valign="top">
+                                                                    @if(auth()->user()->group_id=="1")
+                                                                        <td valign="top">
+                                                                            @if(!empty($year12))
+                                                                                <strong>國小十二年國教課程</strong>
+                                                                                @include('school.book_e12_ok')
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>
+                                                                            　
+                                                                        </td>
+                                                                        <td>
+                                                                            @if(!empty($year9))
+                                                                                <strong>國小九年一貫課程</strong>
+                                                                                @include('school.book_e9_ok')
+                                                                            @endif
+                                                                        </td>
+                                                                    @elseif(auth()->user()->group_id=="2")
+                                                                        <td valign="top">
+                                                                            @if(!empty($year12))
+                                                                                <strong>國中十二年國教課程</strong>
+                                                                                @include('school.book_j12_ok')
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>
+                                                                            　
+                                                                        </td>
+                                                                        <td>
+                                                                            @if(!empty($year9))
+                                                                                <strong>國中九年一貫課程</strong>
+                                                                                @include('school.book_j9_ok')
+                                                                            @endif
+                                                                        </td>
+                                                                    @endif
+                                                                </tr>
+                                                            </table>
+                                                            <br>
+                                                @endif
                                                 @if($question->type=="6")
                                                         <?php
                                                         $f = ['1'=>'','2'=>'','3'=>'','4'=>'','5'=>'','6'=>'','7'=>'','8'=>'','9'=>''];
@@ -144,7 +244,8 @@
                                                     </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="3">
+                                                        <td></td>
+                                                        <td colspan="2">
                                                             @if(auth()->user()->group_id=="1")
                                                                 <table border="1">
                                                                     <tr>
@@ -345,6 +446,250 @@
                                                                 </table>
                                                             @endif
                                                         <br>
+                                                @endif
+                                                @if($question->type=="7")
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td colspan="2">
+                                                                <?php
+                                                                $f = ['1'=>'','2'=>'','3'=>'','4'=>'','5'=>'','6'=>'','7'=>'','8'=>'','9'=>''];
+                                                                if($upload and $upload->file != null){
+                                                                    $check_f = unserialize($upload->file);
+                                                                }else{
+                                                                    $check_f = [];
+                                                                }
+                                                                ?>
+                                                                @if(auth()->user()->group_id=="1")
+                                                                    <table border="1">
+                                                                        <tr>
+                                                                            <td>
+                                                                                年級
+                                                                            </td>
+                                                                            <td>
+                                                                                一年級
+                                                                            </td>
+                                                                            <td>
+                                                                                二年級
+                                                                            </td>
+                                                                            <td>
+                                                                                三年級
+                                                                            </td>
+                                                                            <td>
+                                                                                四年級
+                                                                            </td>
+                                                                            <td>
+                                                                                五年級
+                                                                            </td>
+                                                                            <td>
+                                                                                六年級
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                多檔
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[1]))
+                                                                                    @foreach($check_f[1] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[2]))
+                                                                                    @foreach($check_f[2] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[3]))
+                                                                                    @foreach($check_f[3] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[4]))
+                                                                                    @foreach($check_f[4] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[5]))
+                                                                                    @foreach($check_f[5] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[6]))
+                                                                                    @foreach($check_f[6] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    <br>
+                                                                @endif
+                                                                @if(auth()->user()->group_id=="2")
+                                                                    <table border="1">
+                                                                        <tr>
+                                                                            <td>
+                                                                                年級
+                                                                            </td>
+                                                                            <td>
+                                                                                七年級
+                                                                            </td>
+                                                                            <td>
+                                                                                八年級
+                                                                            </td>
+                                                                            <td>
+                                                                                九年級
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                多檔
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[7]))
+                                                                                    @foreach($check_f[7] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[8]))
+                                                                                    @foreach($check_f[8] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                @if(isset($check_f[9]))
+                                                                                    @foreach($check_f[9] as $k=>$v)
+                                                                                        <?php
+                                                                                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$v;
+                                                                                        ?>
+                                                                                        <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
+                                                                                            <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                                                        </a>
+                                                                                        <br>
+                                                                                    @endforeach
+                                                                                @else
+                                                                                    @if($question->need=="1")
+                                                                                        <span class="text-danger">未上傳多檔</span>
+                                                                                    @else
+                                                                                        <span class="text-warning">未上傳多檔</span>
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
                                                 @endif
                                                 @if($question->type=="8")
                                                     <span class="text-primary"><i class="fas fa-calendar"></i> {{ $upload->file }}</span>
