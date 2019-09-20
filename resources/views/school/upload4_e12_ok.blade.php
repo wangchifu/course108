@@ -27,9 +27,9 @@
                     </a>
                 @else
                     @if($question->need=="1")
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'mandarin']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-danger">未上傳</span>
                     @else
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'mandarin']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-warning">未上傳</span>
                     @endif
                 @endif
             </td>
@@ -50,9 +50,9 @@
                     </a>
                 @else
                     @if($question->need=="1")
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'dialects']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-danger">未上傳</span>
                     @else
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'dialects']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-warning">未上傳</span>
                     @endif
                 @endif
             </td>
@@ -76,9 +76,9 @@
                         </a>
                     @else
                         @if($question->need=="1")
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'english']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-danger">未上傳</span>
                         @else
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'english']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-warning">未上傳</span>
                         @endif
                     @endif
                 @endif
@@ -100,9 +100,9 @@
                     </a>
                 @else
                     @if($question->need=="1")
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'mathematics']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-danger">未上傳</span>
                     @else
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'mathematics']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-warning">未上傳</span>
                     @endif
                 @endif
             </td>
@@ -127,9 +127,9 @@
                         </a>
                     @else
                         @if($question->need=="1")
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'life_curriculum']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-danger">未上傳</span>
                         @else
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'life_curriculum']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-warning">未上傳</span>
                         @endif
                     @endif
                 </td>
@@ -144,9 +144,9 @@
                         </a>
                     @else
                         @if($question->need=="1")
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'social_studies']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-danger">未上傳</span>
                         @else
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'social_studies']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-warning">未上傳</span>
                         @endif
                     @endif
                 </td>
@@ -171,9 +171,9 @@
                         </a>
                     @else
                         @if($question->need=="1")
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'science']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-danger">未上傳</span>
                         @else
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'science']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-warning">未上傳</span>
                         @endif
                     @endif
                 </td>
@@ -198,9 +198,9 @@
                         </a>
                     @else
                         @if($question->need=="1")
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'arts_humanities']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-danger">未上傳</span>
                         @else
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'arts_humanities']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-warning">未上傳</span>
                         @endif
                     @endif
                 </td>
@@ -225,9 +225,9 @@
                         </a>
                     @else
                         @if($question->need=="1")
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'integrative_activities']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-danger">未上傳</span>
                         @else
-                            <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'integrative_activities']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                            <span class="text-warning">未上傳</span>
                         @endif
                     @endif
                 </td>
@@ -249,9 +249,9 @@
                     </a>
                 @else
                     @if($question->need=="1")
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'health_physical']) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-danger">未上傳</span>
                     @else
-                        <a href="javascript:open_upload('{{ route('schools.upload4',['select_year'=>$year->year,'question'=>$question->id,'grade'=>$v,'subject'=>'health_physical']) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未上傳</a>
+                        <span class="text-warning">未上傳</span>
                     @endif
                 @endif
             </td>

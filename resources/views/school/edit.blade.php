@@ -62,6 +62,19 @@
             <br>
         @endif
 
+        @if($question->type=="3")
+            @if($upload)
+
+            @else
+                @if($question->need=="1")
+                    <a href="javascript:open_upload('{{ route('schools.upload3',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未填寫</a>
+                @else
+                    <a href="javascript:open_upload('{{ route('schools.upload3',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-warning"><i class="fas fa-times-circle"></i> 未填寫</a>
+                @endif
+            @endif
+            <br>
+        @endif
+
         @if($question->type=="4")
             <?php
                 if($upload){
@@ -734,7 +747,7 @@
     <script>
         function open_upload(url,name)
         {
-            window.open(url,name,'statusbar=no,scrollbars=yes,status=yes,resizable=yes,width=900,height=450');
+            window.open(url,name,'statusbar=no,scrollbars=yes,status=yes,resizable=yes,width=900,height=650');
         }
     </script>
 @endsection

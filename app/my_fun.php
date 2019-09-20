@@ -70,3 +70,20 @@ if(! function_exists('write_log')){
         \App\Log::create($att);
     }
 }
+
+if (! function_exists('cht2num')) {
+    function cht2num($c){
+        $cht = [
+            '一'=>'1',
+            '二'=>'2',
+            '三'=>'3',
+            '四'=>'4',
+            '五'=>'5',
+            '六'=>'6',
+            '七'=>'7',
+            '八'=>'8',
+            '九'=>'9',
+        ];
+        return $cht[$c];
+    }
+}

@@ -344,6 +344,145 @@ class SchoolController extends Controller
         return redirect()->route('schools.edit',$f[0]);
     }
 
+    public function upload3($select_year,Question $question)
+    {
+        $year = Year::where('year',$select_year)->first();
+
+        $year9 = [];
+        $year12= [];
+        //九年一貫的年級有哪一些
+        if(auth()->user()->group_id==1){
+            if($year->e1 == '9year'){
+                $year9[] = "一";
+            }else{
+                $year12[] = "一";
+            }
+            if($year->e2 == '9year'){
+                $year9[] = "二";
+            }else{
+                $year12[] = "二";
+            }
+            if($year->e3 == '9year'){
+                $year9[] = "三";
+            }else{
+                $year12[] = "三";
+            }
+            if($year->e4 == '9year'){
+                $year9[] = "四";
+            }else{
+                $year12[] = "四";
+            }
+            if($year->e5 == '9year'){
+                $year9[] = "五";
+            }else{
+                $year12[] = "五";
+            }
+            if($year->e6 == '9year'){
+                $year9[] = "六";
+            }else{
+                $year12[] = "六";
+            }
+
+        }elseif(auth()->user()->group_id==2){
+            if($year->j1 == '9year'){
+                $year9[] = "七";
+            }else{
+                $year12[] = "七";
+            }
+            if($year->j2 == '9year'){
+                $year9[] = "八";
+            }else{
+                $year12[] = "八";
+            }
+            if($year->j3 == '9year'){
+                $year9[] = "九";
+            }else{
+                $year12[] = "九";
+            }
+        }
+
+        $section9 = config('course.section9');
+        $section12 = config('course.section12');
+
+
+        $data = [
+            'year'=>$year,
+            'select_year'=>$select_year,
+            'question'=>$question,
+            'year9'=>$year9,
+            'year12'=>$year12,
+            'section9'=>$section9,
+            'section12'=>$section12,
+        ];
+        return view('school.upload3',$data);
+    }
+
+    public function save3(Request $request)
+    {
+        dd('123');
+        $select_year = $request->input('select_year');
+        $question_id = $request->input('question_id');
+
+        $section['mandarin_section'] = $request->input('mandarin_section');
+        $section['dialects_section'] = $request->input('dialects_section');
+        $section['english_section'] = $request->input('english_section');
+        $section['mathematics_section'] = $request->input('mathematics_section');
+        $section['life_curriculum_section'] = $request->input('life_curriculum_section');
+        $section['social_studies_section'] = $request->input('social_studies_section');
+        $section['science_technology_section'] = $request->input('science_technology_section');
+        $section['science_section'] = $request->input('science_section');
+        $section['arts_humanities_section'] = $request->input('arts_humanities_section');
+        $section['integrative_activities_section'] = $request->input('integrative_activities_section');
+        $section['technology_section'] = $request->input('technology_section');
+        $section['health_physical_section'] = $request->input('health_physical_section');
+        $section['alternative_section'] = $request->input('alternative_section');
+
+        /**
+        if(auth()->user()->group_id=="1"){
+            if($section['mandarin_section']['一']+$section['dialects_section']['一'] < 4 or $section['mandarin_section']['一']+$section['dialects_section']['一'] > 6){
+                return back()->withErrors('國小1年級語文領域小計節數應在4~6節之間');
+            }
+            if($section['mandarin_section']['二']+$section['dialects_section']['二'] < 4 or $section['mandarin_section']['二']+$section['dialects_section']['二'] > 6){
+                return back()->withErrors('國小2年級語文領域小計節數應在4~6節之間');
+            }
+            if($section['mandarin_section']['三']+$section['dialects_section']['三']+$section['english_section']['三'] < 5 or $section['mandarin_section']['三']+$section['dialects_section']['三']+$section['english_section']['三'] > 7){
+                return back()->withErrors('國小3年級語文領域小計節數應在5~7節之間');
+            }
+            if($section['mandarin_section']['四']+$section['dialects_section']['四']+$section['english_section']['四'] < 5 or $section['mandarin_section']['四']+$section['dialects_section']['四']+$section['english_section']['四'] > 7){
+                return back()->withErrors('國小4年級語文領域小計節數應在5~7節之間');
+            }
+            if($section['mandarin_section']['五']+$section['dialects_section']['五']+$section['english_section']['五'] < 5 or $section['mandarin_section']['五']+$section['dialects_section']['五']+$section['english_section']['五'] > 8){
+                return back()->withErrors('國小5年級語文領域小計節數應在5~8節之間');
+            }
+            if($section['mandarin_section']['六']+$section['dialects_section']['六']+$section['english_section']['六'] < 5 or $section['mandarin_section']['六']+$section['dialects_section']['六']+$section['english_section']['六'] > 8){
+                return back()->withErrors('國小6年級語文領域小計節數應在5~8節之間');
+            }
+        }
+
+        if(auth()->user()->group_id=="2"){
+            if($section['mandarin_section']['七']+$section['dialects_section']['七']+$section['english_section']['七'] < 6 or $section['mandarin_section']['七']+$section['dialects_section']['七']+$section['english_section']['七'] > 8){
+                return back()->withErrors('國中7年級語文領域小計節數應在6~8節之間');
+            }
+            if($section['mandarin_section']['八']+$section['dialects_section']['八']+$section['english_section']['八'] < 6 or $section['mandarin_section']['八']+$section['dialects_section']['八']+$section['english_section']['八'] > 8){
+                return back()->withErrors('國中8年級語文領域小計節數應在6~8節之間');
+            }
+            if($section['mandarin_section']['九']+$section['dialects_section']['九']+$section['english_section']['九'] < 6 or $section['mandarin_section']['九']+$section['dialects_section']['九']+$section['english_section']['九'] > 9){
+                return back()->withErrors('國中9年級語文領域小計節數應在6~9節之間');
+            }
+        }
+         * */
+
+        $att['file'] = serialize($section);
+
+        $att['code'] = auth()->user()->code;
+        $att['question_id'] = $question_id;
+        $att['year'] = $select_year;
+
+        Upload::create($att);
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
     public function upload4($select_year,Question $question,$grade,$subject)
     {
         $subjects = config('course.subjects');
