@@ -64,7 +64,48 @@
 
         @if($question->type=="3")
             @if($upload)
-
+                <?php
+                    $area_section = unserialize($upload->file);
+                ?>
+                <table>
+                    <tr valign="top">
+                        @if(auth()->user()->group_id=="1")
+                            <td valign="top">
+                                @if(!empty($year12))
+                                    <strong>國小十二年國教課程</strong>
+                                    @include('school.section_e12_ok')
+                                @endif
+                            </td>
+                            <td>
+                                　
+                            </td>
+                            <td>
+                                @if(!empty($year9))
+                                    <strong>國小九年一貫課程</strong>
+                                    @include('school.section_e9_ok')
+                                @endif
+                            </td>
+                        @elseif(auth()->user()->group_id=="2")
+                            <td valign="top">
+                                @if(!empty($year12))
+                                    <strong>國中十二年國教課程</strong>
+                                    @include('school.section_j12_ok')
+                                @endif
+                            </td>
+                            <td>
+                                　
+                            </td>
+                            <td>
+                                @if(!empty($year9))
+                                    <strong>國中九年一貫課程</strong>
+                                    @include('school.section_j9_ok')
+                                @endif
+                            </td>
+                        @endif
+                    </tr>
+                </table>
+                <br>
+                <a href="{{ route('schools.delete3',$upload->id) }}" class="btn btn-info btn-sm" onclick="return confirm('確定重設？')"><i class="fas fa-trash-alt"></i> 清除重設</a>
             @else
                 @if($question->need=="1")
                     <a href="javascript:open_upload('{{ route('schools.upload3',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未填寫</a>
@@ -736,6 +777,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{ route('schools.index') }}" class="btn btn-secondary btn-sm"><i class="fas fa-backward"></i> 返回</a>
+                    <span class="text-danger">填完記得於底部送出審查後不再更改！才算正式送件！</span>
                 </div>
                 <div class="card-body">
                     <h1>{{ auth()->user()->school }} {{ $year->year }}學年度課程計畫</h1>
@@ -744,10 +786,34 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <form action="{{ route('schools.submit') }}" method="post" onsubmit="return false" id="form_submit">
+            @csrf
+            <input type="hidden" name="select_year" value="{{ $year->year }}">
+            <br>
+            <a href="{{ route('schools.index') }}" class="btn btn-secondary btn-sm"><i class="fas fa-backward"></i> 返回</a>
+            <button type="submit" class="btn btn-danger btn-sm" onclick="check_red()">以上確認不再更改，送出審查！</button>
+        </form>
+    </div>
     <script>
         function open_upload(url,name)
         {
             window.open(url,name,'statusbar=no,scrollbars=yes,status=yes,resizable=yes,width=900,height=650');
         }
+
+        function check_red(){
+            var numItems = $('.check_red').length;
+            if(confirm('送出後，無法再更改！您確定嗎?')){
+                if(numItems>0){
+                    alert('有必填題目未填！');
+                    return false;
+                }else{
+                    document.getElementById('form_submit').submit();
+                }
+            }else{
+                return false;
+            }
+        }
+
     </script>
 @endsection

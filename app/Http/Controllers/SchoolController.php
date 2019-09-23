@@ -419,7 +419,6 @@ class SchoolController extends Controller
 
     public function save3(Request $request)
     {
-        dd('123');
         $select_year = $request->input('select_year');
         $question_id = $request->input('question_id');
 
@@ -437,40 +436,6 @@ class SchoolController extends Controller
         $section['health_physical_section'] = $request->input('health_physical_section');
         $section['alternative_section'] = $request->input('alternative_section');
 
-        /**
-        if(auth()->user()->group_id=="1"){
-            if($section['mandarin_section']['一']+$section['dialects_section']['一'] < 4 or $section['mandarin_section']['一']+$section['dialects_section']['一'] > 6){
-                return back()->withErrors('國小1年級語文領域小計節數應在4~6節之間');
-            }
-            if($section['mandarin_section']['二']+$section['dialects_section']['二'] < 4 or $section['mandarin_section']['二']+$section['dialects_section']['二'] > 6){
-                return back()->withErrors('國小2年級語文領域小計節數應在4~6節之間');
-            }
-            if($section['mandarin_section']['三']+$section['dialects_section']['三']+$section['english_section']['三'] < 5 or $section['mandarin_section']['三']+$section['dialects_section']['三']+$section['english_section']['三'] > 7){
-                return back()->withErrors('國小3年級語文領域小計節數應在5~7節之間');
-            }
-            if($section['mandarin_section']['四']+$section['dialects_section']['四']+$section['english_section']['四'] < 5 or $section['mandarin_section']['四']+$section['dialects_section']['四']+$section['english_section']['四'] > 7){
-                return back()->withErrors('國小4年級語文領域小計節數應在5~7節之間');
-            }
-            if($section['mandarin_section']['五']+$section['dialects_section']['五']+$section['english_section']['五'] < 5 or $section['mandarin_section']['五']+$section['dialects_section']['五']+$section['english_section']['五'] > 8){
-                return back()->withErrors('國小5年級語文領域小計節數應在5~8節之間');
-            }
-            if($section['mandarin_section']['六']+$section['dialects_section']['六']+$section['english_section']['六'] < 5 or $section['mandarin_section']['六']+$section['dialects_section']['六']+$section['english_section']['六'] > 8){
-                return back()->withErrors('國小6年級語文領域小計節數應在5~8節之間');
-            }
-        }
-
-        if(auth()->user()->group_id=="2"){
-            if($section['mandarin_section']['七']+$section['dialects_section']['七']+$section['english_section']['七'] < 6 or $section['mandarin_section']['七']+$section['dialects_section']['七']+$section['english_section']['七'] > 8){
-                return back()->withErrors('國中7年級語文領域小計節數應在6~8節之間');
-            }
-            if($section['mandarin_section']['八']+$section['dialects_section']['八']+$section['english_section']['八'] < 6 or $section['mandarin_section']['八']+$section['dialects_section']['八']+$section['english_section']['八'] > 8){
-                return back()->withErrors('國中8年級語文領域小計節數應在6~8節之間');
-            }
-            if($section['mandarin_section']['九']+$section['dialects_section']['九']+$section['english_section']['九'] < 6 or $section['mandarin_section']['九']+$section['dialects_section']['九']+$section['english_section']['九'] > 9){
-                return back()->withErrors('國中9年級語文領域小計節數應在6~9節之間');
-            }
-        }
-         * */
 
         $att['file'] = serialize($section);
 
@@ -481,6 +446,12 @@ class SchoolController extends Controller
         Upload::create($att);
 
         echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function delete3(Upload $upload)
+    {
+        $upload->delete();
+        return redirect()->route('schools.edit',$upload->year);
     }
 
     public function upload4($select_year,Question $question,$grade,$subject)

@@ -149,4 +149,6 @@ Route::group(['middleware' => 'school'],function(){
     Route::get('schools/{select_year}/upload8/{question}' , 'SchoolController@upload8')->name('schools.upload8');
     Route::post('schools/save8' , 'SchoolController@save8')->name('schools.save8');
     Route::get('schools/{upload}/delete8' , 'SchoolController@delete8')->name('schools.delete8');
+
+    Route::post('schools/submit' , 'SchoolController@submit')->name('schools.submit');
 });

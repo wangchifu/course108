@@ -130,6 +130,53 @@
                                                         <?php $i++; ?>
                                                     @endforeach
                                                 @endif
+                                                @if($question->type=="3")
+                                                    </td>
+                                                    </tr>
+                                                    <td></td>
+                                                    <td colspan="2">
+                                                        <?php
+                                                        $area_section = unserialize($upload->file);
+                                                        ?>
+                                                        <table>
+                                                            <tr valign="top">
+                                                                @if(auth()->user()->group_id=="1")
+                                                                    <td valign="top">
+                                                                        @if(!empty($year12))
+                                                                            <strong>國小十二年國教課程</strong>
+                                                                            @include('school.section_e12_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        　
+                                                                    </td>
+                                                                    <td>
+                                                                        @if(!empty($year9))
+                                                                            <strong>國小九年一貫課程</strong>
+                                                                            @include('school.section_e9_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                @elseif(auth()->user()->group_id=="2")
+                                                                    <td valign="top">
+                                                                        @if(!empty($year12))
+                                                                            <strong>國中十二年國教課程</strong>
+                                                                            @include('school.section_j12_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        　
+                                                                    </td>
+                                                                    <td>
+                                                                        @if(!empty($year9))
+                                                                            <strong>國中九年一貫課程</strong>
+                                                                            @include('school.section_j9_ok')
+                                                                        @endif
+                                                                    </td>
+                                                                @endif
+                                                            </tr>
+                                                        </table>
+                                                    <br>
+                                                @endif
                                                 @if($question->type=="4")
                                                     </td>
                                                     </tr>
