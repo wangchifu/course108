@@ -96,6 +96,10 @@ class SchoolController extends Controller
 
     public function edit($select_year)
     {
+        //非可編輯日期期限即返回
+        if(!check_in_date($select_year)){
+            return back();
+        }
         $year = Year::where('year',$select_year)->first();
         $part_order_by = config('course.part_order_by');
         $type_items = config('course.type_items');
@@ -925,6 +929,12 @@ class SchoolController extends Controller
         $upload->delete();
 
         return redirect()->route('schools.edit',$select_year);
+    }
+
+    public function submit(Request $request)
+    {
+        $select_year = $request->input('select_year');
+        dd($select_year);
     }
 
 }

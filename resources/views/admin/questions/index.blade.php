@@ -40,8 +40,7 @@
                                 <button class="btn btn-success btn-sm" onclick="return confirm('會刪掉後者，把前者複製到後者喔！')"><i class="fas fa-copy"></i> 複製</button>
                                 {{ Form::close() }}
                             </td>
-
-                        </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="card-body">

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\C31Table;
 use App\C81Table;
 use App\Course;
+use App\Log;
 use App\Part;
 use App\Question;
 use App\Topic;
+use App\Upload;
 use App\Year;
 use Illuminate\Http\Request;
 
@@ -51,12 +53,21 @@ class YearController extends Controller
         $att = $request->all();
 
         $check_year = Year::where('year',$att['year'])->first();
+
         if($check_year){
             $words = "該年度已經設定，請先刪除！";
             return view('layouts.page_error',compact('words'));
         };
 
         $year = Year::create($att);
+
+        $att2['year'] = $att['year'];
+        $schools = config('course.schools');
+        foreach($schools as $k=>$v){
+            $att2['school_code'] = $k;
+            Course::create($att2);
+        }
+
 
         return redirect()->route('years.index');
     }
@@ -110,6 +121,11 @@ class YearController extends Controller
         Part::where('year',$year->year)->delete();
         Topic::where('year',$year->year)->delete();
         Question::where('year',$year->year)->delete();
+        Upload::where('year',$year->year)->delete();
+        Log::where('year',$year->year)->delete();
+        Course::where('year',$year->year)->delete();
+        deldir(storage_path('app/public/upload/'.$year->year));
+
         $year->delete();
 
         return redirect()->route('years.index');

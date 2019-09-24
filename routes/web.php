@@ -116,6 +116,25 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('books/index' , 'BookController@index')->name('books.index');
     Route::post('books/store' , 'BookController@store')->name('books.store');
     Route::delete('books/destroy' , 'BookController@destroy')->name('books.destroy');
+
+    //普教審查管理
+    Route::match(['get','post'],'reviews' , 'ReviewController@index')->name('reviews.index');
+    Route::get('reviews/{select_year}/{school_code}/first_user' , 'ReviewController@first_user')->name('reviews.first_user');
+    Route::post('reviews/first_user_store' , 'ReviewController@first_user_store')->name('reviews.first_user_store');
+    Route::get('reviews/{select_year}/{school_code}/second_user' , 'ReviewController@second_user')->name('reviews.second_user');
+    Route::post('reviews/second_user_store' , 'ReviewController@second_user_store')->name('reviews.second_user_store');
+
+    //依委員選學校
+    Route::get('reviews/{select_year}/first_by_user' , 'ReviewController@first_by_user')->name('reviews.first_by_user');
+    Route::post('reviews/first_by_user_store' , 'ReviewController@first_by_user_store')->name('reviews.first_by_user_store');
+    Route::get('reviews/{select_year}/second_by_user' , 'ReviewController@second_by_user')->name('reviews.second_by_user');
+    Route::post('reviews/second_by_user_store' , 'ReviewController@second_by_user_store')->name('reviews.second_by_user_store');
+
+    //開放
+    Route::get('reviews/{select_year}/{school_code}/select_open' , 'ReviewController@select_open')->name('reviews.select_open');
+    Route::get('reviews/{select_year}/{school_code}/select_close' , 'ReviewController@select_close')->name('reviews.select_close');
+    Route::get('reviews/{select_year}/open' , 'ReviewController@open')->name('reviews.open');
+    Route::get('reviews/{select_year}/close' , 'ReviewController@close')->name('reviews.close');
 });
 
 //學校可用

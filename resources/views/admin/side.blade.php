@@ -11,7 +11,7 @@
     <a href="{{ route('books.index') }}" class="list-group-item list-group-item-action {{ $active[4] }}">
         <i class="fas fa-book"></i> 教科書版本管理
     </a>
-    <a href="" class="list-group-item list-group-item-action {{ $active[5] }}">
+    <a href="{{ route('reviews.index') }}" class="list-group-item list-group-item-action {{ $active[5] }}">
         <i class="fas fa-user"></i> 普教審查管理
     </a>
     <a href="" class="list-group-item list-group-item-action {{ $active[6] }}">

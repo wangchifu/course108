@@ -21,21 +21,30 @@ if (! function_exists('get_files')) {
 }
 
 //刪除某目錄所有檔案
-if (! function_exists('del_folder')) {
-    function del_folder($folder){
-        if (is_dir($folder)) {
-            if ($handle = opendir($folder)) { //開啟現在的資料夾
-                while (false !== ($file = readdir($handle))) {
-                    //避免搜尋到的資料夾名稱是false,像是0
-                    if ($file != "." && $file != "..") {
-                        //去除掉..跟.
-                        unlink($folder.'/'.$file);
+if (! function_exists('deldir')) {
+    function deldir($dir) {
+        if(is_dir($dir)){
+            $dh = opendir($dir);
+            while ($file = readdir($dh)) {
+                if($file != "." && $file!="..") {
+                    $fullpath = $dir."/".$file;
+                    if(!is_dir($fullpath)) {
+                        unlink($fullpath);
+                    } else {
+                        deldir($fullpath);
                     }
                 }
-                closedir($handle);
             }
-            rmdir($folder);
+            closedir($dh);
+
+            //删除当前文件夹：
+            if(rmdir($dir)) {
+                return true;
+            } else {
+                return false;
+            }
         }
+
     }
 }
 
@@ -85,5 +94,27 @@ if (! function_exists('cht2num')) {
             '九'=>'9',
         ];
         return $cht[$c];
+    }
+}
+
+function check_in_date($select_year){
+    $year = \App\Year::where('year',$select_year)->first();
+    $step11 = str_replace('-','',$year->step1_date1);
+    $step12 = str_replace('-','',$year->step1_date2);
+    if(date('Ymd') >= $step11 and date('Ymd') <= $step12){
+        $check = true;
+    }else{
+        $check = false;
+    }
+    return $check;
+}
+
+if (! function_exists('usersId2Names')) {
+    function usersId2Names(){
+        $users = \App\User::all();
+        foreach($users as $user){
+            $users2Names[$user->id] = $user->name;
+        }
+        return $users2Names;
     }
 }

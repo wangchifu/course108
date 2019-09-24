@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <a href="#" class="badge badge-secondary" onclick="history.back();"><i class="fas fa-backward"></i> 返回</a>
                     <a href="{{ route('years.edit',$year->id) }}"><span class="badge badge-primary"><i class="fas fa-edit"></i> 編輯</span></a>
-                    <a href="{{ route('years.destroy',$year->id) }}" onclick="return confirm('確定刪除？')"><span class="badge badge-danger"><i class="fas fa-trash"></i> 刪除</span></a>
+                    <a href="{{ route('years.destroy',$year->id) }}" onclick="return confirm('確定刪除？該年度所有學校的所有資料將一併刪除喔！')"><span class="badge badge-danger"><i class="fas fa-trash"></i> 刪除</span></a>
                     <div class="form-group">
                         <label for="year">年度</label>
                         <strong class="text-primary">{{ $year->year }}</strong>

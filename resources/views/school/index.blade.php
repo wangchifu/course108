@@ -25,13 +25,29 @@
                 </div>
                 <div class="card-body">
                     <a href="{{ route('schools.show_log',$select_year) }}" class="btn btn-info btn-sm" target="_blank"><i class="fas fa-eye"></i> 檢視上傳歷程</a>
-                    <a href="{{ route('schools.edit',$select_year) }}" class="btn btn-success btn-sm"><i class="fas fa-upload"></i> 上傳檔案</a>
+                    @if(check_in_date($select_year))
+                        <a href="{{ route('schools.edit',$select_year) }}" class="btn btn-success btn-sm"><i class="fas fa-upload"></i> 上傳檔案</a>
+                    @endif
                     <br><br>
                     <table class="table table-striped">
                         <tr>
-                            <th colspan="3">
-                                普教初審<br>
+                            <th colspan="5">
+                                課程首次上傳<br>
                                 <small>{{ $year->step1_date1 }}~{{$year->step1_date2}}</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                普教初審<br>
+                                <small>{{ $year->step2_date1 }}~{{$year->step2_date2}}</small>
+                            </th>
+                            <th>
+                                普教初審-再傳<br>
+                                <small>{{ $year->step2_1_date1 }}~{{$year->step2_1_date2}}</small>
+                            </th>
+                            <th>
+                                普教初審-三傳<br>
+                                <small>{{ $year->step2_2_date1 }}~{{$year->step2_2_date2}}</small>
                             </th>
                             <th>
                                 特教審查
@@ -42,26 +58,6 @@
                             </th>
                         </tr>
                         <tr>
-                            <th>
-                                初審<br>
-                                <small>{{ $year->step2_date1 }}~{{$year->step2_date2}}</small>
-                            </th>
-                            <th>
-                                初審-再傳<br>
-                                <small>{{ $year->step2_1_date1 }}~{{$year->step2_1_date2}}</small>
-                            </th>
-                            <th>
-                                初審-三傳<br>
-                                <small>{{ $year->step2_2_date1 }}~{{$year->step2_2_date2}}</small>
-                            </th>
-                            <td>
-                                123
-                            </td>
-                            <td rowspan="2">
-
-                            </td>
-                        </tr>
-                        <tr>
                             <td>
                                 1
                             </td>
@@ -70,6 +66,12 @@
                             </td>
                             <td>
                                 3
+                            </td>
+                            <td>
+                                4
+                            </td>
+                            <td>
+                                5
                             </td>
                         </tr>
                     </table>
