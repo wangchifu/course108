@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Course;
 use App\Http\Requests\UploadRequest;
 use App\Log;
 use App\Part;
@@ -80,6 +81,10 @@ class SchoolController extends Controller
             }
         }
 
+        $course = Course::where('year',$select_year)
+            ->where('school_code',auth()->user()->code)
+            ->first();
+
         $data = [
             'year_items'=>$year_items,
             'select_year'=>$select_year,
@@ -90,6 +95,7 @@ class SchoolController extends Controller
             'year'=>$year,
             'year9'=>$year9,
             'year12'=>$year12,
+            'course'=>$course,
         ];
         return view('school.index',$data);
     }
@@ -100,7 +106,21 @@ class SchoolController extends Controller
         if(!check_in_date($select_year)){
             return back();
         }
+
         $year = Year::where('year',$select_year)->first();
+
+        $course = Course::where('year',$select_year)
+            ->where('school_code',auth()->user()->code)
+            ->first();
+        //如果已送出，不可編輯
+        $u =explode('/',$_SERVER['REQUEST_URI']);
+        if($u[2]=="edit" and $course->first_result1=="submit"){
+            return back();
+        }
+        if($u[2]=="edit2" and $course->special_result=="submit"){
+            return back();
+        }
+
         $part_order_by = config('course.part_order_by');
         $type_items = config('course.type_items');
         $g_s_items = config('course.g_s_items');
@@ -934,7 +954,17 @@ class SchoolController extends Controller
     public function submit(Request $request)
     {
         $select_year = $request->input('select_year');
-        dd($select_year);
+        $action = $request->input('action');
+        $course = Course::where('year',$select_year)
+            ->where('school_code',auth()->user()->code)
+            ->first();
+        if($action == "edit"){
+            $att['first_result1'] = "submit";
+        }elseif($action == "edit2"){
+            $att['special_result'] = "submit";
+        }
+        $course->update($att);
+        return redirect()->route('schools.index');
     }
 
 }

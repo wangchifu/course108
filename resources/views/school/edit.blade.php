@@ -787,9 +787,13 @@
         </div>
     </div>
     <div class="row justify-content-center">
+        <?php
+        $u =explode('/',$_SERVER['REQUEST_URI']);
+        ?>
         <form action="{{ route('schools.submit') }}" method="post" onsubmit="return false" id="form_submit">
             @csrf
             <input type="hidden" name="select_year" value="{{ $year->year }}">
+            <input type="hidden" name="action" value="{{ $u[2] }}">
             <br>
             <a href="{{ route('schools.index') }}" class="btn btn-secondary btn-sm"><i class="fas fa-backward"></i> 返回</a>
             <button type="submit" class="btn btn-danger btn-sm" onclick="check_red()">以上確認不再更改，送出審查！</button>

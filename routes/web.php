@@ -144,6 +144,7 @@ Route::group(['middleware' => 'school'],function(){
 
     Route::match(['get','post'],'schools' , 'SchoolController@index')->name('schools.index');
     Route::get('schools/edit/{select_year}' , 'SchoolController@edit')->name('schools.edit');
+    Route::get('schools/edit2/{select_year}' , 'SchoolController@edit')->name('schools.edit2');
     Route::get('schools/{select_year}/upload1/{question}' , 'SchoolController@upload1')->name('schools.upload1');
     Route::post('schools/save1' , 'SchoolController@save1')->name('schools.save1');
     Route::get('schools/{file_path}/delete1' , 'SchoolController@delete1')->name('schools.delete1');

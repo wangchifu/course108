@@ -1,3 +1,6 @@
+<?php
+ $u =explode('/',$_SERVER['REQUEST_URI']);
+?>
 @foreach($parts as $part)
     <div class="row title-div">
         <div class="col-12">
@@ -15,12 +18,14 @@
             </div>
             <div class="col-10">
                 @foreach($topic->questions as $question)
-                    <div class="centent-div">
-                        {{ $question->order_by }} {{ $question->title }}<br>
-                    </div>
-                    @yield('upload'.$question->id)
-                    @if($question->type!="0")
-                        <br>
+                    @if(($u[2] == "edit" and $question->g_s==1) or ($u[2] == "edit2" and $question->g_s==2))
+                        <div class="centent-div">
+                            {{ $question->order_by }} {{ $question->title }}<br>
+                        </div>
+                        @yield('upload'.$question->id)
+                        @if($question->type!="0")
+                            <br>
+                        @endif
                     @endif
                 @endforeach
             </div>

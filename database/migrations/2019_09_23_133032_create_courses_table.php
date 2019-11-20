@@ -25,6 +25,7 @@ class CreateCoursesTable extends Migration
             $table->string('first_result3')->nullable();//submit已送出，ok通過
             $table->unsignedInteger('second_user_id')->nullable();//複審者
             $table->string('second_result')->nullable();//ok通過，excellent優秀
+            $table->string('special_result')->nullable();//submit已送出，ok通過
             $table->tinyInteger('open')->nullable();//狀況：1公開,null則不公開
             $table->timestamps();
         });

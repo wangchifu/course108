@@ -17,6 +17,7 @@ class Course extends Model
         'first_result3',
         'second_user_id',
         'second_result',
+        'special_result',
         'open',
     ];
 }
