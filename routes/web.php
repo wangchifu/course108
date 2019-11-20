@@ -186,3 +186,13 @@ Route::group(['middleware' => 'school'],function(){
 
     Route::post('schools/submit' , 'SchoolController@submit')->name('schools.submit');
 });
+
+//初審委員
+Route::group(['middleware' => 'first'],function(){
+    Route::match(['get','post'],'firsts/index' , 'FirstController@index')->name('firsts.index');
+    Route::get('firsts/{course}/show' , 'FirstController@show')->name('firsts.show');
+    Route::get('firsts/{course}/create1' , 'FirstController@create1')->name('firsts.create1');
+    Route::post('firsts/store1' , 'FirstController@store1')->name('firsts.store1');
+    Route::get('firsts/{course}/edit1' , 'FirstController@edit1')->name('firsts.edit1');
+    Route::post('firsts/update1' , 'FirstController@update1')->name('firsts.update1');
+});

@@ -39,7 +39,7 @@
                     @endif
                     @if(auth()->user()->group_id==4)
                         <li class="nav-item">
-                            <a class="nav-link" href="">[ 初審作業 ]</a>
+                            <a class="nav-link" href="{{ route('firsts.index') }}">[ 初審作業 ]</a>
                         </li>
                     @endif
                     @if(auth()->user()->group_id==5)

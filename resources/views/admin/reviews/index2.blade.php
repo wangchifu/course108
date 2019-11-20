@@ -41,6 +41,7 @@
                         <tr>
                             <th nowrap style="background-color: #c4e1ff">
                                 校名
+                                <br><a href="" class="badge badge-danger" target="_blank">上傳情況</a>
                             </th>
                             <th nowrap>
                                 審「身障類」

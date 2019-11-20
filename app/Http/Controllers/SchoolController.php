@@ -85,6 +85,11 @@ class SchoolController extends Controller
             ->where('school_code',auth()->user()->code)
             ->first();
 
+        $schools = config('course.schools');
+        $i=0;
+        if(strpos($schools[$course->school_code], '國小') !== false) $i = "1";
+        if(strpos($schools[$course->school_code], '國中') !== false) $i = "2";
+
         $data = [
             'year_items'=>$year_items,
             'select_year'=>$select_year,
@@ -96,6 +101,9 @@ class SchoolController extends Controller
             'year9'=>$year9,
             'year12'=>$year12,
             'course'=>$course,
+            'school_code'=>$course->school_code,
+            'school_name'=>$schools[$course->school_code],
+            'school_group'=>$i,
         ];
         return view('school.index',$data);
     }
