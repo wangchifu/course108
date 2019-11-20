@@ -135,6 +135,20 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('reviews/{select_year}/{school_code}/select_close' , 'ReviewController@select_close')->name('reviews.select_close');
     Route::get('reviews/{select_year}/open' , 'ReviewController@open')->name('reviews.open');
     Route::get('reviews/{select_year}/close' , 'ReviewController@close')->name('reviews.close');
+
+    //特教審查管理
+    Route::match(['get','post'],'reviews/index2' , 'ReviewController@index2')->name('reviews.index2');
+    Route::get('reviews/{select_year}/{school_code}/special1_user' , 'ReviewController@special1_user')->name('reviews.special1_user');
+    Route::post('reviews/special1_user_store' , 'ReviewController@special1_user_store')->name('reviews.special1_user_store');
+    Route::get('reviews/{select_year}/{school_code}/special2_user' , 'ReviewController@special2_user')->name('reviews.special2_user');
+    Route::post('reviews/special2_user_store' , 'ReviewController@special2_user_store')->name('reviews.special2_user_store');
+    Route::get('reviews/{select_year}/{school_code}/special3_user' , 'ReviewController@special3_user')->name('reviews.special3_user');
+    Route::post('reviews/special3_user_store' , 'ReviewController@special3_user_store')->name('reviews.special3_user_store');
+
+    //依委員選學校
+    Route::get('reviews/{select_year}/special_by_user/{special}' , 'ReviewController@special_by_user')->name('reviews.special_by_user');
+    Route::post('reviews/special_by_user_store' , 'ReviewController@special_by_user_store')->name('reviews.special_by_user_store');
+
 });
 
 //學校可用

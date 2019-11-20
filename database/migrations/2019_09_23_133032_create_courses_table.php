@@ -18,7 +18,9 @@ class CreateCoursesTable extends Migration
             $table->string('year');
             $table->string('school_code');
             $table->tinyInteger('leading')->nullable();//1前導學校，null則不是
-            $table->unsignedInteger('special_user_id')->nullable();//特教審查
+            $table->unsignedInteger('special1_user_id')->nullable();//特教審查
+            $table->unsignedInteger('special2_user_id')->nullable();//特教審查
+            $table->unsignedInteger('special3_user_id')->nullable();//特教審查
             $table->unsignedInteger('first_user_id')->nullable();//初審者
             $table->string('first_result1')->nullable();//submit已送出，back退回再修改，pass通過但修改，ok通過，excellent優秀進複審
             $table->string('first_result2')->nullable();//submit已送出，back退回三修，ok通過
