@@ -125,9 +125,11 @@ class SchoolController extends Controller
         if($u[2]=="edit" and $course->first_result1=="submit"){
             return back();
         }
+        /**
         if($u[2]=="edit2" and $course->special_result=="submit"){
             return back();
         }
+         * */
 
         $part_order_by = config('course.part_order_by');
         $type_items = config('course.type_items');
@@ -967,7 +969,15 @@ class SchoolController extends Controller
             ->where('school_code',auth()->user()->code)
             ->first();
         if($action == "edit"){
-            $att['first_result1'] = "submit";
+            if($course->first_result1==null){
+                $att['first_result1'] = "submit";
+            }
+            if($course->first_result1=="back" and $course->first_result2==null){
+                $att['first_result2'] = "submit";
+            }
+            if($course->first_result2=="back"){
+                $att['first_result3'] = "submit";
+            }
         }elseif($action == "edit2"){
             $att['special_result'] = "submit";
         }

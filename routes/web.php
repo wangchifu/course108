@@ -149,6 +149,10 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('reviews/{select_year}/special_by_user/{special}' , 'ReviewController@special_by_user')->name('reviews.special_by_user');
     Route::post('reviews/special_by_user_store' , 'ReviewController@special_by_user_store')->name('reviews.special_by_user_store');
 
+    //未送名單
+    Route::get('reviews/{result}/not_send' , 'ReviewController@not_send')->name('reviews.not_send');
+    Route::get('reviews/{course}/{page}/{action}/back_null' , 'ReviewController@back_null')->name('reviews.back_null');
+
 });
 
 //學校可用
@@ -195,4 +199,14 @@ Route::group(['middleware' => 'first'],function(){
     Route::post('firsts/store1' , 'FirstController@store1')->name('firsts.store1');
     Route::get('firsts/{course}/edit1' , 'FirstController@edit1')->name('firsts.edit1');
     Route::post('firsts/update1' , 'FirstController@update1')->name('firsts.update1');
+
+    Route::get('firsts/{course}/create2' , 'FirstController@create2')->name('firsts.create2');
+    Route::post('firsts/store2' , 'FirstController@store2')->name('firsts.store2');
+    Route::get('firsts/{course}/edit2' , 'FirstController@edit2')->name('firsts.edit2');
+    Route::post('firsts/update2' , 'FirstController@update2')->name('firsts.update2');
+
+    Route::get('firsts/{course}/create3' , 'FirstController@create3')->name('firsts.create3');
+    Route::post('firsts/store3' , 'FirstController@store3')->name('firsts.store3');
+    Route::get('firsts/{course}/edit3' , 'FirstController@edit3')->name('firsts.edit3');
+    Route::post('firsts/update3' , 'FirstController@update3')->name('firsts.update3');
 });

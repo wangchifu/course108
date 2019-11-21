@@ -16,6 +16,8 @@ class ReviewController extends Controller
         //選擇的年度
         $select_year = ($request->input('year'))?$request->input('year'):current($year_items);
 
+        $page = ($request->input('page'))?$request->input('page'):1;
+
         $schools = config('course.schools');
 
         $courses = Course::where('year',$select_year)
@@ -45,6 +47,7 @@ class ReviewController extends Controller
 
         $data = [
             'year_items'=>$year_items,
+            'page'=>$page,
             'select_year'=>$select_year,
             'schools'=>$schools,
             'courses'=>$courses,
@@ -333,5 +336,48 @@ class ReviewController extends Controller
             $course->update($att);
         }
         echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    public function not_send($result)
+    {
+        $schools = config('course.schools');
+        if($result==1){
+            $courses = Course::where('first_result1',null)->get();
+            foreach($courses as $course){
+                echo $schools[$course->school_code]."<br>";
+            }
+        }
+        if($result==2){
+            $courses = Course::where('first_result1','back')
+                ->where('first_result2',null)
+                ->get();
+            foreach($courses as $course){
+                echo $schools[$course->school_code]."<br>";
+            }
+        }
+        if($result==3){
+            $courses = Course::where('first_result2','back')
+                ->where('first_result3',null)
+                ->get();
+            foreach($courses as $course){
+                echo $schools[$course->school_code]."<br>";
+            }
+        }
+    }
+
+    public function back_null(Course $course,$page,$action)
+    {
+        if($action=="1"){
+            $att['first_result1'] = null;
+        }
+        if($action=="2"){
+            $att['first_result2'] = null;
+        }
+        if($action=="3"){
+            $att['first_result3'] = null;
+        }
+
+        $course->update($att);
+        return redirect()->route('reviews.index',['page'=>$page]);
     }
 }

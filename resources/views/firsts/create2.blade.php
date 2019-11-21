@@ -4,15 +4,23 @@
 
 @foreach($questions as $question)
     @if($question->g_s == 1)
-        @section('input'.$question->id)
-            <td style="vertical-align:top;">
-                <input type="hidden" name="questions[]" value="{{ $question->id }}">
-                <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" checked value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
-                <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" value="0"> <label for="check2_{{ $question->id }}">不符合</label>
-                <br>
-                <textarea name="suggest_{{ $question->id }}"></textarea>
-            </td>
-        @endsection
+    <?php
+    //若一審已經通過，就不用再出現
+        $first_suggest1 = \App\FirstSuggest1::where('question_id',$question->id)
+        ->where('school_code',$school_code)
+        ->first();
+    ?>
+        @if($first_suggest1->pass==0)
+            @section('input'.$question->id)
+                <td style="vertical-align:top;">
+                    <input type="hidden" name="questions[]" value="{{ $question->id }}">
+                    <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" checked value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
+                    <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" value="0"> <label for="check2_{{ $question->id }}">不符合</label>
+                    <br>
+                    <textarea name="suggest_{{ $question->id }}"></textarea>
+                </td>
+            @endsection
+        @endif
     @endif
 @endforeach
 
@@ -25,7 +33,7 @@
                     <li class="breadcrumb-item active" aria-current="page">審查 {{ $school_name }}</li>
                 </ol>
             </nav>
-            <form action="{{ route('firsts.store1') }}" method="post">
+            <form action="{{ route('firsts.store2') }}" method="post">
             @csrf
                 @include('layouts.base_course1')
                 <table class="table">
@@ -39,7 +47,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <select name="first_result1" class="form-control" required>
+                            <select name="first_result2" class="form-control" required>
                                 <option value="" disabled selected>
                                     -----請選擇初審結果-----
                                 </option>
@@ -55,7 +63,7 @@
                             </select>
                         </td>
                         <td colspan="3">
-                            <textarea name="first_reason1" class="form-control"></textarea>
+                            <textarea name="first_reason2" class="form-control"></textarea>
                         </td>
                     </tr>
                 </table>

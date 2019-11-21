@@ -47,13 +47,13 @@
                                 初審<br>委員
                             </th>
                             <th nowrap style="background-color:#fff8d7">
-                                初審<br>狀況<br><a href="" class="badge badge-danger" target="_blank">未送名單</a>
+                                初審<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'1']) }}" class="badge badge-danger" target="_blank">未送名單</a>
                             </th>
                             <th style="background-color:#fff8d7">
-                                再傳<br>狀況<br><a href="" class="badge badge-danger" target="_blank">未送名單</a>
+                                再傳<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'2']) }}" class="badge badge-danger" target="_blank">未送名單</a>
                             </th>
                             <th style="background-color:#fff8d7">
-                                三傳<br>狀況<br><a href="" class="badge badge-danger" target="_blank">未送名單</a>
+                                三傳<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'3']) }}" class="badge badge-danger" target="_blank">未送名單</a>
                             </th>
                             <th nowrap>
                                 複審<br>委員
@@ -77,20 +77,82 @@
                                     <a href="javascript:open_window('{{ route('reviews.first_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
                                 </td>
                                 <td>
-
+                                    @if($course->first_result1==null)
+                                        <span class="text-dark">未送審</span>
+                                    @endif
+                                    @if($course->first_result1=="submit")
+                                        <span class="text-primary">已送審</span>
+                                        <a href="{{ route('reviews.back_null',['course'=>$course->id,'page'=>$page,'action'=>'1']) }}" onclick="return confirm('確定設為未送審？')">
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </a>
+                                    @endif
+                                    @if($course->first_result1=="ok")
+                                        <span class="text-primary">已通過</span>
+                                    @endif
+                                    @if($course->first_result1=="back")
+                                        <span class="text-danger">被退回</span>
+                                    @endif
+                                    @if($course->first_result1=="excellent")
+                                        <span class="text-success">進入複審</span>
+                                    @endif
                                 </td>
                                 <td>
-
+                                    @if($course->first_result2==null and $course->first_result1=="back")
+                                        <span class="text-dark">未送審</span>
+                                    @endif
+                                    @if($course->first_result2=="submit")
+                                        <span class="text-primary">已送審</span>
+                                        <a href="{{ route('reviews.back_null',['course'=>$course->id,'page'=>$page,'action'=>'2']) }}" onclick="return confirm('確定設為未送審？')">
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </a>
+                                    @endif
+                                    @if($course->first_result2=="ok")
+                                        <span class="text-primary">已通過</span>
+                                    @endif
+                                    @if($course->first_result2=="back")
+                                        <span class="text-danger">被退回</span>
+                                    @endif
+                                    @if($course->first_result2=="excellent")
+                                        <span class="text-success">進入複審</span>
+                                    @endif
                                 </td>
                                 <td>
-
+                                    @if($course->first_result3==null and $course->first_result2=="back")
+                                        <span class="text-dark">未送審</span>
+                                    @endif
+                                    @if($course->first_result3=="submit")
+                                        <span class="text-primary">已送審</span>
+                                        <a href="{{ route('reviews.back_null',['course'=>$course->id,'page'=>$page,'action'=>'3']) }}" onclick="return confirm('確定設為未送審？')">
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </a>
+                                    @endif
+                                    @if($course->first_result3=="ok")
+                                        <span class="text-primary">已通過</span>
+                                    @endif
+                                    @if($course->first_result3=="back")
+                                        <span class="text-danger">被退回</span>
+                                    @endif
+                                    @if($course->first_result3=="excellent")
+                                        <span class="text-success">進入複審</span>
+                                    @endif
                                 </td>
                                 <td>
                                     {{ $second_name[$course->school_code] }}
                                     <a href="javascript:open_window('{{ route('reviews.second_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
                                 </td>
                                 <td>
-
+                                    @if($course->special_result=="ok")
+                                        <span class="text-primary">通過</span>
+                                    @endif
+                                    @if($course->special_result=="excellent1")
+                                        <span class="text-success">1.特優</span>
+                                    @endif
+                                    @if($course->special_result=="excellent2")
+                                        <span class="text-success">2.優等</span>
+                                    @endif
+                                    @if($course->special_result=="excellent3")
+                                        <span class="text-success">3.甲等</span>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($open[$course->school_code])

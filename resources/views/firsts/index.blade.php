@@ -84,7 +84,7 @@
                                         @endif
                                     @elseif($course->first_result2=="submit")
                                         <span class="text-primary">已送審</span>
-                                        [<a href="{{ route('firsts.create2',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-edit"></i>審核</a>]
+                                        [<a href="{{ route('firsts.create2',['course'=>$course->id]) }}"><i class="fas fa-edit"></i>審核</a>]
                                     @else
                                         @if($course->first_result2=="ok")
                                             <span class="text-success">通過</span>
@@ -94,7 +94,7 @@
                                             <i class="fas fa-thumbs-up text-primary"></i> <span class="text-success">優良</span>
                                         @endif
                                         @if($course->first_result3 == null)
-                                            [<a href="{{ route('firsts.edit2',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-edit"></i> 修改</a>]
+                                            [<a href="{{ route('firsts.edit2',['course'=>$course->id]) }}"><i class="fas fa-edit"></i> 修改</a>]
                                         @endif
                                     @endif
                                 </td>
@@ -106,25 +106,25 @@
                                     @elseif($course->first_result3=="submit")
                                         @if($course->first_suggest3)
                                             <span class="text-primary">再次送審</span>
-                                            [<a href="{{ route('firsts.edit3',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-edit"></i> 修改</a>]
+                                            [<a href="{{ route('firsts.edit3',['course'=>$course->id]) }}"><i class="fas fa-edit"></i> 修改</a>]
                                         @else
                                             <span class="text-primary">已送審</span>
-                                            [<a href="{{ route('firsts.create3',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-edit"></i>審核</a>]
+                                            [<a href="{{ route('firsts.create3',['course'=>$course->id]) }}"><i class="fas fa-edit"></i>審核</a>]
                                         @endif
                                     @elseif($course->first_result3=="ok")
                                         <span class="text-success">通過</span>
-                                        [<a href="{{ route('firsts.edit3',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-edit"></i> 修改</a>]
+                                        [<a href="{{ route('firsts.edit3',['course'=>$course->id]) }}"><i class="fas fa-edit"></i> 修改</a>]
                                     @elseif($course->first_result3=="back")
                                         <span class="text-warning">退回</span>
-                                        [<a href="{{ route('firsts.edit3',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-edit"></i> 修改</a>]
+                                        [<a href="{{ route('firsts.edit3',['course'=>$course->id]) }}"><i class="fas fa-edit"></i> 修改</a>]
                                     @elseif($course->first_result3=="excellent")
                                         <i class="fas fa-thumbs-up text-primary"></i> <span class="text-success">優良</span>
-                                        [<a href="{{ route('firsts.edit3',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-edit"></i> 修改</a>]
+                                        [<a href="{{ route('firsts.edit3',['course'=>$course->id]) }}"><i class="fas fa-edit"></i> 修改</a>]
                                     @endif
                                 </td>
                                 <td>
                                     @if($course->first_result1 != null and $course->first_result1 != "submit")
-                                    <a href="{{ route('firsts.show',['course_id'=>$course->id,'page'=>$page]) }}"><i class="fas fa-eye"></i>檢視</a>
+                                    <a href="{{ route('firsts.show',['course'=>$course->id]) }}"><i class="fas fa-eye"></i>檢視</a>
                                     @endif
                                 </td>
                             </tr>

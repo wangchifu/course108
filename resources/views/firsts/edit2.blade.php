@@ -4,24 +4,32 @@
 
 @foreach($questions as $question)
     @if($question->g_s == 1)
-        @section('input'.$question->id)
-            <?php
-                if($f_s1[$question->id]['pass']==1){
-                    $check1 = "checked";
-                    $check2 = null;
-                }elseif($f_s1[$question->id]['pass']==0){
-                    $check1 = null;
-                    $check2 = "checked";
-                }
-            ?>
-            <td style="vertical-align:top;">
-                <input type="hidden" name="questions[]" value="{{ $question->id }}">
-                <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" {{ $check1 }} value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
-                <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" {{ $check2 }} value="0"> <label for="check2_{{ $question->id }}">不符合</label>
-                <br>
-                <textarea name="suggest_{{ $question->id }}">{{ $f_s1[$question->id]['suggest'] }}</textarea>
-            </td>
-        @endsection
+        <?php
+        //若一審已經通過，就不用再出現
+        $first_suggest1 = \App\FirstSuggest1::where('question_id',$question->id)
+            ->where('school_code',$school_code)
+            ->first();
+        ?>
+        @if($first_suggest1->pass==0)
+            @section('input'.$question->id)
+                <?php
+                    if($f_s2[$question->id]['pass']==1){
+                        $check1 = "checked";
+                        $check2 = null;
+                    }elseif($f_s2[$question->id]['pass']==0){
+                        $check1 = null;
+                        $check2 = "checked";
+                    }
+                ?>
+                <td style="vertical-align:top;">
+                    <input type="hidden" name="questions[]" value="{{ $question->id }}">
+                    <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" {{ $check1 }} value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
+                    <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" {{ $check2 }} value="0"> <label for="check2_{{ $question->id }}">不符合</label>
+                    <br>
+                    <textarea name="suggest_{{ $question->id }}">{{ $f_s2[$question->id]['suggest'] }}</textarea>
+                </td>
+            @endsection
+        @endif
     @endif
 @endforeach
 
@@ -34,7 +42,7 @@
                     <li class="breadcrumb-item active" aria-current="page">審查 {{ $school_name }}</li>
                 </ol>
             </nav>
-            <form action="{{ route('firsts.update1') }}" method="post">
+            <form action="{{ route('firsts.update2') }}" method="post">
             @csrf
                 @include('layouts.base_course1')
                 <table class="table">
@@ -48,22 +56,22 @@
                     </tr>
                     <tr>
                         <?php
-                            if($course->first_result1=="ok"){
+                            if($course->first_result2=="ok"){
                                 $select1 = "selected";
                                 $select2 = null;
                                 $select3 = null;
-                            }elseif($course->first_result1=="back"){
+                            }elseif($course->first_result2=="back"){
                                 $select1 = null;
                                 $select2 = "selected";
                                 $select3 = null;
-                            }elseif($course->first_result1=="excellent"){
+                            }elseif($course->first_result2=="excellent"){
                                 $select1 = null;
                                 $select2 = null;
                                 $select3 = "selected";
                             }
                         ?>
                         <td colspan="2">
-                            <select name="first_result1" class="form-control" required>
+                            <select name="first_result2" class="form-control" required>
                                 <option value="" disabled>
                                     -----請選擇初審結果-----
                                 </option>
@@ -79,7 +87,7 @@
                             </select>
                         </td>
                         <td colspan="3">
-                            <textarea name="first_reason1" class="form-control">{{ $course->first_reason1 }}</textarea>
+                            <textarea name="first_reason2" class="form-control">{{ $course->first_reason2 }}</textarea>
                         </td>
                     </tr>
                 </table>
