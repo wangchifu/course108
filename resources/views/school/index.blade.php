@@ -34,6 +34,15 @@
                         @endif
                     @endif
                     <br><br>
+                    @if($course->second_result=="excellent1")
+                        <img src="{{ asset('images/1.png') }}" width="100%">
+                    @endif
+                    @if($course->second_result=="excellent2")
+                        <img src="{{ asset('images/2.png') }}" width="100%">
+                    @endif
+                    @if($course->second_result=="excellent3")
+                        <img src="{{ asset('images/3.png') }}" width="100%">
+                    @endif
                     <table class="table table-striped">
                         <tr>
                             <th colspan="5">
@@ -121,10 +130,20 @@
                                 @if($course->special_result=="submit")
                                     <span class="text-primary">已送審</span>
                                 @endif
-
                             </td>
                             <td>
-                                5
+                                @if($course->second_result=="ok")
+                                    <span class="text-primary">已通過</span>
+                                @endif
+                                @if($course->second_result=="excellent1")
+                                    <i class="fas fa-crown text-warning"></i> <span class="text-success">1.特優</span>
+                                @endif
+                                @if($course->second_result=="excellent2")
+                                    <i class="fas fa-thumbs-up text-primary"></i> <span class="text-success">2.優等</span>
+                                @endif
+                                @if($course->second_result=="excellent3")
+                                    <span class="text-success">3.甲等</span>
+                                @endif
                             </td>
                         </tr>
                     </table>

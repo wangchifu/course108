@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20623a93-5540-4d29-8e75-656f5cd3d6e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/firsts/create2.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/firsts/create3.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/firsts/edit2.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/firsts/edit3.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/SecondController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/seconds/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/seconds/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FirstController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FirstController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SchoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SchoolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/reviews/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reviews/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/firsts/create1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/firsts/create1.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/firsts/edit1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/firsts/edit1.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/firsts/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/firsts/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/school/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/school/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -31,29 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="153" column="58" selection-start-line="153" selection-start-column="58" selection-end-line="153" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/reviews/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="124" column="127" selection-start-line="124" selection-start-column="127" selection-end-line="124" selection-end-column="127" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReviewController.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SecondController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="376" column="31" selection-start-line="376" selection-start-column="31" selection-end-line="376" selection-end-column="31" />
+            <state relative-caret-position="2358">
+              <caret line="131" column="26" selection-start-line="131" selection-start-column="26" selection-end-line="131" selection-end-column="26" />
               <folding>
                 <element signature="e#40#55#0#PHP" expanded="true" />
               </folding>
@@ -65,7 +43,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>上傳檔案</find>
       <find>function edi</find>
       <find>$g_s_items</find>
       <find>function submit</find>
@@ -95,6 +72,7 @@
       <find>pass</find>
       <find>f_s2</find>
       <find>未送</find>
+      <find>schools</find>
     </findStrings>
     <replaceStrings>
       <replace>$section12</replace>
@@ -111,9 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/school/upload3.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/school/section_j12.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/school/section_j9.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/school/section_j9_ok.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/school/section_j12_ok.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/years/show.blade.php" />
@@ -133,7 +108,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/reviews/special3_user.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/reviews/special_by_user.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/first/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/firsts/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/reviews/index2.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/base_course.blade.php" />
@@ -149,7 +123,6 @@
         <option value="$PROJECT_DIR$/app/FirstSuggest2.php" />
         <option value="$PROJECT_DIR$/app/FirstSuggest3.php" />
         <option value="$PROJECT_DIR$/app/SpecialSuggest.php" />
-        <option value="$PROJECT_DIR$/resources/views/school/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/firsts/create1.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/firsts/edit1.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/firsts/create2.blade.php" />
@@ -159,9 +132,14 @@
         <option value="$PROJECT_DIR$/resources/views/firsts/create3.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/firsts/edit3.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/FirstController.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/reviews/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/seconds/index.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SecondController.php" />
+        <option value="$PROJECT_DIR$/resources/views/seconds/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/school/index.blade.php" />
       </list>
     </option>
   </component>
@@ -254,8 +232,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="143" />
-    <option name="y" value="146" />
+    <option name="x" value="144" />
+    <option name="y" value="163" />
     <option name="width" value="1729" />
     <option name="height" value="899" />
   </component>
@@ -325,28 +303,11 @@
               <item name="course108" type="b2602c69:ProjectViewProjectNode" />
               <item name="course108" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="course108" type="b2602c69:ProjectViewProjectNode" />
-              <item name="course108" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
               <item name="seeds" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="course108" type="b2602c69:ProjectViewProjectNode" />
               <item name="course108" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="course108" type="b2602c69:ProjectViewProjectNode" />
-              <item name="course108" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="course108" type="b2602c69:ProjectViewProjectNode" />
-              <item name="course108" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -360,15 +321,28 @@
               <item name="course108" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="firsts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="course108" type="b2602c69:ProjectViewProjectNode" />
               <item name="course108" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="reviews" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="course108" type="b2602c69:ProjectViewProjectNode" />
+              <item name="course108" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="course108" type="b2602c69:ProjectViewProjectNode" />
+              <item name="course108" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="seconds" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="course108" type="b2602c69:ProjectViewProjectNode" />
@@ -386,7 +360,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/firsts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/seconds" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -397,11 +371,11 @@
       <recent name="$PROJECT_DIR$/resources/views/admin" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/seconds" />
       <recent name="$PROJECT_DIR$/resources/views/firsts" />
       <recent name="$PROJECT_DIR$/resources/views/layouts" />
       <recent name="$PROJECT_DIR$/resources/views/first" />
       <recent name="$PROJECT_DIR$/resources/views/admin/reviews" />
-      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -453,7 +427,7 @@
       <workItem from="1569288124182" duration="9643000" />
       <workItem from="1573690120193" duration="1797000" />
       <workItem from="1574206914409" duration="21438000" />
-      <workItem from="1574293809933" duration="7363000" />
+      <workItem from="1574293809933" duration="11201000" />
     </task>
     <task id="LOCAL-00001" summary="使用者管理ok">
       <created>1567649788149</created>
@@ -602,14 +576,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574239178562</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="初審均ok">
+      <created>1574301186844</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1574301186844</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185642000" />
+    <option name="totallyTimeSpent" value="189480000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="143" y="146" width="1729" height="899" extended-state="0" />
+    <frame x="144" y="163" width="1729" height="899" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29910448" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -680,41 +661,21 @@
     <MESSAGE value="普教特教分開上傳" />
     <MESSAGE value="特教審查指定ok" />
     <MESSAGE value="初審1可以新增和修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="初審1可以新增和修改" />
+    <MESSAGE value="初審均ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="初審均ok" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/school/index.blade.php</url>
-          <line>131</line>
+          <line>150</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/YearController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
-          <caret line="125" column="52" selection-start-line="125" selection-start-column="52" selection-end-line="125" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/questions/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuestionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/reviews/first_user.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -820,20 +781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/nav.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="41" column="76" selection-start-line="41" selection-start-column="76" selection-end-line="41" selection-end-column="76" />
         </state>
       </provider>
     </entry>
@@ -978,13 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/firsts/create1.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/firsts/edit1.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -1037,27 +977,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/school/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReviewController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1062">
-          <caret line="28" column="161" selection-start-line="28" selection-start-column="161" selection-end-line="28" selection-end-column="161" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FirstController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="724" column="33" selection-start-line="724" selection-start-column="33" selection-end-line="724" selection-end-column="33" />
+        <state relative-caret-position="444">
+          <caret line="376" column="31" selection-start-line="376" selection-start-column="31" selection-end-line="376" selection-end-column="31" />
           <folding>
             <element signature="e#40#55#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="153" column="58" selection-start-line="153" selection-start-column="58" selection-end-line="153" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -1068,10 +994,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReviewController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="376" column="31" selection-start-line="376" selection-start-column="31" selection-end-line="376" selection-end-column="31" />
+        <state relative-caret-position="162">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/nav.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="46" column="77" selection-start-line="46" selection-start-column="77" selection-end-line="46" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/firsts/create1.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FirstController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1520">
+          <caret line="123" column="24" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="24" />
+          <folding>
+            <element signature="e#40#55#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/seconds/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="57" column="33" lean-forward="true" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/seconds/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="53" column="166" selection-start-line="53" selection-start-column="166" selection-end-line="53" selection-end-column="166" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/school/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="43" column="52" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="217" column="16" selection-start-line="217" selection-start-column="16" selection-end-line="217" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SecondController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2358">
+          <caret line="131" column="26" selection-start-line="131" selection-start-column="26" selection-end-line="131" selection-end-column="26" />
           <folding>
             <element signature="e#40#55#0#PHP" expanded="true" />
           </folding>

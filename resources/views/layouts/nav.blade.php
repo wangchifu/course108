@@ -44,7 +44,7 @@
                     @endif
                     @if(auth()->user()->group_id==5)
                         <li class="nav-item">
-                            <a class="nav-link" href="">[ 複審作業 ]</a>
+                            <a class="nav-link" href="{{ route('seconds.index') }}">[ 複審作業 ]</a>
                         </li>
                     @endif
                     @if(auth()->user()->group_id==9)

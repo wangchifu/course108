@@ -210,3 +210,10 @@ Route::group(['middleware' => 'first'],function(){
     Route::get('firsts/{course}/edit3' , 'FirstController@edit3')->name('firsts.edit3');
     Route::post('firsts/update3' , 'FirstController@update3')->name('firsts.update3');
 });
+
+//複審委員
+Route::group(['middleware' => 'second'],function(){
+    Route::get('seconds/index' , 'SecondController@index')->name('seconds.index');
+    Route::get('seconds/{course}/create' , 'SecondController@create')->name('seconds.create');
+    Route::patch('seconds/update' , 'SecondController@update')->name('seconds.update');
+});
