@@ -33,9 +33,9 @@
                     </table>
                 </div>
                 <div class="card-body">
-                    <a href="javascript:open_window2('{{ route('reviews.special_by_user',['select_year'=>$select_year,'special'=>'1']) }}','新視窗')" class="btn btn-info btn-sm"><i class="fas fa-user"></i> 審「身障」委員選學校</a>
-                    <a href="javascript:open_window2('{{ route('reviews.special_by_user',['select_year'=>$select_year,'special'=>'2']) }}','新視窗')" class="btn btn-info btn-sm"><i class="far fa-user"></i> 審「資優」委員選學校</a>
-                    <a href="javascript:open_window2('{{ route('reviews.special_by_user',['select_year'=>$select_year,'special'=>'3']) }}','新視窗')" class="btn btn-info btn-sm"><i class="far fa-user"></i> 審「藝才」委員選學校</a>
+                    @foreach($special_questions as $special_question)
+                        <a href="javascript:open_window2('{{ route('reviews.special_by_user',['select_year'=>$select_year,'question'=>$special_question->id]) }}','新視窗')" class="btn btn-info btn-sm"><i class="fas fa-user"></i> 審「{{ $special_question->order_by }}」委員選學校</a>
+                    @endforeach
                     <table border="1" width="100%" class="table-striped">
                         <thead>
                         <tr>
@@ -43,15 +43,12 @@
                                 校名
                                 <br><a href="" class="badge badge-danger" target="_blank">上傳情況</a>
                             </th>
-                            <th nowrap>
-                                審「身障類」
-                            </th>
-                            <th nowrap>
-                                審「資優類」
-                            </th>
-                            <th nowrap>
-                                審「藝才類」
-                            </th>
+                            @foreach($special_questions as $special_question)
+                                <th>
+                                    {{ $special_question->order_by }}：
+                                    {{ $special_question->title }}
+                                </th>
+                            @endforeach
                         </tr>
                         </thead>
                         <tbody>
@@ -60,18 +57,14 @@
                                 <td>
                                     {{ $schools[$course->school_code] }} <small>({{ $course->school_code }})</small>
                                 </td>
-                                <td>
-                                    {{ $special1_name[$course->school_code] }}
-                                    <a href="javascript:open_window('{{ route('reviews.special1_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
-                                </td>
-                                <td>
-                                    {{ $special2_name[$course->school_code] }}
-                                    <a href="javascript:open_window('{{ route('reviews.special2_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
-                                </td>
-                                <td>
-                                    {{ $special3_name[$course->school_code] }}
-                                    <a href="javascript:open_window('{{ route('reviews.special3_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
-                                </td>
+                                @foreach($special_questions as $special_question)
+                                    <td>
+                                        <a href="javascript:open_window('{{ route('reviews.special_user',['question'=>$special_question->id,'select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
+                                        @if(isset($s_r[$course->school_code][$special_question->id]))
+                                        {{ $s_r[$course->school_code][$special_question->id] }}
+                                        @endif
+                                    </td>
+                                @endforeach
                             </tr>
                         @endforeach
 

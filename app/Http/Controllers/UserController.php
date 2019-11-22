@@ -9,9 +9,10 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $group_id = ($request->input('group_id'))?$request->input('group_id'):'3';
+        $group_id = ($request->input('group_id'))?$request->input('group_id'):'0';
         $groups = config('course.groups');
-
+        $groups[0]="--請選擇--";
+        ksort($groups);
         $users = User::where('group_id',$group_id)
             ->orderBy('disable')
             ->get();
@@ -96,5 +97,28 @@ class UserController extends Controller
         $att['password'] = bcrypt(env('DEFAULT_PWD'));
         $user->update($att);
         return redirect()->route('users.index',['group_id'=>$user->group_id]);
+    }
+
+    public function search(Request $request)
+    {
+        $target = $request->input('target');
+        $users = User::where('school', 'like', '%' . $target . '%')
+            ->orWhere(function($q) use ($target){
+                $q->where('name','like','%' . $target . '%');
+            })
+            ->orderBy('group_id')
+            ->get();
+
+        $group_id = ($request->input('group_id'))?$request->input('group_id'):'0';
+        $groups = config('course.groups');
+        $groups[0]="--請選擇--";
+        ksort($groups);
+
+        $data = [
+            'group_id'=>$group_id,
+            'groups'=>$groups,
+            'users'=>$users,
+        ];
+        return view('admin.users.index',$data);
     }
 }

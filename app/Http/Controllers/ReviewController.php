@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Question;
+use App\SpecialReview;
 use App\User;
 use App\Year;
 use Illuminate\Http\Request;
@@ -203,19 +205,15 @@ class ReviewController extends Controller
 
         $courses = Course::where('year',$select_year)
             ->paginate('25');
+        $special_questions = Question::where('year',$select_year)
+            ->where('g_s','2')
+            ->orderBy('order_by')
+            ->get();
 
-        //取全部使用者的id2name
-        $usersId2Names = usersId2Names();
-
-        $special1_name = [];
-        $special2_name = [];
-        $special3_name = [];
-
-
-        foreach($courses as $course){
-            $special1_name[$course->school_code] = ($course->special1_user_id)?$usersId2Names[$course->special1_user_id]:null;
-            $special2_name[$course->school_code] = ($course->special2_user_id)?$usersId2Names[$course->special2_user_id]:null;
-            $special3_name[$course->school_code] = ($course->special3_user_id)?$usersId2Names[$course->special3_user_id]:null;
+        $s_r = [];
+        $special_reviews = SpecialReview::where('year',$select_year)->get();
+        foreach($special_reviews as $special_review){
+            $s_r[$special_review->school_code][$special_review->question_id] = $special_review->user->name;
         }
 
         $data = [
@@ -223,12 +221,47 @@ class ReviewController extends Controller
             'select_year'=>$select_year,
             'schools'=>$schools,
             'courses'=>$courses,
-            'special1_name'=>$special1_name,
-            'special2_name'=>$special2_name,
-            'special3_name'=>$special3_name,
+            's_r'=>$s_r,
+            'special_questions'=>$special_questions,
         ];
         return view('admin.reviews.index2',$data);
     }
+
+    public function special_user(Question $question,$select_year,$school_code)
+    {
+        $users = User::where('group_id',3)->pluck('name','id')->toArray();
+        $schools = config('course.schools');
+        $data = [
+            'users'=>$users,
+            'select_year'=>$select_year,
+            'school_code'=>$school_code,
+            'schools'=>$schools,
+            'question'=>$question,
+        ];
+        return view('admin.reviews.special_user',$data);
+    }
+
+    public function special_user_store(Request $request)
+    {
+        $special_review = SpecialReview::where('year',$request->input('select_year'))
+            ->where('question_id',$request->input('question_id'))
+            ->where('school_code',$request->input('school_code'))
+            ->first();
+        $att['year'] = $request->input('select_year');
+        $att['question_id'] = $request->input('question_id');
+        $att['school_code'] = $request->input('school_code');
+        $att['user_id'] = $request->input('user_id');
+        if($special_review){
+
+            $special_review->update($att);
+        }else{
+            SpecialReview::create($att);
+        }
+
+        echo "<body onload='opener.location.reload();window.close();'>";
+    }
+
+    /**
 
     public function special1_user($select_year,$school_code)
     {
@@ -302,15 +335,17 @@ class ReviewController extends Controller
 
         echo "<body onload='opener.location.reload();window.close();'>";
     }
+     * */
 
-    public function special_by_user($select_year,$special)
+
+    public function special_by_user($select_year,Question $question)
     {
         $users = User::where('group_id',3)->pluck('name','id')->toArray();
         $schools = config('course.schools');
 
         $data = [
             'select_year'=>$select_year,
-            'special'=>$special,
+            'question'=>$question,
             'users'=>$users,
             'schools'=>$schools,
         ];
@@ -320,23 +355,23 @@ class ReviewController extends Controller
     public function special_by_user_store(Request $request)
     {
         foreach($request->input('s') as $k=>$v){
-            $course = Course::where('year',$request->input('select_year'))
+            $special_review = SpecialReview::where('year',$request->input('select_year'))
+                ->where('question_id',$request->input('question_id'))
                 ->where('school_code',$k)
                 ->first();
-            if($request->input('special')=="1"){
-                $att['special1_user_id'] = $request->input('user_id');
+            $att['year'] = $request->input('select_year');
+            $att['question_id'] = $request->input('question_id');
+            $att['school_code'] = $k;
+            $att['user_id'] = $request->input('user_id');
+            if($special_review){
+                $special_review->update($att);
+            }else{
+                SpecialReview::create($att);
             }
-            if($request->input('special')=="2"){
-                $att['special2_user_id'] = $request->input('user_id');
-            }
-            if($request->input('special')=="3"){
-                $att['special3_user_id'] = $request->input('user_id');
-            }
-
-            $course->update($att);
         }
         echo "<body onload='opener.location.reload();window.close();'>";
     }
+
 
     public function not_send($result)
     {

@@ -26,9 +26,22 @@
                                     選擇群組：
                                 </td>
                                 <td>
-                                    {{ Form::open(['route'=>'users.index','method'=>'post']) }}
-                                    {{ Form::select('group_id',$groups,$group_id,['onchange'=>'submit()']) }}
-                                    {{ Form::close() }}
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                {{ Form::open(['route'=>'users.index','method'=>'post']) }}
+                                                {{ Form::select('group_id',$groups,$group_id,['onchange'=>'submit()']) }}
+                                                {{ Form::close() }}
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('users.search') }}" method="post">
+                                                    @csrf
+                                                    <input type="text" name="target" required placeholder="輸入名稱">
+                                                    <button type="submit">搜尋</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>

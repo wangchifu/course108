@@ -83,6 +83,7 @@ Route::group(['middleware'=>'admin'],function(){
     Route::patch('users/{user}/disable' , 'UserController@disable')->name('users.disable');
     Route::patch('users/{user}/able' , 'UserController@able')->name('users.able');
     Route::get('users/{user}/reset' , 'UserController@reset')->name('users.reset');
+    Route::post('users/search' , 'UserController@search')->name('users.search');
 
     //模擬登入
     Route::get('sims/{user}/impersonate', 'SimulationController@impersonate')->name('sims.impersonate');
@@ -138,15 +139,21 @@ Route::group(['middleware'=>'admin'],function(){
 
     //特教審查管理
     Route::match(['get','post'],'reviews/index2' , 'ReviewController@index2')->name('reviews.index2');
+
+    Route::get('reviews/{question}/{select_year}/{school_code}/special_user' , 'ReviewController@special_user')->name('reviews.special_user');
+    Route::post('reviews/special_user_store' , 'ReviewController@special_user_store')->name('reviews.special_user_store');
+    /**
     Route::get('reviews/{select_year}/{school_code}/special1_user' , 'ReviewController@special1_user')->name('reviews.special1_user');
     Route::post('reviews/special1_user_store' , 'ReviewController@special1_user_store')->name('reviews.special1_user_store');
     Route::get('reviews/{select_year}/{school_code}/special2_user' , 'ReviewController@special2_user')->name('reviews.special2_user');
     Route::post('reviews/special2_user_store' , 'ReviewController@special2_user_store')->name('reviews.special2_user_store');
     Route::get('reviews/{select_year}/{school_code}/special3_user' , 'ReviewController@special3_user')->name('reviews.special3_user');
     Route::post('reviews/special3_user_store' , 'ReviewController@special3_user_store')->name('reviews.special3_user_store');
+     * */
 
     //依委員選學校
-    Route::get('reviews/{select_year}/special_by_user/{special}' , 'ReviewController@special_by_user')->name('reviews.special_by_user');
+    Route::get('reviews/{select_year}/special_by_user/{question}' , 'ReviewController@special_by_user')->name('reviews.special_by_user');
+    //Route::get('reviews/{select_year}/special_by_user/{special}' , 'ReviewController@special_by_user')->name('reviews.special_by_user');
     Route::post('reviews/special_by_user_store' , 'ReviewController@special_by_user_store')->name('reviews.special_by_user_store');
 
     //未送名單
@@ -193,6 +200,11 @@ Route::group(['middleware' => 'school'],function(){
 
 //初審委員
 Route::group(['middleware' => 'first'],function(){
+    Route::get('home', function(){
+        if(auth()->user()->group_id=="4"){
+            return redirect()->route('firsts.index');
+        }
+    });
     Route::match(['get','post'],'firsts/index' , 'FirstController@index')->name('firsts.index');
     Route::get('firsts/{course}/show' , 'FirstController@show')->name('firsts.show');
     Route::get('firsts/{course}/create1' , 'FirstController@create1')->name('firsts.create1');
@@ -213,7 +225,23 @@ Route::group(['middleware' => 'first'],function(){
 
 //複審委員
 Route::group(['middleware' => 'second'],function(){
+    Route::get('home', function(){
+        if(auth()->user()->group_id=="5"){
+            return redirect()->route('seconds.index');
+        }
+    });
     Route::get('seconds/index' , 'SecondController@index')->name('seconds.index');
     Route::get('seconds/{course}/create' , 'SecondController@create')->name('seconds.create');
     Route::patch('seconds/update' , 'SecondController@update')->name('seconds.update');
+});
+
+//特教委員
+Route::group(['middleware' => 'special'],function(){
+    Route::get('home', function(){
+        if(auth()->user()->group_id=="3"){
+            return redirect()->route('special.index');
+        }
+    });
+    Route::get('specials/index' , 'SpecialController@index')->name('special.index');
+
 });

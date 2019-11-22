@@ -98,7 +98,8 @@ class GLoginController extends Controller
             //登入
             if(Auth::attempt(['username' => $username,
                 'password' => $request->input('password')])){
-                return redirect()->route('index');
+                //return redirect()->route('index');
+                return redirect()->route('schools.index');
             }
         }else{
             return back()->withErrors('GSuite認證錯誤');
