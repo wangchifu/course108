@@ -12,7 +12,10 @@
 */
 
 //首頁
-Route::get('/' , 'PostController@index')->name('index');
+Route::get('/' , function(){
+    return redirect()->route('index');
+});
+Route::get('posts/index' , 'PostController@index')->name('index');
 //公告內容
 Route::get('/posts/show/{post}' , 'PostController@show')->name('posts.show');
 //下載storage裡public的檔案
