@@ -46,7 +46,9 @@
                     <table class="table table-striped">
                         <tr>
                             <th colspan="5">
-                                課程首次上傳<br>
+                                課程首次上傳
+                                <a href="{{ route('schools.show_all',$course->year) }}" class="badge badge-danger" target="_blank">顯示全部結果</a>
+                                <br>
                                 <small>{{ $year->step1_date1 }}~{{$year->step1_date2}}</small>
                             </th>
                         </tr>
@@ -129,6 +131,7 @@
                                 @endif
                                 @if($course->special_result=="submit")
                                     <span class="text-primary">已送審</span>
+                                    <a href="{{ route('schools.show_special',$course->year) }}" class="badge badge-danger" target="_blank">顯示特教結果</a>
                                 @endif
                             </td>
                             <td>

@@ -985,4 +985,27 @@ class SchoolController extends Controller
         return redirect()->route('schools.index');
     }
 
+    public function show_special($select_year)
+    {
+        $special_questions = Question::where('year',$select_year)
+            ->where('g_s','2')
+            ->orderBy('order_by')
+            ->get();
+        $data = [
+            'special_questions'=>$special_questions,
+        ];
+        return view('school.show_special',$data);
+    }
+
+    public function show_all($select_year)
+    {
+        $questions = Question::where('year',$select_year)
+            ->orderBy('order_by')
+            ->get();
+        $data = [
+            'questions'=>$questions,
+        ];
+        return view('school.show_all',$data);
+    }
+
 }

@@ -196,6 +196,9 @@ Route::group(['middleware' => 'school'],function(){
     Route::get('schools/{upload}/delete8' , 'SchoolController@delete8')->name('schools.delete8');
 
     Route::post('schools/submit' , 'SchoolController@submit')->name('schools.submit');
+
+    Route::get('schools/{select_year}/show_special' , 'SchoolController@show_special')->name('schools.show_special');
+    Route::get('schools/{select_year}/show_all' , 'SchoolController@show_all')->name('schools.show_all');
 });
 
 //初審委員
