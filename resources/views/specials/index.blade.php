@@ -1,6 +1,6 @@
 @extends('layouts.master',['bg_color'=>'bg-dark'])
 
-@section('title','複審作業')
+@section('title','特教審核')
 
 @section('content')
     <div class="row justify-content-center">
@@ -28,42 +28,47 @@
                         <thead class="thead-light">
                         <tr>
                             <th nowrap>
-                                代碼
-                            </th>
-                            <th nowrap>
                                 校名
                             </th>
-                            <th nowrap>
-                                複審作業
-                            </th>
-                            <th>
-                                結果
-                            </th>
+                            @foreach($special_questions as $special_question)
+                                <th>
+                                    {{ $special_question->title }}
+                                </th>
+                            @endforeach
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($courses as $course)
+                        @foreach($special_review_data as $k=>$v)
                             <tr>
                                 <td>
-                                    {{ $course->school_code }}
+                                    {{ $schools[$k] }}
                                 </td>
-                                <td>
-                                    {{ $schools[$course->school_code] }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('seconds.create',['course'=>$course->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>進行審核</a>
-                                </td>
-                                <td>
-                                    @if($course->second_result=="ok")
-                                        <span class="text-info">通過</span>
-                                    @elseif($course->second_result=="excellent1")
-                                        <span class="text-success">1.特優</span>
-                                    @elseif($course->second_result=="excellent2")
-                                        <span class="text-success">2.優等</span>
-                                    @elseif($course->second_result=="excellent3")
-                                        <span class="text-success">3.甲等</span>
-                                    @endif
-                                </td>
+                                @foreach($special_questions as $special_question)
+                                    <td>
+                                        <?php
+                                        ?>
+                                        @if(isset($v[$special_question->id]['user']) and isset($v[$special_question->id]['id']))
+                                            @if($v[$special_question->id]['user'] == auth()->user()->id)
+                                                <a href="{{ route('specials.create',['special_review'=>$v[$special_question->id]['id']]) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>進行審核</a>
+                                            @endif
+                                        @endif
+                                        <?php
+                                            $special_suggest = \App\SpecialSuggest::where('question_id',$special_question->id)
+                                            ->where('school_code',$k)
+                                            ->first();
+                                        ?>
+                                        @if($special_suggest)
+                                            @if($special_suggest->pass =="1")
+                                                <span class="text-success">符合</span>
+                                            @endif
+                                            @if($special_suggest->pass =="0")
+                                                <span class="text-danger">不符合</span>
+                                            @endif
+                                        @else
+                                                <span class="text-warning">未審</span>
+                                        @endif
+                                    </td>
+                                @endforeach
                             </tr>
                         @endforeach
                         </tbody>

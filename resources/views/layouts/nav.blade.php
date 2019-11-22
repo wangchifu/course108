@@ -34,7 +34,7 @@
                     @endif
                     @if(auth()->user()->group_id==3)
                         <li class="nav-item">
-                            <a class="nav-link" href="">[ 特教審核 ]</a>
+                            <a class="nav-link" href="{{ route('specials.index') }}">[ 特教審核 ]</a>
                         </li>
                     @endif
                     @if(auth()->user()->group_id==4)

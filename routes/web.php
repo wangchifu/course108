@@ -242,6 +242,8 @@ Route::group(['middleware' => 'special'],function(){
             return redirect()->route('special.index');
         }
     });
-    Route::get('specials/index' , 'SpecialController@index')->name('special.index');
+    Route::get('specials/index' , 'SpecialController@index')->name('specials.index');
+    Route::get('specials/{special_review}/create' , 'SpecialController@create')->name('specials.create');
+    Route::post('specials/store' , 'SpecialController@store')->name('specials.store');
 
 });
