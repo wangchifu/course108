@@ -3,7 +3,7 @@
 @section('title','初審作業')
 
 @foreach($questions as $question)
-    @if($question->g_s == 1)
+    @if($question->g_s == 1 and $question->type != "0")
         @section('input'.$question->id)
             <?php
                 if($f_s1[$question->id]['pass']==1){
@@ -14,7 +14,7 @@
                     $check2 = "checked";
                 }
             ?>
-            <td style="vertical-align:top;">
+            <td style="vertical-align:top;background-color: #FFEE99">
                 <input type="hidden" name="questions[]" value="{{ $question->id }}">
                 <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" {{ $check1 }} value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
                 <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" {{ $check2 }} value="0"> <label for="check2_{{ $question->id }}">不符合</label>

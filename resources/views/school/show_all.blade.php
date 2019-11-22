@@ -1,9 +1,91 @@
 @extends('layouts.master_clean')
-@section('title','特教審查 | ')
+@section('title','全部審查結果 | ')
 @section('content')
     <h1>
         {{ auth()->user()->school }}：全部課程審查
     </h1>
+    <table class="table table-striped">
+        <thead class="thead-light">
+        <tr>
+            <th>
+                一傳
+            </th>
+            <th>
+                二傳
+            </th>
+            <th>
+                三傳
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                @if($course->first_result1==null)
+                    <span class="text-danger">未送審</span>
+                @endif
+                @if($course->first_result1=="submit")
+                    <span>已送審</span>
+                @endif
+                @if($course->first_result1=="ok")
+                    <span class="text-info">已通過</span>
+                @endif
+                @if($course->first_result1=="back")
+                    <span class="text-danger">被退回</span>
+                @endif
+                @if($course->first_result1=="excellent")
+                    <span class="text-success">進入複審</span>
+                @endif
+                <br>
+                <span class="text-primary">
+                    {{ $course->first_reason1 }}
+                </span>
+            </td>
+            <td>
+                @if($course->first_result2==null and $course->first_result1=="back")
+                    <span class="text-danger">未送審</span>
+                @endif
+                @if($course->first_result2=="submit")
+                    <span>已送審</span>
+                @endif
+                @if($course->first_result2=="ok")
+                    <span class="text-info">已通過</span>
+                @endif
+                @if($course->first_result2=="back")
+                    <span class="text-danger">被退回</span>
+                @endif
+                @if($course->first_result2=="excellent")
+                    <span class="text-success">進入複審</span>
+                @endif
+                <br>
+                <span class="text-primary">
+                    {{ $course->first_reason2 }}
+                </span>
+            </td>
+            <td>
+                @if($course->first_result3==null and $course->first_result2=="back")
+                    <span class="text-danger">未送審</span>
+                @endif
+                @if($course->first_result3=="submit")
+                    <span>已送審</span>
+                @endif
+                @if($course->first_result3=="ok")
+                    <span class="text-info">已通過</span>
+                @endif
+                @if($course->first_result3=="back")
+                    <span class="text-danger">被退回</span>
+                @endif
+                @if($course->first_result3=="excellent")
+                    <span class="text-success">進入複審</span>
+                @endif
+                <br>
+                <span class="text-primary">
+                    {{ $course->first_reason3 }}
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 <table class="table table-striped">
     <thead class="thead-light">
     <tr>
@@ -79,6 +161,9 @@
                             <span class="text-danger">不符合！</span>
                         @endif
                     @endif
+                    @if(!$suggest1 and !$suggest2 and !$suggest1)
+                        <span class="text-warning">未審</span>
+                    @endif
                 </td>
                 <td>
                     @if($suggest1)
@@ -107,17 +192,23 @@
                         {{ $question->title }}
                     </td>
                     <td>
-                        @if($special_suggest->pass=="1")
-                            <span class="text-success">符合！</span>
-                        @endif
-                        @if($special_suggest->pass=="0")
-                            <span class="text-danger">不符合！</span>
+                        @if($special_suggest)
+                            @if($special_suggest->pass=="1")
+                                <span class="text-success">符合！</span>
+                            @endif
+                            @if($special_suggest->pass=="0")
+                                <span class="text-danger">不符合！</span>
+                            @endif
+                        @else
+                            <span class="text-warning">未審</span>
                         @endif
                     </td>
                     <td>
-                        <span class="text-primary">
-                            {{ $special_suggest->suggest }}
-                        </span>
+                        @if($special_suggest)
+                            <span class="text-primary">
+                                {{ $special_suggest->suggest }}
+                            </span>
+                        @endif
                     </td>
                 </tr>
             @endif

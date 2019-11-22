@@ -42,9 +42,6 @@
                             <th>
                                 初審-三傳
                             </th>
-                            <th>
-                                詳細結果
-                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -120,11 +117,6 @@
                                     @elseif($course->first_result3=="excellent")
                                         <i class="fas fa-thumbs-up text-primary"></i> <span class="text-success">優良</span>
                                         [<a href="{{ route('firsts.edit3',['course'=>$course->id]) }}"><i class="fas fa-edit"></i> 修改</a>]
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($course->first_result1 != null and $course->first_result1 != "submit")
-                                    <a href="{{ route('firsts.show',['course'=>$course->id]) }}"><i class="fas fa-eye"></i>檢視</a>
                                     @endif
                                 </td>
                             </tr>

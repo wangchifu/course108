@@ -198,6 +198,7 @@ class SchoolController extends Controller
             'questions'=>$questions,
             'year9'=>$year9,
             'year12'=>$year12,
+            'course'=>$course,
         ];
         return view('school.edit',$data);
     }
@@ -999,11 +1000,15 @@ class SchoolController extends Controller
 
     public function show_all($select_year)
     {
+        $course = Course::where('school_code',auth()->user()->code)
+            ->where('year',$select_year)
+            ->first();
         $questions = Question::where('year',$select_year)
             ->orderBy('order_by')
             ->get();
         $data = [
             'questions'=>$questions,
+            'course'=>$course,
         ];
         return view('school.show_all',$data);
     }
