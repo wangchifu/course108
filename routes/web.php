@@ -175,6 +175,11 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('reviews/{result}/not_send' , 'ReviewController@not_send')->name('reviews.not_send');
     Route::get('reviews/{course}/{page}/{action}/back_null' , 'ReviewController@back_null')->name('reviews.back_null');
 
+    //匯出表單
+    Route::match(['get','post'],'exports/index' , 'ExportController@index')->name('exports.index');
+    Route::get('exports/{select_year}/section' , 'ExportController@section')->name('exports.section');
+    Route::get('exports/{select_year}/show_date' , 'ExportController@show_date')->name('exports.show_date');
+
 });
 
 //學校可用

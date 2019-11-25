@@ -17,7 +17,7 @@
     <a href="{{ route('reviews.index2') }}" class="list-group-item list-group-item-action {{ $active[6] }}">
         <i class="fas fa-user-tag"></i> 特教審查管理
     </a>
-    <a href="" class="list-group-item list-group-item-action {{ $active[7] }}">
+    <a href="{{ route('exports.index') }}" class="list-group-item list-group-item-action {{ $active[7] }}">
         <i class="fas fa-file-export"></i> 匯出表單
     </a>
 </div>
