@@ -33,6 +33,9 @@
                             <th nowrap>
                                 校名
                             </th>
+                            <th>
+                                傳訊
+                            </th>
                             <th nowrap>
                                 初審
                             </th>
@@ -52,6 +55,13 @@
                                 </td>
                                 <td>
                                     {{ $schools[$course->school_code] }}
+                                </td>
+                                <td>
+                                    <form action="{{ route('message') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="school_code" value="{{ $course->school_code }}">
+                                        <button><i class="fas fa-comment-dots text-primary"></i></button>
+                                    </form>
                                 </td>
                                 <td>
                                     @if($course->first_result1==null)

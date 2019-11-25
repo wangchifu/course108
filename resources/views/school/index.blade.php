@@ -55,6 +55,13 @@
                         <tr>
                             <th>
                                 普教初審<br>
+                                @if($course->first_user_id)
+                                    <form action="{{ route('message') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="for_user_id" value="{{ $course->first_user_id }}">
+                                        <button><i class="fas fa-comment-dots text-primary"></i></button>
+                                    </form>
+                                @endif
                                 <small>{{ $year->step2_date1 }}~{{$year->step2_date2}}</small>
                             </th>
                             <th>
@@ -70,7 +77,14 @@
                             </th>
                             <th>
                                 普教複審<br>
-                                <small>{{ $year->step3_date1 }}~{{$year->step3_date2}}</small>
+                                @if($course->second_user_id)
+                                    <form action="{{ route('message') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="for_user_id" value="{{ $course->second_user_id }}">
+                                        <button><i class="fas fa-comment-dots text-primary"></i></button>
+                                    </form>
+                                @endif
+                                <small>{{ $year->step3_date1 }}~{{$year->step3_date2}}</small><br>
                             </th>
                         </tr>
                         <tr>

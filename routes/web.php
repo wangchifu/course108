@@ -57,6 +57,15 @@ Route::group(['middleware'=>'auth'],function(){
         }
     });
 
+    //通知
+    Route::get('notify' , 'HomeController@notify')->name('notify');
+    Route::patch('email_store' , 'HomeController@email_store')->name('email_store');
+    Route::get('callback', 'HomeController@callback')->name('callback');
+    Route::get('cancel', 'HomeController@cancel')->name('cancel');
+
+    Route::post('message' , 'HomeController@message')->name('message');
+    Route::post('message_store' , 'HomeController@message_store')->name('message_store');
+
     //更改個人密碼
     Route::get('resetPwd' , 'HomeController@reset_pwd')->name('reset_pwd');
     Route::patch('updatePWD' , 'HomeController@update_pwd')->name('update_pwd');

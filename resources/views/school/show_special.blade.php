@@ -8,8 +8,21 @@
     <thead class="thead-light">
     <tr>
         @foreach($special_questions as $special_question)
+            <?php
+                $special_review = \App\SpecialReview::where('question_id',$special_question->id)
+                    ->where('school_code',auth()->user()->code)
+                    ->first();
+            ?>
             <th>
                 {{ $special_question->title }}
+                @if($special_review)
+                    123
+                    <form action="{{ route('message') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="for_user_id" value="{{ $special_review->user_id }}">
+                        <button><i class="fas fa-comment-dots text-primary"></i></button>
+                    </form>
+                @endif
             </th>
         @endforeach
     </tr>

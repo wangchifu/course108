@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('title')->nullable();
             $table->string('login_type')->nullable();//null為本機登入,gsuite為gsuite登入
             $table->tinyInteger('disable')->nullable();//1為停用,null為啟用
+            $table->string('access_token')->nullable();//line的toaen
             $table->rememberToken();
             $table->timestamps();
         });
