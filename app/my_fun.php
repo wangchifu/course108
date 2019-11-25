@@ -109,6 +109,50 @@ function check_in_date($select_year){
     return $check;
 }
 
+function check_date($select_year,$action){
+    $year = \App\Year::where('year',$select_year)->first();
+    $words = null;
+    $today = date('Ymd');
+    if($action==1){
+        $d1 = str_replace('-','',$year->step1_date1);
+        $d2 = str_replace('-','',$year->step1_date2);
+    }
+    if($action==2){
+        $d1 = str_replace('-','',$year->step2_date1);
+        $d2 = str_replace('-','',$year->step2_date2);
+    }
+    if($action=="2_1"){
+        $d1 = str_replace('-','',$year->step2_1_date1);
+        $d2 = str_replace('-','',$year->step2_1_date2);
+    }
+    if($action=="2_2"){
+        $d1 = str_replace('-','',$year->step2_2_date1);
+        $d2 = str_replace('-','',$year->step2_2_date2);
+    }
+    if($action==3){
+        $d1 = str_replace('-','',$year->step3_date1);
+        $d2 = str_replace('-','',$year->step3_date2);
+    }
+    if($action==4){
+        $d1 = str_replace('-','',$year->step4_date1);
+        $d2 = str_replace('-','',$year->step4_date2);
+    }
+
+    $w = [
+        '1'=>'階段1：學校上傳',
+        '2'=>'階段2：初審作業',
+        '2_1'=>'階段2_1：依初審後再傳',
+        '2_2'=>'階段2_2：初審後，三傳',
+        '3'=>'階段3：複審作業',
+        '4'=>'查詢',
+    ];
+
+    if($today < $d1 or $today >$d2){
+        $words = $w[$action]." 開放時間為 ".$d1." 到 ".$d2;
+    }
+    return $words;
+}
+
 if (! function_exists('usersId2Names')) {
     function usersId2Names(){
         $users = \App\User::all();

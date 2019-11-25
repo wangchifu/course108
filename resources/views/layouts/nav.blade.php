@@ -21,10 +21,10 @@
                     @endif
                 @endauth
                 <li class="nav-item">
-                    <a class="nav-link" href="">課程計畫分享</a>
+                    <a class="nav-link" href="{{ route('share') }}">課程計畫分享</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">優良學校</a>
+                    <a class="nav-link" href="{{ route('excellent') }}">優良學校</a>
                 </li>
                 @auth
                     @if(auth()->user()->group_id < 3)

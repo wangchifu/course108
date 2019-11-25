@@ -47,6 +47,9 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 //Route::get('/home', 'HomeController@index')->name('home');
 
+Route::match(['get','post'],'share' , 'HomeController@share')->name('share');
+Route::get('/share/{select_year}/{school_code}' , 'HomeController@share_one')->name('share_one');
+Route::match(['get','post'],'excellent' , 'HomeController@excellent')->name('excellent');
 
 //已登入者可連
 Route::group(['middleware'=>'auth'],function(){
