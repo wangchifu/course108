@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Part;
 use App\Question;
+use App\User;
 use App\Year;
 use Illuminate\Http\Request;
 
@@ -135,6 +136,29 @@ class SecondController extends Controller
         $att['second_result'] = $request->input('second_result');
         $att['second_reason'] = $request->input('second_reason');
         $course->update($att);
+
+        //通知使用者
+        $users = User::where('code',$course->school_code)
+            ->get();
+        $result = [
+            'ok'=>'不列入優良學校課程計畫！',
+            'excellent1'=>'讚！列入優良學校課程計畫！(特優)',
+            'excellent2'=>'讚！列入優良學校課程計畫！(優等)',
+            'excellent3'=>'讚！列入優良學校課程計畫！(甲等)',
+
+        ];
+        foreach($users as $user){
+            $to = $user->email;
+            $subject = "課程計畫複審結果通知----".$result[$request->input('second_result')];
+            $body = "課程計畫複審結果通知----".$result[$request->input('second_result')]." 請登入 https://course108.chc.edu.tw 查看！" ;
+            $line = $user->access_token;
+            if($to){
+                send_mail($to,$subject,$body);
+            }
+            if($line){
+                line_to($line,$body);
+            }
+        }
 
         return redirect()->route('seconds.index');
     }

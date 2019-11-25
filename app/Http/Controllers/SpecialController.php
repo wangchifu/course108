@@ -6,6 +6,7 @@ use App\Course;
 use App\Question;
 use App\SpecialReview;
 use App\SpecialSuggest;
+use App\User;
 use App\Year;
 use Illuminate\Http\Request;
 
@@ -70,6 +71,27 @@ class SpecialController extends Controller
         }else{
             SpecialSuggest::create($att);
         }
+
+        $users = User::where('code',$att['school_code'])
+            ->get();
+
+        $question = Question::find($att['question_id']);
+
+        $result = ($att['pass']=="1")?$question->title." 符合":$question->title." 不符合";
+
+        foreach($users as $user){
+            $to = $user->email;
+            $subject = "課程計畫特教部分 審查結果通知----".$result;
+            $body = "課程計畫特教部分 審查結果通知----".$result." 請登入 https://course108.chc.edu.tw 查看！" ;
+            $line = $user->access_token;
+            if($to){
+                send_mail($to,$subject,$body);
+            }
+            if($line){
+                line_to($line,$body);
+            }
+        }
+
         return redirect()->route('specials.index');
     }
 }
