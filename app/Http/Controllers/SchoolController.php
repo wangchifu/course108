@@ -483,6 +483,71 @@ class SchoolController extends Controller
         echo "<body onload='opener.location.reload();window.close();'>";
     }
 
+    public function print(Upload $upload)
+    {
+        $year = Year::where('year',$upload->year)->first();
+        //九年一貫的年級有哪一些
+        if(auth()->user()->group_id==1){
+            if($year->e1 == '9year'){
+                $year9[] = "一";
+            }else{
+                $year12[] = "一";
+            }
+            if($year->e2 == '9year'){
+                $year9[] = "二";
+            }else{
+                $year12[] = "二";
+            }
+            if($year->e3 == '9year'){
+                $year9[] = "三";
+            }else{
+                $year12[] = "三";
+            }
+            if($year->e4 == '9year'){
+                $year9[] = "四";
+            }else{
+                $year12[] = "四";
+            }
+            if($year->e5 == '9year'){
+                $year9[] = "五";
+            }else{
+                $year12[] = "五";
+            }
+            if($year->e6 == '9year'){
+                $year9[] = "六";
+            }else{
+                $year12[] = "六";
+            }
+
+        }elseif(auth()->user()->group_id==2){
+            if($year->j1 == '9year'){
+                $year9[] = "七";
+            }else{
+                $year12[] = "七";
+            }
+            if($year->j2 == '9year'){
+                $year9[] = "八";
+            }else{
+                $year12[] = "八";
+            }
+            if($year->j3 == '9year'){
+                $year9[] = "九";
+            }else{
+                $year12[] = "九";
+            }
+        }
+
+        $area_section = unserialize($upload->file);
+
+        $data = [
+            'year'=>$year,
+            'year9'=>$year9,
+            'year12'=>$year12,
+            'area_section'=>$area_section,
+        ];
+        return view('school.print',$data);
+    }
+
     public function delete3(Upload $upload)
     {
         $upload->delete();

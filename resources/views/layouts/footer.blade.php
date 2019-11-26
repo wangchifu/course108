@@ -34,10 +34,13 @@
 
         foreach($messages as $message){
             if($message->has_read == null){
-                if($message->for_school_code or $message->for_user_id){
-                    if($message->for_user_id == auth()->user()->id ){
+                if($message->for_school_code==auth()->user()->code){
+                    if($message->for_school_code <> null){
                         $i++;
                     }
+                }
+                if($message->for_user_id == auth()->user()->id){
+                    $i++;
                 }
             }
         }

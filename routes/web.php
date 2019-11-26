@@ -220,6 +220,9 @@ Route::group(['middleware' => 'school'],function(){
 
     Route::get('schools/{select_year}/show_special' , 'SchoolController@show_special')->name('schools.show_special');
     Route::get('schools/{select_year}/show_all' , 'SchoolController@show_all')->name('schools.show_all');
+
+    //列印
+    Route::get('schools/{upload}/print' , 'SchoolController@print')->name('schools.print');
 });
 
 //初審委員

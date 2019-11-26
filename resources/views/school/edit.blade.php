@@ -106,6 +106,7 @@
                 </table>
                 <br>
                 <a href="{{ route('schools.delete3',$upload->id) }}" class="btn btn-info btn-sm" onclick="return confirm('確定重設？')"><i class="fas fa-trash-alt"></i> 清除重設</a>
+                <a href="{{ route('schools.print',$upload->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-print"></i> 列印簽章檔案</a>
             @else
                 @if($question->need=="1")
                     <a href="javascript:open_upload('{{ route('schools.upload3',['select_year'=>$year->year,'question'=>$question->id]) }}','新視窗')" class="badge badge-danger check_red"><i class="fas fa-times-circle"></i> 未填寫</a>
