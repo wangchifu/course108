@@ -33,8 +33,10 @@
                     <table class="table table-striped">
                         <thead class="thead-light">
                         <tr>
+                            <th width="8%">標示</th>
                             <th width="20%">時間</th>
                             <th width="20%">寄件者</th>
+                            <th width="20%">收件者</th>
                             <th>內容</th>
                         </tr>
                         </thead>
@@ -42,23 +44,64 @@
                         @foreach($messages as $message)
                             <tr>
                                 <td>
+                                    @if($message->has_read)
+                                        @if($message->from_user_id != auth()->user()->id)
+                                            已讀
+                                        @endif
+                                    @else
+                                        @if($message->from_user_id != auth()->user()->id)
+                                        <a href="{{ route('notify_read',$message->id) }}" class="badge badge-danger" onclick="return confirm('標示已讀？')">未讀</a>
+                                        @endif
+                                    @endif
+                                </td>
+                                <td>
                                     {{ $message->created_at }}
                                 </td>
                                 <td>
-                                    @if($message->from_user->group_id > 2)
-                                        {{ $groups[$message->from_user->group_id] }}
-                                    @endif
-                                    @if($message->from_user->group_id < 3)
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                @if($message->from_user->group_id > 2)
+                                                    {{ $groups[$message->from_user->group_id] }}
+                                                @endif
+                                                @if($message->from_user->group_id < 3)
 
-                                        {{ $schools[$message->from_user->code] }}
-                                    @endif
-                                    {{ $message->from_user->name }}
-                                    @if($message->from_user_id != auth()->user()->id)
-                                        <form action="{{ route('message') }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="for_user_id" value="{{ $message->from_user_id }}">
-                                            <button><i class="fas fa-comment-dots text-primary"></i></button>
-                                        </form>
+                                                    {{ $schools[$message->from_user->code] }}
+                                                @endif
+                                                @if($message->from_user_id == auth()->user()->id)
+                                                    {{ $message->from_user->name }}
+                                                @else
+                                                    {{ mb_substr($message->from_user->name,0,1) }}**
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($message->from_user_id != auth()->user()->id)
+                                                    <form action="{{ route('message') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="for_user_id" value="{{ $message->from_user_id }}">
+                                                        <button><i class="fas fa-comment-dots text-primary"></i></button>
+                                                    </form>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    @if($message->for_user_id)
+                                        @if($message->for_user->group_id > 2)
+                                            {{ $groups[$message->for_user->group_id] }}
+                                        @endif
+                                        @if($message->for_user->group_id < 3)
+
+                                            {{ $schools[$message->for_user->code] }}
+                                        @endif
+                                        @if($message->for_user_id == auth()->user()->id)
+                                            {{ $message->for_user->name }}
+                                        @else
+                                            {{ mb_substr($message->for_user->name,0,1) }}**
+                                        @endif
+                                    @else
+                                        {{ $schools[$message->for_school_code] }}
                                     @endif
                                 </td>
                                 <td>

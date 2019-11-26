@@ -62,6 +62,7 @@ Route::group(['middleware'=>'auth'],function(){
 
     //通知
     Route::get('notify' , 'HomeController@notify')->name('notify');
+    Route::get('notify_read/{message}' , 'HomeController@notify_read')->name('notify_read');
     Route::patch('email_store' , 'HomeController@email_store')->name('email_store');
     Route::get('callback', 'HomeController@callback')->name('callback');
     Route::get('cancel', 'HomeController@cancel')->name('cancel');

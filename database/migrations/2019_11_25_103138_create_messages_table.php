@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->unsignedInteger('for_user_id')->nullable();//給誰
             $table->unsignedInteger('from_user_id');//誰發的
             $table->text('message');//訊息
+            $table->tinyInteger('has_read')->nullable();//誰發的
             $table->timestamps();
         });
     }

@@ -60,11 +60,12 @@ class HomeController extends Controller
     {
         $groups = config('course.groups');
         $schools = config('course.schools');
-        $messages = Message::where('from_user_id',auth()->user()->id)
-            ->orWhere(function($q){
-                $q->where('for_user_id',auth()->user()->id)
-                    ->orWhere('for_school_code',auth()->user()->code);
-            })->orderBy('created_at','DESC')
+        $messages = Message::where(function($q){
+                $q->where('for_school_code','<>',null)
+                    ->Where('for_school_code',auth()->user()->code);
+            })->orWhere('from_user_id',auth()->user()->id)
+            ->orWhere('for_user_id',auth()->user()->id)
+            ->orderBy('created_at','DESC')
             ->get();
 
         $data = [
@@ -73,6 +74,13 @@ class HomeController extends Controller
             'messages'=>$messages,
         ];
         return view('notify',$data);
+    }
+
+    public function notify_read(Message $message)
+    {
+        $att['has_read'] =1;
+        $message->update($att);
+        return redirect()->route('notify');
     }
 
     public function email_store(Request $request)

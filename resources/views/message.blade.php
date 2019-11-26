@@ -39,7 +39,7 @@
                                 @if($for_user->group_id >2)
                                     {{ $groups[$for_user->group_id] }}
                                 @endif
-                                    {{ $for_user->name }}
+                                    {{ mb_substr($for_user->name,0,1) }}**
                                 <input type="hidden" name="for_user_id" value="{{ $for_user->id }}">
                             @endif
                         </div>
