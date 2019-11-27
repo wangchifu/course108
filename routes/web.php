@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('test' , 'HomeController@test')->name('test');
+
 //首頁
 Route::get('/' , function(){
     return redirect()->route('index');

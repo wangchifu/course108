@@ -1038,7 +1038,7 @@ class SchoolController extends Controller
             if($course->first_result1==null){
                 $att['first_result1'] = "submit";
             }
-            if($course->first_result1=="back" and $course->first_result2==null){
+            if(($course->first_result1=="back" or $course->first_result1=="late") and $course->first_result2==null){
                 $att['first_result2'] = "submit";
             }
             if($course->first_result2=="back"){

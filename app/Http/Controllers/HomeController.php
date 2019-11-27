@@ -2,9 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\C31Table;
+use App\C81Table;
 use App\Course;
+use App\CourseOld;
+use App\FirstSuggest1;
+use App\FirstSuggest2;
+use App\FirstSuggest3;
 use App\Message;
 use App\Part;
+use App\SecondSuggestOld;
+use App\SpecialReview;
+use App\SpecialSuggest;
+use App\SpecialSuggest131;
+use App\SpecialSuggest132;
+use App\SpecialSuggest133;
+use App\Upload;
 use App\User;
 use App\Year;
 use Illuminate\Http\Request;
@@ -26,6 +39,156 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function test()
+    {
+
+        $courses_old = CourseOld::all();
+        $str= "";
+        foreach($courses_old as $course_old){
+            $c81s = C81Table::where('year','108')->where('school_code',$course_old->school_code)->get();
+            foreach($c81s as $c81){
+                $school['mandarin'][$c81->grade] =  $c81->mandarin_book;
+                $school['dialects'][$c81->grade] =  $c81->dialects_book;
+                $school['english'][$c81->grade] =  $c81->english_book;
+                $school['mathematics'][$c81->grade] =  $c81->mathematics_book;
+                $school['life_curriculum'][$c81->grade] =  $c81->life_curriculum_book;
+                $school['social_studies'][$c81->grade] =  $c81->social_studies_book;
+                $school['science_technology'][$c81->grade] =  $c81->science_technology_book;
+                $school['science'][$c81->grade] =  $c81->science_book;
+                $school['arts_humanities'][$c81->grade] =  $c81->arts_humanities_book;
+                $school['integrative_activities'][$c81->grade] =  $c81->integrative_activities_book;
+                $school['technology'][$c81->grade] =  $c81->technology_book;
+                $school['health_physical'][$c81->grade] =  $c81->health_physical_book;
+                $school['alternative'][$c81->grade] =  $c81->alternative_book;
+            }
+            
+
+
+            $section['mandarin'] = $school['mandarin'];
+            $section['dialects'] = $school['dialects'];
+            $section['english'] = $school['english'];
+            $section['mathematics'] = $school['mathematics'];
+            $section['life_curriculum'] = $school['life_curriculum'];
+            $section['social_studies'] = $school['social_studies'];
+            $section['science_technology'] = $school['science_technology'];
+            $section['science'] = $school['science'];
+            $section['arts_humanities'] = $school['arts_humanities'];
+            $section['integrative_activities'] = $school['integrative_activities'];
+            $section['technology'] = $school['technology'];
+            $section['health_physical'] = $school['health_physical'];
+            $section['alternative'] = $school['alternative'];
+
+
+            $att['file'] = serialize($section);
+
+            //$att['code'] = $course_old->school_code;
+            //$att['question_id'] = "15";
+            //$att['year'] = "108";
+
+            $upload = Upload::where('year','108')->where('question_id','15')->where('code',$course_old->school_code)
+                ->first();
+
+            $upload->update($att);
+
+        }
+
+
+
+        /**
+        foreach($courses_old as $course_old) {
+            $special_suggest131 = SpecialSuggest131::where('course_id', $course_old->id)->first();
+            $special_suggest132 = SpecialSuggest132::where('course_id', $course_old->id)->first();
+            $special_suggest133 = SpecialSuggest133::where('course_id', $course_old->id)->first();
+            //$first_suggest2_old = FirstSuggest2Old::where('course_id',$course_old->id)->first();
+            //$first_suggest3_old = FirstSuggest3Old::where('course_id',$course_old->id)->first();
+            //$second_suggest_old = SecondSuggestOld::where('course_id',$course_old->id)->first();
+            //$course = Course::where('school_code',$course_old->school_code)->first();
+
+            if(!is_dir(storage_path('app/public/upload/108/'.$course_old->school_code.'/26'))){
+                mkdir(storage_path('app/public/upload/108/'.$course_old->school_code.'/26'));
+            }
+            if (file_exists(storage_path('app/public2/upload/108/'.$course_old->school_code.'/c13.pdf'))) {
+                rename(storage_path('app/public2/upload/108/'.$course_old->school_code.'/c13.pdf'), storage_path('app/public/upload/108/'.$course_old->school_code.'/26/c13.pdf'));
+            }
+
+            $att2['code'] = $course_old->school_code;
+            $att2['question_id'] = "26";
+            $att2['year'] = "108";
+            $att2['file'] = 'c13.pdf';
+            $upload = Upload::create($att2);
+
+
+            if ($special_suggest131) {
+                $att['question_id'] = 27;
+                $att['school_code'] = $course_old->school_code;
+                $att['pass'] = $special_suggest131->c13_1_pass;
+                $att['suggest'] = $special_suggest131->c13_1;
+                //SpecialSuggest::create($att);
+
+                if(!is_dir(storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id']))){
+                    mkdir(storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id']));
+                }
+                if (file_exists(storage_path('app/public2/upload/108/'.$att['school_code'].'/c13_1.pdf'))) {
+                    rename(storage_path('app/public2/upload/108/'.$att['school_code'].'/c13_1.pdf'), storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id'].'/c13_1.pdf'));
+                }
+
+                $att2['code'] = $course_old->school_code;
+                $att2['question_id'] = "27";
+                $att2['year'] = "108";
+                $att2['file'] = 'c13_1.pdf';
+                $upload = Upload::create($att2);
+
+            }
+            if ($special_suggest132) {
+                $att['question_id'] = 28;
+                $att['school_code'] = $course_old->school_code;
+                $att['pass'] = $special_suggest132->c13_2_pass;
+                $att['suggest'] = $special_suggest132->c13_2;
+                //SpecialSuggest::create($att);
+                if(!is_dir(storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id']))){
+                    mkdir(storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id']));
+                }
+                if (file_exists(storage_path('app/public2/upload/108/'.$att['school_code'].'/c13_2.pdf'))) {
+                    //rename(storage_path('app/public2/upload/108/'.$att['school_code'].'/c13_2.pdf'), storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id'].'/c13_2.pdf'));
+                }
+                $att2['code'] = $course_old->school_code;
+                $att2['question_id'] = "28";
+                $att2['year'] = "108";
+                $att2['file'] = 'c13_2.pdf';
+                $upload = Upload::create($att2);
+            }
+            if ($special_suggest133) {
+                $att['question_id'] = 29;
+                $att['school_code'] = $course_old->school_code;
+                $att['pass'] = $special_suggest133->c13_3_pass;
+                $att['suggest'] = $special_suggest133->c13_3;
+                //SpecialSuggest::create($att);
+                if(!is_dir(storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id']))){
+                    mkdir(storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id']));
+                }
+                if (file_exists(storage_path('app/public2/upload/108/'.$att['school_code'].'/c13_3.pdf'))) {
+                    //rename(storage_path('app/public2/upload/108/'.$att['school_code'].'/c13_3.pdf'), storage_path('app/public/upload/108/'.$att['school_code'].'/'.$att['question_id'].'/c13_3.pdf'));
+                }
+                $att2['code'] = $course_old->school_code;
+                $att2['question_id'] = "29";
+                $att2['year'] = "108";
+                $att2['file'] = 'c13_3.pdf';
+                $upload = Upload::create($att2);
+            }
+
+        }
+         * */
+
+
+        //$schools = config('course.schools');
+
+
+
+        echo $str;
+    }
+
+
     public function index()
     {
         return view('home');

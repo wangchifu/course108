@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <a href="{{ route('schools.show_log',$select_year) }}" class="btn btn-info btn-sm" target="_blank"><i class="fas fa-eye"></i> 檢視上傳歷程</a>
                     @if(check_in_date($select_year))
-                        @if(($course->first_result1==null or $course->first_result1=="back") and ($course->first_result2 ==null or $course->first_result2 =="back"))
+                        @if(($course->first_result1==null or $course->first_result1=="back" or $course->first_result1=="late") and ($course->first_result2 ==null or $course->first_result2 =="back"))
                             <a href="{{ route('schools.edit',$select_year) }}" class="btn btn-success btn-sm"><i class="fas fa-upload"></i> 上傳普教課程</a>
                         @endif
                         @if($course->special_result==null or $course->special_result=="back")
@@ -91,6 +91,9 @@
                             <td>
                                 @if($course->first_result1==null)
                                     <span class="text-danger">未送審</span>
+                                @endif
+                                @if($course->first_result1=='late')
+                                    <span class="text-warning">未交</span>
                                 @endif
                                 @if($course->first_result1=="submit")
                                     <span>已送審</span>

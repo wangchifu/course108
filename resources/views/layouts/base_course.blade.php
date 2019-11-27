@@ -670,7 +670,9 @@
                     @if($question->need)
                         <span class="text-danger">未上傳</span>
                     @else
-                        <span class="text-warning">非必填</span>
+                        @if($question->type <> "0")
+                            <span class="text-warning">非必填</span>
+                        @endif
                         @endif
                         @endif
                     </td>

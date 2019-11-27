@@ -377,7 +377,9 @@ class ReviewController extends Controller
     {
         $schools = config('course.schools');
         if($result==1){
-            $courses = Course::where('first_result1',null)->get();
+            $courses = Course::where('first_result1',null)
+                ->orWhere('first_result1','late')
+                ->get();
             foreach($courses as $course){
                 echo $schools[$course->school_code]."<br>";
             }

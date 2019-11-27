@@ -80,6 +80,9 @@
                                     @if($course->first_result1==null)
                                         <span class="text-dark">未送審</span>
                                     @endif
+                                    @if($course->first_result1=='late')
+                                        <span class="text-warning">未交</span>
+                                    @endif
                                     @if($course->first_result1=="submit")
                                         <span class="text-primary">已送審</span>
                                         <a href="{{ route('reviews.back_null',['course'=>$course->id,'page'=>$page,'action'=>'1']) }}" onclick="return confirm('確定設為未送審？')">
@@ -141,16 +144,16 @@
                                     <a href="javascript:open_window('{{ route('reviews.second_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
                                 </td>
                                 <td>
-                                    @if($course->special_result=="ok")
-                                        <span class="text-primary">通過</span>
+                                    @if($course->second_result=="ok")
+                                        <span class="text-primary">已通過</span>
                                     @endif
-                                    @if($course->special_result=="excellent1")
+                                    @if($course->second_result=="excellent1")
                                         <span class="text-success">1.特優</span>
                                     @endif
-                                    @if($course->special_result=="excellent2")
+                                    @if($course->second_result=="excellent2")
                                         <span class="text-success">2.優等</span>
                                     @endif
-                                    @if($course->special_result=="excellent3")
+                                    @if($course->second_result=="excellent3")
                                         <span class="text-success">3.甲等</span>
                                     @endif
                                 </td>
