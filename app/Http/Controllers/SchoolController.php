@@ -28,7 +28,21 @@ class SchoolController extends Controller
             $g_s_items = config('course.g_s_items');
             $parts = Part::where('year',$select_year)->orderBy('order_by')->get();
             $year = Year::where('year',$select_year)->first();
+
+
+            //若期限已過，則各校設為 late
+            $late_courses = Course::where('first_result1',null)
+                ->where('year',$select_year)
+                ->get();
+            $die1 = str_replace('-','',$year->step1_date2);
+            if(date('Ymd') > $die1){
+                foreach($late_courses as $late_course){
+                    $att['first_result1'] = "late";
+                    $late_course->update($att);
+                }
+            }
         }
+
 
         //九年一貫的年級有哪一些
         if(auth()->user()->group_id==1){

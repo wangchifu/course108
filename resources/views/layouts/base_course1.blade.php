@@ -465,14 +465,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[1]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[1] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -484,14 +486,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[2]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[2] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -503,14 +507,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[3]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[3] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -522,14 +528,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[4]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[4] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -541,14 +549,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[5]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[5] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -560,14 +570,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[6]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[6] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -603,14 +615,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[7]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[7] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -622,14 +636,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[8]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[8] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")
@@ -641,14 +657,16 @@
                                     </td>
                                     <td valign="top">
                                         @if(isset($check_f[9]))
+                                            <?php $i=1; ?>
                                             @foreach($check_f[9] as $k=>$v)
                                                 <?php
                                                 $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$v;
                                                 ?>
                                                 <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
-                                                    <i class="fas fa-eye"></i> {{ substr($v,15) }}
+                                                    <i class="fas fa-eye"></i> 檔案{{ $i }}
                                                 </a>
                                                 <br>
+                                                    <?php $i++; ?>
                                             @endforeach
                                         @else
                                             @if($question->need=="1")

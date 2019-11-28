@@ -285,6 +285,7 @@
                     <h4><i class="fab fa-fort-awesome"></i> 芳苑鄉</h4>
                     <a href="{{ url('share/'.$select_year.'/074517/') }}" class="btn btn-light btn-sm" style="margin:3px" target="_blank">{!! $open['074517'] !!}芳苑國中</a>
                     <a href="{{ url('share/'.$select_year.'/074516/') }}" class="btn btn-light btn-sm" style="margin:3px" target="_blank">{!! $open['074516'] !!}草湖國中 </a>
+                    <a href="{{ url('share/'.$select_year.'/074543/') }}" class="btn btn-light btn-sm" style="margin:3px" target="_blank">{!! $open['074543'] !!}民權國中</a>
                     <a href="{{ url('share/'.$select_year.'/074758/') }}" class="btn btn-light btn-sm" style="margin:3px" target="_blank">{!! $open['074758'] !!}芳苑國小 </a>
                     <a href="{{ url('share/'.$select_year.'/074759/') }}" class="btn btn-light btn-sm" style="margin:3px" target="_blank">{!! $open['074759'] !!}後寮國小</a>
                     <a href="{{ url('share/'.$select_year.'/074760/') }}" class="btn btn-light btn-sm" style="margin:3px" target="_blank">{!! $open['074760'] !!}民權國小</a>
