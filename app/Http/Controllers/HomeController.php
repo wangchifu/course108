@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -207,8 +207,13 @@ class HomeController extends Controller
             $year = Year::where('year',$select_year)->first();
         }
 
+        $schools = config('course.schools');
+
+        if(strpos($schools[$school_code], '國小') !== false) $i = "1";
+        if(strpos($schools[$school_code], '國中') !== false) $i = "2";
+
         //九年一貫的年級有哪一些
-        if(auth()->user()->group_id==1){
+        if($i==1){
             if($year->e1 == '9year'){
                 $year9[] = "一";
             }else{
@@ -240,7 +245,7 @@ class HomeController extends Controller
                 $year12[] = "六";
             }
 
-        }elseif(auth()->user()->group_id==2){
+        }elseif($i==2){
             if($year->j1 == '9year'){
                 $year9[] = "七";
             }else{

@@ -13,7 +13,7 @@
                     ->where('school_code',auth()->user()->code)
                     ->first();
             ?>
-            <th>
+            <th style="vertical-align:text-top;">
                 {{ $special_question->title }}
                 @if($special_review)
                     123
@@ -44,7 +44,7 @@
                             <span class="text-danger">不符合！</span>
                         @endif
                         <br>
-                        {{ $special_suggest->suggest }}
+                        {!! nl2br($special_suggest->suggest) !!}
                     @else
                         <span class="text-warning">未審</span>
                     @endif

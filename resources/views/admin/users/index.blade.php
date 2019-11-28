@@ -91,7 +91,11 @@
                                     {{ $user->title }}
                                 </td>
                                 <td>
-                                    {{ $user->email }}
+                                    @if($user->email)
+                                    <span class="badge badge-secondary" data-container="body" data-toggle="popover{{ $user->id }}" data-placement="top" data-content="{{ $user->email }}">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('sims.impersonate',$user->id) }}" onclick="return confirm('確定模擬登入？')">
@@ -115,6 +119,11 @@
                                     @endif
                                 </td>
                             </tr>
+                            <script>
+                                $(function () {
+                                    $('[data-toggle="popover{{ $user->id }}"]').popover()
+                                })
+                            </script>
                         @endforeach
                         </tbody>
                     </table>

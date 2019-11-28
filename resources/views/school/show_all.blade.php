@@ -21,6 +21,7 @@
         <tbody>
         <tr>
             <td>
+                結果：
                 @if($course->first_result1==null)
                     <span class="text-danger">未送審</span>
                 @endif
@@ -37,11 +38,15 @@
                     <span class="text-success">進入複審</span>
                 @endif
                 <br>
+                @if($course->first_reason1)
+                評審意見：<br>
                 <span class="text-primary">
-                    {{ $course->first_reason1 }}
+                    {!! nl2br($course->first_reason1) !!}
                 </span>
+                @endif
             </td>
             <td>
+                結果：
                 @if($course->first_result2==null and $course->first_result1=="back")
                     <span class="text-danger">未送審</span>
                 @endif
@@ -58,11 +63,15 @@
                     <span class="text-success">進入複審</span>
                 @endif
                 <br>
+                @if($course->first_reason2)
+                評審意見：<br>
                 <span class="text-primary">
-                    {{ $course->first_reason2 }}
+                    {!! nl2br($course->first_reason2) !!}
                 </span>
+                @endif
             </td>
             <td>
+                結果：
                 @if($course->first_result3==null and $course->first_result2=="back")
                     <span class="text-danger">未送審</span>
                 @endif
@@ -79,9 +88,12 @@
                     <span class="text-success">進入複審</span>
                 @endif
                 <br>
+                @if($course->first_reason3)
+                評審意見：<br>
                 <span class="text-primary">
-                    {{ $course->first_reason3 }}
+                    {!! nl2br($course->first_reason3) !!}
                 </span>
+                @endif
             </td>
         </tr>
         </tbody>
@@ -99,7 +111,7 @@
             符合?
         </th>
         <th width="30%">
-            評語
+            逐項建議
         </th>
     </tr>
     </thead>
@@ -132,53 +144,76 @@
                     {{ $question->title }}
                 </td>
                 <td>
-                    @if($suggest1)
-                        一傳：<br>
-                        @if($suggest1->pass=="1")
-                            <span class="text-success">符合！</span>
+                    @if($question->type != 0)
+                        @if($suggest1)
+                            @if($suggest1->pass=="1")
+                                一傳：<br>
+                                <span class="text-success">符合！</span>
+                            @endif
+                            @if($suggest1->pass=="0")
+                                一傳：<br>
+                                <span class="text-danger">不符合！</span>
+                            @endif
+                        @else
+                            一傳：<br>
+                            <span class="text-warning">未審！</span>
                         @endif
-                        @if($suggest1->pass=="0")
-                            <span class="text-danger">不符合！</span>
+                        <br>
+                        @if($suggest2)
+                            @if($suggest2->pass=="1")
+                                二傳：<br>
+                                <span class="text-success">符合！</span>
+                            @endif
+                            @if($suggest2->pass=="0")
+                                二傳：<br>
+                                <span class="text-danger">不符合！</span>
+                            @endif
+                        @else
+                            @if($suggest1->pass !="1")
+                            二傳：<br>
+                            <span class="text-warning">未審！</span>
+                            @endif
                         @endif
-                    @endif
-                    <br>
-                    @if($suggest2)
-                        二傳：<br>
-                        @if($suggest2->pass=="1")
-                            <span class="text-success">符合！</span>
+                        <br>
+                        @if($suggest3)
+                            @if($suggest3->pass=="1")
+                                三傳：<br>
+                                <span class="text-success">符合！</span>
+                            @endif
+                            @if($suggest3->pass=="0")
+                                三傳：<br>
+                                <span class="text-danger">不符合！</span>
+                            @endif
+                        @else
+                            @if($suggest2->pass !="1")
+                            三傳：<br>
+                            <span class="text-warning">未審！</span>
+                            @endif
                         @endif
-                        @if($suggest2->pass=="0")
-                            <span class="text-danger">不符合！</span>
-                        @endif
-                    @endif
-                    <br>
-                    @if($suggest3)
-                        三傳：<br>
-                        @if($suggest3->pass=="1")
-                            <span class="text-success">符合！</span>
-                        @endif
-                        @if($suggest3->pass=="0")
-                            <span class="text-danger">不符合！</span>
-                        @endif
-                    @endif
-                    @if(!$suggest1 and !$suggest2 and !$suggest1)
-                        <span class="text-warning">未審</span>
                     @endif
                 </td>
                 <td>
-                    @if($suggest1)
-                        一傳：<br>
-                        <span class="text-primary">{{ $suggest1->suggest }}</span>
-                    @endif
-                    <br>
-                    @if($suggest2)
-                        二傳：<br>
-                        <span class="text-primary">{{ $suggest2->suggest }}</span>
-                    @endif
-                    <br>
-                    @if($suggest3)
-                        三傳：<br>
-                        <span class="text-primary">{{ $suggest3->suggest }}</span>
+                    @if($question->type != 0)
+                        @if($suggest1)
+                            @if($suggest1->suggest)
+                            一傳：<br>
+                            <span class="text-primary">{{ $suggest1->suggest }}</span>
+                            @endif
+                        @endif
+                        <br>
+                        @if($suggest2)
+                            @if($suggest2->suggest)
+                            二傳：<br>
+                            <span class="text-primary">{{ $suggest2->suggest }}</span>
+                            @endif
+                        @endif
+                        <br>
+                        @if($suggest3)
+                            @if($suggest3->suggest)
+                            三傳：<br>
+                            <span class="text-primary">{{ $suggest3->suggest }}</span>
+                            @endif
+                        @endif
                     @endif
                 </td>
             </tr>

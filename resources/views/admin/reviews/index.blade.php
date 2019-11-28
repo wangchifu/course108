@@ -69,7 +69,7 @@
                         <tbody>
                         @foreach($courses as $course)
                             <tr>
-                                <td>
+                                <td nowrap>
                                     {{ $schools[$course->school_code] }} <small>({{ $course->school_code }})</small>
                                 </td>
                                 <td>
