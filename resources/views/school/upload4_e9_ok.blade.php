@@ -20,7 +20,7 @@
             <td>
                 @if(isset($area_file['mandarin'][$v]))
                     <?php
-                    $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['mandarin'][$v];
+                    $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['mandarin'][$v];
                     ?>
                     <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                         <i class="fas fa-eye"></i> 檢視檔案
@@ -43,7 +43,7 @@
             <td>
                 @if(isset($area_file['dialects'][$v]))
                     <?php
-                    $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['dialects'][$v];
+                    $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['dialects'][$v];
                     ?>
                     <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                         <i class="fas fa-eye"></i> 檢視檔案
@@ -66,7 +66,7 @@
             <td>
                 @if(isset($area_file['english'][$v]))
                     <?php
-                    $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['english'][$v];
+                    $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['english'][$v];
                     ?>
                     <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                         <i class="fas fa-eye"></i> 檢視檔案
@@ -89,7 +89,7 @@
             <td>
                 @if(isset($area_file['mathematics'][$v]))
                     <?php
-                    $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['mathematics'][$v];
+                    $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['mathematics'][$v];
                     ?>
                     <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                         <i class="fas fa-eye"></i> 檢視檔案
@@ -116,7 +116,7 @@
                 <td rowspan="3">
                     @if(isset($area_file['life_curriculum'][$v]))
                         <?php
-                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['life_curriculum'][$v];
+                        $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['life_curriculum'][$v];
                         ?>
                         <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                             <i class="fas fa-eye"></i> 檢視檔案
@@ -133,7 +133,7 @@
                 <td>
                     @if(isset($area_file['social_studies'][$v]))
                         <?php
-                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['social_studies'][$v];
+                        $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['social_studies'][$v];
                         ?>
                         <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                             <i class="fas fa-eye"></i> 檢視檔案
@@ -160,7 +160,7 @@
                 <td>
                     @if(isset($area_file['science_technology'][$v]))
                         <?php
-                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['science_technology'][$v];
+                        $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['science_technology'][$v];
                         ?>
                         <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                             <i class="fas fa-eye"></i> 檢視檔案
@@ -187,7 +187,7 @@
                 <td>
                     @if(isset($area_file['arts_humanities'][$v]))
                         <?php
-                        $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['arts_humanities'][$v];
+                        $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['arts_humanities'][$v];
                         ?>
                         <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                             <i class="fas fa-eye"></i> 檢視檔案
@@ -211,7 +211,7 @@
             <td>
                 @if(isset($area_file['integrative_activities'][$v]))
                     <?php
-                    $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['integrative_activities'][$v];
+                    $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['integrative_activities'][$v];
                     ?>
                     <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                         <i class="fas fa-eye"></i> 檢視檔案
@@ -234,7 +234,7 @@
             <td>
                 @if(isset($area_file['health_physical'][$v]))
                     <?php
-                    $file_path = $year->year.'&&'.auth()->user()->code.'&&'.$question->id.'&&'.$area_file['health_physical'][$v];
+                    $file_path = $year->year.'&&'.$school_code.'&&'.$question->id.'&&'.$area_file['health_physical'][$v];
                     ?>
                     <a href="{{ route('schools.open',$file_path) }}" class="badge badge-primary" target="_blank">
                         <i class="fas fa-eye"></i> 檢視檔案

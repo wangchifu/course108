@@ -209,11 +209,11 @@ class HomeController extends Controller
 
         $schools = config('course.schools');
 
-        if(strpos($schools[$school_code], '國小') !== false) $i = "1";
-        if(strpos($schools[$school_code], '國中') !== false) $i = "2";
+        if(strpos($schools[$school_code], '國小') !== false) $school_group = "1";
+        if(strpos($schools[$school_code], '國中') !== false) $school_group = "2";
 
         //九年一貫的年級有哪一些
-        if($i==1){
+        if($school_group==1){
             if($year->e1 == '9year'){
                 $year9[] = "一";
             }else{
@@ -245,7 +245,7 @@ class HomeController extends Controller
                 $year12[] = "六";
             }
 
-        }elseif($i==2){
+        }elseif($school_group==2){
             if($year->j1 == '9year'){
                 $year9[] = "七";
             }else{
@@ -275,20 +275,17 @@ class HomeController extends Controller
             die();
         }
 
-        $schools = config('course.schools');
-        $i=0;
-        if(strpos($schools[$course->school_code], '國小') !== false) $i = "1";
-        if(strpos($schools[$course->school_code], '國中') !== false) $i = "2";
-
         $data = [
             'course'=>$course,
             'select_year'=>$select_year,
             'school_name'=>$schools[$school_code],
-            'school_group'=>$i,
             'parts'=>$parts,
             'part_order_by'=>$part_order_by,
             'school_code'=>$school_code,
             'year'=>$year,
+            'school_group'=>$school_group,
+            'year9'=>$year9,
+            'year12'=>$year12,
         ];
         return view('share_one',$data);
     }

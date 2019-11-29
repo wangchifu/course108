@@ -30,7 +30,7 @@
                     <td valign="top">
                         {{ $question->order_by }} {{ $question->title }}
                     </td>
-                    <td nowrap>
+                    <td nowrapf>
                         @if($upload)
                             @if($question->type=="1")
                                 <?php
