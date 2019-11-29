@@ -23,7 +23,7 @@
             <td>
                 結果：
                 @if($course->first_result1==null)
-                    <span class="text-danger">未送審</span>
+                    <span class="text-warning">未送審</span>
                 @endif
                 @if($course->first_result1=="submit")
                     <span>已送審</span>
@@ -48,7 +48,7 @@
             <td>
                 結果：
                 @if($course->first_result2==null and $course->first_result1=="back")
-                    <span class="text-danger">未送審</span>
+                    <span class="text-warning">未送審</span>
                 @endif
                 @if($course->first_result2=="submit")
                     <span>已送審</span>
@@ -73,7 +73,7 @@
             <td>
                 結果：
                 @if($course->first_result3==null and $course->first_result2=="back")
-                    <span class="text-danger">未送審</span>
+                    <span class="text-warning">未送審</span>
                 @endif
                 @if($course->first_result3=="submit")
                     <span>已送審</span>
@@ -101,16 +101,22 @@
 <table class="table table-striped">
     <thead class="thead-light">
     <tr>
-        <th>
+        <th nowrap>
             題號
         </th>
-        <th>
+        <th nowrap>
             題目
         </th>
-        <th width="10%">
+        <th nowrap>
+            必填?
+        </th>
+        <th nowrap>
+            繳交?
+        </th>
+        <th width="10%" nowrap>
             符合?
         </th>
-        <th width="30%">
+        <th width="30%" nowrap>
             逐項建議
         </th>
     </tr>
@@ -143,7 +149,31 @@
                 <td>
                     {{ $question->title }}
                 </td>
+                <td nowrap>
+                    @if($question->need==1)
+                        <span class="text-primary">必填</span>
+                    @elseif($question->need==0 and $question->type != 0)
+                        <span class="text-warning">非必填</span>
+                    @endif
+                    @if($question->type==0)
+                        <span class="text-secondary">不用傳</span>
+                    @endif
+                </td>
                 <td>
+                    <?php
+                        $upload = \App\Upload::where('question_id',$question->id)
+                            ->where('code',$course->school_code)
+                            ->first();
+                    ?>
+                    @if($upload)
+                        <span class="text-success">已送</span>
+                    @else
+                        @if($question->type != 0)
+                        <span class="text-warning">未送</span>
+                        @endif
+                    @endif
+                </td>
+                <td nowrap>
                     @if($question->type != 0)
                         @if($suggest1)
                             @if($suggest1->pass=="1")
@@ -197,21 +227,27 @@
                         @if($suggest1)
                             @if($suggest1->suggest)
                             一傳：<br>
-                            <span class="text-primary">{{ $suggest1->suggest }}</span>
+                            <span class="text-primary">
+                                {!! nl2br($suggest1->suggest) !!}
+                            </span>
                             @endif
                         @endif
                         <br>
                         @if($suggest2)
                             @if($suggest2->suggest)
                             二傳：<br>
-                            <span class="text-primary">{{ $suggest2->suggest }}</span>
+                            <span class="text-primary">
+                                {!! nl2br($suggest2->suggest) !!}
+                            </span>
                             @endif
                         @endif
                         <br>
                         @if($suggest3)
                             @if($suggest3->suggest)
                             三傳：<br>
-                            <span class="text-primary">{{ $suggest3->suggest }}</span>
+                            <span class="text-primary">
+                                {!! nl2br($suggest3->suggest) !!}
+                            </span>
                             @endif
                         @endif
                     @endif
@@ -225,6 +261,30 @@
                     </td>
                     <td>
                         {{ $question->title }}
+                    </td>
+                    <td>
+                        @if($question->need==1)
+                            <span class="text-primary">必填</span>
+                        @elseif($question->need==0 and $question->type != 0)
+                            <span class="text-warning">非必填</span>
+                        @endif
+                        @if($question->type==0)
+                            <span class="text-secondary">不用傳</span>
+                        @endif
+                    </td>
+                    <td>
+                        <?php
+                        $upload = \App\Upload::where('question_id',$question->id)
+                            ->where('code',$course->school_code)
+                            ->first();
+                        ?>
+                        @if($upload)
+                            <span class="text-success">已送</span>
+                        @else
+                            @if($question->type != 0)
+                                <span class="text-warning">未送</span>
+                            @endif
+                        @endif
                     </td>
                     <td>
                         @if($special_suggest)
@@ -241,7 +301,7 @@
                     <td>
                         @if($special_suggest)
                             <span class="text-primary">
-                                {{ $special_suggest->suggest }}
+                                {!! nl2br($special_suggest->suggest) !!}
                             </span>
                         @endif
                     </td>

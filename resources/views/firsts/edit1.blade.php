@@ -19,7 +19,7 @@
                 <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" {{ $check1 }} value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
                 <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" {{ $check2 }} value="0"> <label for="check2_{{ $question->id }}">不符合</label>
                 <br>
-                <textarea name="suggest_{{ $question->id }}">{{ $f_s1[$question->id]['suggest'] }}</textarea>
+                <textarea name="suggest_{{ $question->id }}" placeholder="請填建議">{{ $f_s1[$question->id]['suggest'] }}</textarea>
             </td>
         @endsection
     @endif
@@ -31,7 +31,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('firsts.index') }}">初審作業</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">審查 {{ $school_name }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">審查 {{ $school_name }} 一傳</li>
                 </ol>
             </nav>
             <form action="{{ route('firsts.update1') }}" method="post">

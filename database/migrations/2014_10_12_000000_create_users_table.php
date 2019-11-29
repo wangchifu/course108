@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedInteger('group_id');
+            $table->unsignedInteger('group_id')->index();
             $table->string('email')->nullable();//email改為可null
             $table->timestamp('email_verified_at')->nullable();
             $table->string('username')->unique();//增加使用 username 登入的欄位

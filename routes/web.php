@@ -173,8 +173,9 @@ Route::group(['middleware'=>'admin'],function(){
     Route::post('reviews/special_by_user_store' , 'ReviewController@special_by_user_store')->name('reviews.special_by_user_store');
 
     //未送名單
-    Route::get('reviews/{result}/not_send' , 'ReviewController@not_send')->name('reviews.not_send');
+    Route::get('reviews/{result}/{select_year}/not_send' , 'ReviewController@not_send')->name('reviews.not_send');
     Route::get('reviews/{course}/{page}/{action}/back_null' , 'ReviewController@back_null')->name('reviews.back_null');
+    Route::get('show_special/{select_year}' , 'ReviewController@show_special')->name('reviews.show_special');
 
     //匯出表單
     Route::match(['get','post'],'exports/index' , 'ExportController@index')->name('exports.index');

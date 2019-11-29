@@ -16,8 +16,8 @@ class CreateUploadsTable extends Migration
         Schema::create('uploads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('year');
-            $table->unsignedInteger('question_id');
-            $table->string('code');//學校代碼
+            $table->unsignedInteger('question_id')->index();
+            $table->string('code')->index();//學校代碼
             $table->text('file');//學校代碼
             $table->timestamps();
         });

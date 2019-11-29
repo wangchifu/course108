@@ -15,7 +15,7 @@ class CreateYearsTable extends Migration
     {
         Schema::create('years', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('year');
+            $table->string('year')->index();
             $table->string('e1')->nullable();//國小一年級的課程9year為九年一貫；12year為十二年國教
             $table->string('e2')->nullable();
             $table->string('e3')->nullable();

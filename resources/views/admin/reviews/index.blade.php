@@ -47,13 +47,13 @@
                                 初審<br>委員
                             </th>
                             <th nowrap style="background-color:#fff8d7">
-                                初審<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'1']) }}" class="badge badge-danger" target="_blank">未送名單</a>
+                                初審<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'1','select_year'=>$select_year]) }}" class="badge badge-danger" target="_blank">未送名單</a>
                             </th>
                             <th style="background-color:#fff8d7">
-                                再傳<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'2']) }}" class="badge badge-danger" target="_blank">未送名單</a>
+                                再傳<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'2','select_year'=>$select_year]) }}" class="badge badge-danger" target="_blank">未送名單</a>
                             </th>
                             <th style="background-color:#fff8d7">
-                                三傳<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'3']) }}" class="badge badge-danger" target="_blank">未送名單</a>
+                                三傳<br>狀況<br><a href="{{ route('reviews.not_send',['result'=>'3','select_year'=>$select_year]) }}" class="badge badge-danger" target="_blank">未送名單</a>
                             </th>
                             <th nowrap>
                                 複審<br>委員

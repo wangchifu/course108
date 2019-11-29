@@ -16,8 +16,8 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->unsignedInteger('part_id');
-            $table->unsignedInteger('year');
+            $table->unsignedInteger('part_id')->index();
+            $table->unsignedInteger('year')->index();
             $table->unsignedInteger('order_by');
             $table->timestamps();
         });

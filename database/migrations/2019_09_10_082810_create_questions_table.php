@@ -16,12 +16,12 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->unsignedInteger('topic_id');
-            $table->unsignedInteger('year');
+            $table->unsignedInteger('topic_id')->index();
+            $table->unsignedInteger('year')->index();
             $table->float('order_by');
             $table->unsignedInteger('type');//題目類型
             $table->tinyInteger('need')->nullable();//必填1，非必填null
-            $table->unsignedInteger('g_s');//1普教；2特教
+            $table->unsignedInteger('g_s')->index();//1普教；2特教
             $table->timestamps();
         });
     }

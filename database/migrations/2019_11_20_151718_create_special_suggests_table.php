@@ -15,8 +15,8 @@ class CreateSpecialSuggestsTable extends Migration
     {
         Schema::create('special_suggests', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('question_id');//題目id
-            $table->string('school_code');//學校
+            $table->unsignedInteger('question_id')->index();//題目id
+            $table->string('school_code')->index();//學校
             $table->tinyInteger('pass')->nullable();//1通過，0則不是
             $table->text('suggest')->nullable();//建議
             $table->timestamps();

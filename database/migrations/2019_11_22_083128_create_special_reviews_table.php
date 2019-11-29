@@ -15,10 +15,10 @@ class CreateSpecialReviewsTable extends Migration
     {
         Schema::create('special_reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('year');
-            $table->unsignedInteger('question_id');//題目id
-            $table->string('school_code');//學校
-            $table->unsignedInteger('user_id');
+            $table->string('year')->index();
+            $table->unsignedInteger('question_id')->index();//題目id
+            $table->string('school_code')->index();//學校
+            $table->unsignedInteger('user_id')->index();
             $table->timestamps();
         });
     }

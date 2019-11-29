@@ -37,6 +37,7 @@
                 ?>
                 <td>
                     @if($special_suggest)
+                        結果：
                         @if($special_suggest->pass=="1")
                             <span class="text-success">符合！</span>
                         @endif
@@ -44,7 +45,10 @@
                             <span class="text-danger">不符合！</span>
                         @endif
                         <br>
-                        {!! nl2br($special_suggest->suggest) !!}
+                        建議：<br>
+                        <span class="text-primary">
+                            {!! nl2br($special_suggest->suggest) !!}
+                        </span>
                     @else
                         <span class="text-warning">未審</span>
                     @endif

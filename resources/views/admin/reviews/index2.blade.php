@@ -41,7 +41,7 @@
                         <tr>
                             <th nowrap style="background-color: #c4e1ff">
                                 校名
-                                <br><a href="" class="badge badge-danger" target="_blank">上傳情況</a>
+                                <br><a href="{{ route('reviews.show_special',$select_year) }}" class="badge badge-danger" target="_blank">上傳情況</a>
                             </th>
                             @foreach($special_questions as $special_question)
                                 <th>

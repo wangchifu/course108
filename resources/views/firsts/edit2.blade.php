@@ -10,25 +10,27 @@
             ->where('school_code',$school_code)
             ->first();
         ?>
-        @if($first_suggest1->pass==0)
-            @section('input'.$question->id)
-                <?php
-                    if($f_s2[$question->id]['pass']==1){
-                        $check1 = "checked";
-                        $check2 = null;
-                    }elseif($f_s2[$question->id]['pass']==0){
-                        $check1 = null;
-                        $check2 = "checked";
-                    }
-                ?>
-                <td style="vertical-align:top;background-color: #FFEE99">
-                    <input type="hidden" name="questions[]" value="{{ $question->id }}">
-                    <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" {{ $check1 }} value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
-                    <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" {{ $check2 }} value="0"> <label for="check2_{{ $question->id }}">不符合</label>
-                    <br>
-                    <textarea name="suggest_{{ $question->id }}">{{ $f_s2[$question->id]['suggest'] }}</textarea>
-                </td>
-            @endsection
+        @if($first_suggest1)
+            @if($first_suggest1->pass==0)
+                @section('input'.$question->id)
+                    <?php
+                        if($f_s2[$question->id]['pass']==1){
+                            $check1 = "checked";
+                            $check2 = null;
+                        }elseif($f_s2[$question->id]['pass']==0){
+                            $check1 = null;
+                            $check2 = "checked";
+                        }
+                    ?>
+                    <td style="vertical-align:top;background-color: #FFEE99">
+                        <input type="hidden" name="questions[]" value="{{ $question->id }}">
+                        <input type="radio" name="check_{{ $question->id }}" id="check1_{{ $question->id }}" {{ $check1 }} value="1" checked> <label for="check1_{{ $question->id }}">符合</label>　
+                        <input type="radio" name="check_{{ $question->id }}" id="check2_{{ $question->id }}" {{ $check2 }} value="0"> <label for="check2_{{ $question->id }}">不符合</label>
+                        <br>
+                        <textarea name="suggest_{{ $question->id }}" placeholder="請填建議">{{ $f_s2[$question->id]['suggest'] }}</textarea>
+                    </td>
+                @endsection
+            @endif
         @endif
     @endif
 @endforeach
@@ -39,7 +41,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('firsts.index') }}">初審作業</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">審查 {{ $school_name }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">審查 {{ $school_name }} 二傳</li>
                 </ol>
             </nav>
             <form action="{{ route('firsts.update2') }}" method="post">

@@ -15,9 +15,9 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('for_school_code')->nullable();//給哪所學校
-            $table->unsignedInteger('for_user_id')->nullable();//給誰
-            $table->unsignedInteger('from_user_id');//誰發的
+            $table->string('for_school_code')->index()->nullable();//給哪所學校
+            $table->unsignedInteger('for_user_id')->index()->nullable();//給誰
+            $table->unsignedInteger('from_user_id')->index();//誰發的
             $table->text('message');//訊息
             $table->tinyInteger('has_read')->nullable();//誰發的
             $table->timestamps();

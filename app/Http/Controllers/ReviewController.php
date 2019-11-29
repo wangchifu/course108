@@ -373,19 +373,23 @@ class ReviewController extends Controller
     }
 
 
-    public function not_send($result)
+    public function not_send($result,$select_year)
     {
         $schools = config('course.schools');
         if($result==1){
-            $courses = Course::where('first_result1',null)
-                ->orWhere('first_result1','late')
-                ->get();
+            $courses = Course::where('year',$select_year)
+            ->where(function($q){
+              $q->where('first_result1',null)
+                  ->orWhere('first_result1','late');
+            })
+            ->get();
             foreach($courses as $course){
                 echo $schools[$course->school_code]."<br>";
             }
         }
         if($result==2){
-            $courses = Course::where('first_result1','back')
+            $courses = Course::where('year',$select_year)
+                ->where('first_result1','back')
                 ->where('first_result2',null)
                 ->get();
             foreach($courses as $course){
@@ -393,7 +397,8 @@ class ReviewController extends Controller
             }
         }
         if($result==3){
-            $courses = Course::where('first_result2','back')
+            $courses = Course::where('year',$select_year)
+                ->where('first_result2','back')
                 ->where('first_result3',null)
                 ->get();
             foreach($courses as $course){
@@ -416,5 +421,22 @@ class ReviewController extends Controller
 
         $course->update($att);
         return redirect()->route('reviews.index',['page'=>$page]);
+    }
+
+    public function show_special($select_year)
+    {
+        $special_questions = Question::where('year',$select_year)
+            ->where('g_s','2')
+            ->get();
+        $courses = Course::where('year',$select_year)
+            ->get();
+        $schools = config('course.schools');
+        $data = [
+            'special_questions'=>$special_questions,
+            'courses'=>$courses,
+            'schools'=>$schools,
+            'select_year'=>$select_year,
+        ];
+        return view('admin.reviews.show_special',$data);
     }
 }

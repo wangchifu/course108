@@ -15,10 +15,10 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('year');
-            $table->string('school_code');
+            $table->string('year')->index();
+            $table->string('school_code')->index();
             $table->string('event');//事件
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->index();
             $table->timestamps();
         });
     }
