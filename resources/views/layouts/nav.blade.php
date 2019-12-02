@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark {{ $bg_color }} fixed-top">
     <div class="container">
         <img src="{{ asset('images/icon.svg') }}" height="36">　
-        <a class="navbar-brand" href="{{ env('APP_URL') }}">彰化縣國中小學課程計畫審查系統</a>
+        <a class="navbar-brand" href="https://course108.chc.edu.tw">彰化縣國中小學課程計畫審查系統</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
