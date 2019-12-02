@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>
-        @yield('title'){{ env('APP_NAME') }}
+        @yield('title')彰化縣國中小學課程計畫審查系統
     </title>
     @include('layouts.head')
 </head>
