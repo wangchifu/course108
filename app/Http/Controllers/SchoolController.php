@@ -125,7 +125,7 @@ class SchoolController extends Controller
     public function edit($select_year)
     {
         //非可編輯日期期限即返回
-        if(!check_in_date($select_year)){
+        if(!check_date($select_year,'1') and !check_date($select_year,'2_1') and !check_date($select_year,'2_2')){
             return back();
         }
 
@@ -137,6 +137,12 @@ class SchoolController extends Controller
         //如果已送出，不可編輯
         $u =explode('/',$_SERVER['REQUEST_URI']);
         if($u[2]=="edit" and $course->first_result1=="submit"){
+            return back();
+        }
+        if($u[2]=="edit" and $course->first_result2=="submit"){
+            return back();
+        }
+        if($u[2]=="edit" and $course->first_result3=="submit"){
             return back();
         }
         /**
