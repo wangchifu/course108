@@ -261,7 +261,7 @@ Route::group(['middleware' => 'second'],function(){
             return redirect()->route('seconds.index');
         }
     });
-    Route::get('seconds/index' , 'SecondController@index')->name('seconds.index');
+    Route::match(['get','post'],'seconds/index' , 'SecondController@index')->name('seconds.index');
     Route::get('seconds/{course}/create' , 'SecondController@create')->name('seconds.create');
     Route::patch('seconds/update' , 'SecondController@update')->name('seconds.update');
 });
@@ -273,7 +273,7 @@ Route::group(['middleware' => 'special'],function(){
             return redirect()->route('special.index');
         }
     });
-    Route::get('specials/index' , 'SpecialController@index')->name('specials.index');
+    Route::match(['get','post'],'specials/index' , 'SpecialController@index')->name('specials.index');
     Route::get('specials/{special_review}/create' , 'SpecialController@create')->name('specials.create');
     Route::post('specials/store' , 'SpecialController@store')->name('specials.store');
 

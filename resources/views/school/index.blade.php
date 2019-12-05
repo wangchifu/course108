@@ -16,17 +16,18 @@
                                 選擇年度：
                             </td>
                             <td>
-                                {{ Form::open(['route'=>'questions.index','method'=>'post']) }}
-                                {{ Form::select('year',$year_items,$select_year,['onchange'=>'submit()']) }}
-                                {{ Form::close() }}
+
                             </td>
                         </tr>
                     </table>
+                    {{ Form::open(['route'=>'schools.index','method'=>'get']) }}
+                    {{ Form::select('year',$year_items,$select_year,['onchange'=>'submit()']) }}
+                    {{ Form::close() }}
                 </div>
                 <div class="card-body">
                     <a href="{{ route('schools.show_log',$select_year) }}" class="btn btn-info btn-sm" target="_blank"><i class="fas fa-eye"></i> 檢視上傳歷程</a>
-                    @if(check_in_date($select_year))
-                        @if(($course->first_result1==null or $course->first_result1=="back" or $course->first_result1=="late") and ($course->first_result2 ==null or $course->first_result2 =="back"))
+                    @if(check_date($select_year,'1') or check_date($select_year,'2_1') or check_date($select_year,'2_2'))
+                        @if(($course->first_result1==null or $course->first_result1=="back" or $course->first_result1=="late") and ($course->first_result2 ==null or $course->first_result2 =="back") and ($course->first_result3 ==null))
                             <a href="{{ route('schools.edit',$select_year) }}" class="btn btn-success btn-sm"><i class="fas fa-upload"></i> 上傳普教課程</a>
                         @endif
                         @if($course->special_result==null or $course->special_result=="back")
