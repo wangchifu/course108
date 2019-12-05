@@ -140,6 +140,8 @@ Route::group(['middleware'=>'admin'],function(){
     Route::post('reviews/first_user_store' , 'ReviewController@first_user_store')->name('reviews.first_user_store');
     Route::get('reviews/{select_year}/{school_code}/second_user' , 'ReviewController@second_user')->name('reviews.second_user');
     Route::post('reviews/second_user_store' , 'ReviewController@second_user_store')->name('reviews.second_user_store');
+    Route::get('reviews/{course}/first_review_delete' , 'ReviewController@first_review_delete')->name('reviews.first_review_delete');
+    Route::get('reviews/{course}/second_review_delete' , 'ReviewController@second_review_delete')->name('reviews.second_review_delete');
 
     //依委員選學校
     Route::get('reviews/{select_year}/first_by_user' , 'ReviewController@first_by_user')->name('reviews.first_by_user');
@@ -158,6 +160,7 @@ Route::group(['middleware'=>'admin'],function(){
 
     Route::get('reviews/{question}/{select_year}/{school_code}/special_user' , 'ReviewController@special_user')->name('reviews.special_user');
     Route::post('reviews/special_user_store' , 'ReviewController@special_user_store')->name('reviews.special_user_store');
+    Route::get('reviews/{special_review}/special_review_delete' , 'ReviewController@special_review_delete')->name('reviews.special_review_delete');
     /**
     Route::get('reviews/{select_year}/{school_code}/special1_user' , 'ReviewController@special1_user')->name('reviews.special1_user');
     Route::post('reviews/special1_user_store' , 'ReviewController@special1_user_store')->name('reviews.special1_user_store');

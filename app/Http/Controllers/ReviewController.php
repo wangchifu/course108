@@ -211,9 +211,11 @@ class ReviewController extends Controller
             ->get();
 
         $s_r = [];
+        $special_review_id=[];
         $special_reviews = SpecialReview::where('year',$select_year)->get();
         foreach($special_reviews as $special_review){
             $s_r[$special_review->school_code][$special_review->question_id] = $special_review->user->name;
+            $special_review_id[$special_review->school_code][$special_review->question_id] = $special_review->id;
         }
 
         $data = [
@@ -222,9 +224,30 @@ class ReviewController extends Controller
             'schools'=>$schools,
             'courses'=>$courses,
             's_r'=>$s_r,
+            'special_review_id'=>$special_review_id,
             'special_questions'=>$special_questions,
         ];
         return view('admin.reviews.index2',$data);
+    }
+
+    public function special_review_delete(SpecialReview $special_review)
+    {
+        $special_review->delete();
+        return back();
+    }
+
+    public function first_review_delete(Course $course)
+    {
+        $att['first_user_id'] = null;
+        $course->update($att);
+        return back();
+    }
+
+    public function second_review_delete(Course $course)
+    {
+        $att['second_user_id'] = null;
+        $course->update($att);
+        return back();
     }
 
     public function special_user(Question $question,$select_year,$school_code)

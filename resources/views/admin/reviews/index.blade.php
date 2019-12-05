@@ -73,8 +73,13 @@
                                     {{ $schools[$course->school_code] }} <small>({{ $course->school_code }})</small>
                                 </td>
                                 <td>
-                                    {{ $first_name[$course->school_code] }}
                                     <a href="javascript:open_window('{{ route('reviews.first_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
+                                    {{ $first_name[$course->school_code] }}
+                                    @if($first_name[$course->school_code])
+                                    <a href="{{ route('reviews.first_review_delete',$course->id) }}" onclick="return confirm('確定刪除嗎？')">
+                                        <i class="fas fa-times-circle text-danger"></i>
+                                    </a>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($course->first_result1==null)
@@ -140,8 +145,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ $second_name[$course->school_code] }}
                                     <a href="javascript:open_window('{{ route('reviews.second_user',['select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
+                                    {{ $second_name[$course->school_code] }}
+                                    @if($second_name[$course->school_code])
+                                        <a href="{{ route('reviews.second_review_delete',$course->id) }}" onclick="return confirm('確定刪除嗎？')">
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </a>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($course->second_result=="ok")

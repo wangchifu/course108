@@ -62,6 +62,9 @@
                                         <a href="javascript:open_window('{{ route('reviews.special_user',['question'=>$special_question->id,'select_year'=>$select_year,'school_code'=>$course->school_code]) }}','新視窗')"><i class="fas fa-list-ul"></i></a>
                                         @if(isset($s_r[$course->school_code][$special_question->id]))
                                         {{ $s_r[$course->school_code][$special_question->id] }}
+                                            <a href="{{ route('reviews.special_review_delete',$special_review_id[$course->school_code][$special_question->id]) }}" onclick="return confirm('確定刪除嗎？')">
+                                                <i class="fas fa-times-circle text-danger"></i>
+                                            </a>
                                         @endif
                                     </td>
                                 @endforeach
